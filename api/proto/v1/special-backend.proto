@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+package special_app_v1;
+
+option go_package = "special_app/pkg/proto/v1;special_app_v1";
+
+service SpecialAppService {}

@@ -1,5 +1,5 @@
 create table if not exists Order (
-            ID_Order serial not null constraint PK_Order primary key,
+            ID_Order UUID constraint PK_Order primary key default uuid_generate_v4(),
             Order_Number varchar (20) not null,
             Order_Form_Date date not null,
             Order_Form_Time time not null,

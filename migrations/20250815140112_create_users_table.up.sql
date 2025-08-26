@@ -1,5 +1,5 @@
 create table if not exists User (
-            ID_User serial not null constraint PK_User primary key,
+            ID_User UUID constraint PK_User primary key default uuid_generate_v4(),
             S_N_User varchar (50) not null,
             F_N_User varchar (50) not null,
             N_N_User varchar (50) not null,

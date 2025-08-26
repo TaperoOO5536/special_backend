@@ -9,4 +9,197 @@ package special_app_v1;
 
 option go_package = "special_app/pkg/proto/v1;special_app_v1";
 
-service SpecialAppService {}
+service SpecialAppService {
+  rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
+  rpc UpdateUser(UpdateUserRequest) returns (GetUserInfoResponse) {}
+  rpc GetUser(GetUserRequest) returns (GetUserInfoResponse) {}
+
+  rpc GetIventInfo(GetIventInfoRequest) returns (GetIventInfoResponse) {}
+  rpc GetIvents(GetIventsRequest) returns (GetIventsResponse) {}
+
+  rpc CreateUserIvent(CreateUserIventRequest) returns (GetUserIventInfoResponse) {}
+  rpc GetUserIventInfo(GetUserIventInfoRequest) returns (GetUserIventInfoResponse) {}
+  rpc GetUserIvents(GetUserIventsRequest) returns (GetUserIventsResponse) {}
+  rpc UpdateUserIvent(UdpateUserIventRequest) return (GetUserIventInfoResponse) {}
+  rpc DeleteUserIvent(DeleteUserIventRequest) returns (google.protobuf.Empty) {}
+  
+  rpc GetItemInfo(GetItemInfoRequest) returns (GetItemInfoResponse) {}
+  rpc GetItems(GetItemsRequest) returns (GetItemsResponse) {}
+
+  rpc CreateOrder(CreateOrderRequest) returns (GetOrderInfoResponse) {}
+  rpc GetOrderInfo(GetOrderInfoRequest) returns (GetOrderInfoResponse) {}
+  rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {}
+  rpc UpdateOrder(UpdateOrderRequest) returns (GetOrderInfoResponse) {}
+}
+
+// Users !!!
+
+message CreateUserRequest {}
+
+message UpdateUserRequest {
+  optional string name = 1;
+  optional string surname = 2;
+  optional string nickname = 3;
+  optional string phone_number = 4;
+}
+
+message GetUserRequest {}
+
+message GetUserInfoResponse {
+  string name = 1;
+  string surname = 2;
+  string nickname = 3;
+  string phone_number = 4;
+}
+
+// Ivents !!!
+
+message GetIventInfoRequest {
+  string id = 1;
+}
+
+message GetIventsRequest {}
+
+message GetIventInfoResponse {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  google.protobuf.timestamp datetime = 4;
+  int price = 5;
+  int total_seats = 6;
+  int occupied_seats = 7;
+  repeated string pictures = 8;
+}
+
+message IventInfoForList {
+  string id = 1;
+  string title = 2;
+  google.protobuf.timestamp datetime = 3;
+  int price = 4;
+  int total_seats = 5;
+  int occupied_seats = 6;
+  string picture = 7;
+}
+
+message GetIventsResponse {
+  repeated IventInfoForList ivents = 1;
+}
+
+// UserIvent !!!
+
+message CreateUserIventRequest {
+  string ivent_id = 1;
+  int number_of_guests = 2;
+}
+
+message GetUserIventInfoRequest {
+  string id = 1;
+}
+
+message GetUserIventsRequest {}
+
+message UpdateUserIventRequest {
+  string id = 1;
+  int number_of_guests = 2;
+}
+
+message DeleteUserIventRequest {
+  string id = 1;
+}
+
+message GetUserIventInfoResponse {
+  string id = 1; 
+  string ivent_id = 2;
+  string number_of_guests = 3;
+  string title = 4; 
+  google.protobuf.timestamp datetime = 5;
+  string picture = 6;
+}
+
+message UserIventInfoForList {
+  string id = 1;
+  string ivent_id = 2;
+  string title = 3;
+  google.protobuf.timestamp datetime = 4;
+  string picture = 5;
+}
+
+message GetUserIventsResponse {
+  repeated UserIventInfoForList user_ivents = 2;
+}
+
+// Item !!!
+
+message GetItemInfoRequest {
+  string id = 1;
+}
+
+message GetItemsRequest {}
+
+message GetItemInfoResponse {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  int price = 4;
+  repeated string pictures = 5;
+}
+
+message ItemInfoForList {
+  string id = 1;
+  string title = 2;
+  int price = 3;
+  string picture = 4;
+}
+
+message GetItemsResponse {
+  repeated ItemInfoForList items = 1;
+}
+
+// Order
+
+message CreateOrderRequest {
+  google.protobuf.timestamp completion_date = 1;
+  optional comment = 2;
+}
+
+message GetOrderInfoRequest {
+  string id = 1;
+}
+
+message GetOrdersRequest {}
+
+message UpdateOrderRequest {
+  string id = 1;
+  string status = 2;
+}
+
+message OrderItemInfoForList {
+  string id = 1;
+  string item_id = 2;
+  string title = 3;
+  int price = 4;
+  int quantity = 5;
+  string picture = 6;
+
+}
+
+message GetOrderInfoResponse {
+  string number = 1;
+  google.protobuf.timestamp form_date = 2;
+  google.protobuf.timestamp completion_date = 3;
+  string comment = 4;
+  string status = 5;
+  int order_amount = 6;
+  repeated OrderItemInfoForList items = 7;
+}
+
+message OrderInfoForList = {
+  string number = 1;
+  google.protobuf.timestamp completion_date = 2;
+  string status = 3;
+  int order_amount = 4;
+}
+
+message GetOrdersResponse {
+  repeated OrderInfoForList orders = 1;
+}

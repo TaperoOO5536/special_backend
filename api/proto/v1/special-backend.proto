@@ -10,29 +10,98 @@ package special_app_v1;
 option go_package = "special_app/pkg/proto/v1;special_app_v1";
 
 service SpecialAppService {
-  rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
-  rpc UpdateUser(UpdateUserRequest) returns (GetUserInfoResponse) {}
-  rpc GetUser(GetUserRequest) returns (GetUserInfoResponse) {}
+  rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/users"
+    }
+  }
+  rpc UpdateUser(UpdateUserRequest) returns (GetUserInfoResponse) {
+    option (google.api.http) = {
+      patch: "/v1/users"
+      body: "*"
+    }
+  }
+  rpc GetUser(GetUserRequest) returns (GetUserInfoResponse) {
+    option (google.api.http) = {
+      get: "/v1/users"
+    }
+  }
 
-  rpc GetIventInfo(GetIventInfoRequest) returns (GetIventInfoResponse) {}
-  rpc GetIvents(GetIventsRequest) returns (GetIventsResponse) {}
+  rpc GetIventInfo(GetIventInfoRequest) returns (GetIventInfoResponse) {
+    option (google.api.http) = {
+      get: "/v1/ivents/{id}"
+    }
+  }
+  rpc GetIvents(GetIventsRequest) returns (GetIventsResponse) {
+    option (google.api.http) = {
+      get: "/v1/ivents"
+    }
+  }
 
-  rpc CreateUserIvent(CreateUserIventRequest) returns (GetUserIventInfoResponse) {}
-  rpc GetUserIventInfo(GetUserIventInfoRequest) returns (GetUserIventInfoResponse) {}
-  rpc GetUserIvents(GetUserIventsRequest) returns (GetUserIventsResponse) {}
-  rpc UpdateUserIvent(UdpateUserIventRequest) return (GetUserIventInfoResponse) {}
-  rpc DeleteUserIvent(DeleteUserIventRequest) returns (google.protobuf.Empty) {}
+  rpc CreateUserIvent(CreateUserIventRequest) returns (GetUserIventInfoResponse) {
+    option (google.api.http) = {
+      post: "/v1/user_ivents"
+      body: "*"
+    }
+  }
+  rpc GetUserIventInfo(GetUserIventInfoRequest) returns (GetUserIventInfoResponse) {
+    option (google.api.http) = {
+      get: "/v1/user_ivents/{id}"
+    }
+  }
+  rpc GetUserIvents(GetUserIventsRequest) returns (GetUserIventsResponse) {
+    option (google.api.http) = {
+      get: "/v1/user_ivents"
+    }
+  }
+  rpc UpdateUserIvent(UpdateUserIventRequest) returns (GetUserIventInfoResponse) {
+    option (google.api.http) = {
+      patch: "/v1/user_ivents/{id}"
+      body: "*"
+    }
+  }
+  rpc DeleteUserIvent(DeleteUserIventRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/user_ivents/{id}"
+    }
+  }
   
-  rpc GetItemInfo(GetItemInfoRequest) returns (GetItemInfoResponse) {}
-  rpc GetItems(GetItemsRequest) returns (GetItemsResponse) {}
+  rpc GetItemInfo(GetItemInfoRequest) returns (GetItemInfoResponse) {
+    option (google.api.http) = {
+      get: "/v1/items/{id}"
+    }
+  }
+  rpc GetItems(GetItemsRequest) returns (GetItemsResponse) {
+    option (google.api.http) = {
+      get: "/v1/items"
+    }
+  }
 
-  rpc CreateOrder(CreateOrderRequest) returns (GetOrderInfoResponse) {}
-  rpc GetOrderInfo(GetOrderInfoRequest) returns (GetOrderInfoResponse) {}
-  rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {}
-  rpc UpdateOrder(UpdateOrderRequest) returns (GetOrderInfoResponse) {}
+  rpc CreateOrder(CreateOrderRequest) returns (GetOrderInfoResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders"
+      body: "*"
+    }
+  }
+  rpc GetOrderInfo(GetOrderInfoRequest) returns (GetOrderInfoResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/{id}"
+    }
+  }
+  rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders"
+    }
+  }
+  rpc UpdateOrder(UpdateOrderRequest) returns (GetOrderInfoResponse) {
+    option (google.api.http) = {
+      patch: "/v1/orders/{id}"
+      body: "*"
+    }
+  }
 }
 
-// Users !!!
+// Users
 
 message CreateUserRequest {}
 
@@ -52,7 +121,7 @@ message GetUserInfoResponse {
   string phone_number = 4;
 }
 
-// Ivents !!!
+// Ivents
 
 message GetIventInfoRequest {
   string id = 1;
@@ -64,20 +133,20 @@ message GetIventInfoResponse {
   string id = 1;
   string title = 2;
   string description = 3;
-  google.protobuf.timestamp datetime = 4;
-  int price = 5;
-  int total_seats = 6;
-  int occupied_seats = 7;
+  google.protobuf.Timestamp datetime = 4;
+  int64 price = 5;
+  int64 total_seats = 6;
+  int64 occupied_seats = 7;
   repeated string pictures = 8;
 }
 
 message IventInfoForList {
   string id = 1;
   string title = 2;
-  google.protobuf.timestamp datetime = 3;
-  int price = 4;
-  int total_seats = 5;
-  int occupied_seats = 6;
+  google.protobuf.Timestamp datetime = 3;
+  int64 price = 4;
+  int64 total_seats = 5;
+  int64 occupied_seats = 6;
   string picture = 7;
 }
 
@@ -85,11 +154,11 @@ message GetIventsResponse {
   repeated IventInfoForList ivents = 1;
 }
 
-// UserIvent !!!
+// UserIvent
 
 message CreateUserIventRequest {
   string ivent_id = 1;
-  int number_of_guests = 2;
+  int64 number_of_guests = 2;
 }
 
 message GetUserIventInfoRequest {
@@ -100,7 +169,7 @@ message GetUserIventsRequest {}
 
 message UpdateUserIventRequest {
   string id = 1;
-  int number_of_guests = 2;
+  int64 number_of_guests = 2;
 }
 
 message DeleteUserIventRequest {
@@ -112,7 +181,7 @@ message GetUserIventInfoResponse {
   string ivent_id = 2;
   string number_of_guests = 3;
   string title = 4; 
-  google.protobuf.timestamp datetime = 5;
+  google.protobuf.Timestamp datetime = 5;
   string picture = 6;
 }
 
@@ -120,7 +189,7 @@ message UserIventInfoForList {
   string id = 1;
   string ivent_id = 2;
   string title = 3;
-  google.protobuf.timestamp datetime = 4;
+  google.protobuf.Timestamp datetime = 4;
   string picture = 5;
 }
 
@@ -128,7 +197,7 @@ message GetUserIventsResponse {
   repeated UserIventInfoForList user_ivents = 2;
 }
 
-// Item !!!
+// Item
 
 message GetItemInfoRequest {
   string id = 1;
@@ -140,14 +209,14 @@ message GetItemInfoResponse {
   string id = 1;
   string title = 2;
   string description = 3;
-  int price = 4;
+  int64 price = 4;
   repeated string pictures = 5;
 }
 
 message ItemInfoForList {
   string id = 1;
   string title = 2;
-  int price = 3;
+  int64 price = 3;
   string picture = 4;
 }
 
@@ -158,8 +227,8 @@ message GetItemsResponse {
 // Order
 
 message CreateOrderRequest {
-  google.protobuf.timestamp completion_date = 1;
-  optional comment = 2;
+  google.protobuf.Timestamp completion_date = 1;
+  optional string comment = 2;
 }
 
 message GetOrderInfoRequest {
@@ -177,27 +246,27 @@ message OrderItemInfoForList {
   string id = 1;
   string item_id = 2;
   string title = 3;
-  int price = 4;
-  int quantity = 5;
+  int64 price = 4;
+  int64 quantity = 5;
   string picture = 6;
 
 }
 
 message GetOrderInfoResponse {
   string number = 1;
-  google.protobuf.timestamp form_date = 2;
-  google.protobuf.timestamp completion_date = 3;
+  google.protobuf.Timestamp form_date = 2;
+  google.protobuf.Timestamp completion_date = 3;
   string comment = 4;
   string status = 5;
-  int order_amount = 6;
+  int64 order_amount = 6;
   repeated OrderItemInfoForList items = 7;
 }
 
-message OrderInfoForList = {
+message OrderInfoForList {
   string number = 1;
-  google.protobuf.timestamp completion_date = 2;
+  google.protobuf.Timestamp completion_date = 2;
   string status = 3;
-  int order_amount = 4;
+  int64 order_amount = 4;
 }
 
 message GetOrdersResponse {

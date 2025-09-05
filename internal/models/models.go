@@ -47,10 +47,10 @@ type Order struct {
 	Number         string      `gorm:"column:order_number"`
 	UserID         string      `gorm:"column:user_od"`
 	FormDate       time.Time   `gorm:"column:order_form_datetime"`
-	CompletionDate time.Time   `gorm:"column:Completion_Date"`
-	Comment        string      `gorm:"column:Order_Comment"`
-	Status         string      `gorm:"column:Order_Status"`
-	OrderAmount    int64       `gorm:"column:Order_Amount"`
+	CompletionDate time.Time   `gorm:"column:completion_date"`
+	Comment        string      `gorm:"column:order_comment"`
+	Status         string      `gorm:"column:order_status"`
+	OrderAmount    int64       `gorm:"column:order_amount"`
 	OrderItems     []OrderItem `gorm:"foreignKey:OrderID"`
 }
 
@@ -64,9 +64,9 @@ type Item struct {
 }
 
 type OrderItem struct{
-	ID       uuid.UUID `gorm:"column:ID_Order_Item;primaryKey"`
-	OrderID  uuid.UUID `gorm:"column:Order_ID;index"`
-	ItemID   uuid.UUID `gorm:"column:Item_ID;index"`
+	ID       uuid.UUID `gorm:"column:id_order_item;primaryKey"`
+	OrderID  uuid.UUID `gorm:"column:order_id;index"`
+	ItemID   uuid.UUID `gorm:"column:item_id;index"`
 	Quantity int64
 }
 

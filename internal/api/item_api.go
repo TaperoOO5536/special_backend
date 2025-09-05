@@ -53,3 +53,27 @@ func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInf
 		Pictures: pictures,
 	}, nil
 }
+
+func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsRequest) (*pb.GetItemsResponse, error) {
+	items, err := h.itemService.GetItems(ctx)
+	if err != nil {
+		err := status.Error(codes.Internal, err.Error())
+		return nil, err
+	}
+
+	response := &pb.GetItemsResponse{
+		Items: make([]*pb.ItemInfoForList, 0, len(items)),
+	}
+	
+	for _, item := range items {
+		pbItem := &pb.ItemInfoForList{
+			Id: item.ID.String(),
+			Title: item.Title,
+			Price: item.Price,
+			Picture: item.LittlePicture,
+		}
+		response.Items = append(response.Items, pbItem)
+	}
+
+	return response, nil
+}

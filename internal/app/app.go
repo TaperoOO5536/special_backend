@@ -46,12 +46,15 @@ func (a *App) Start(ctx context.Context) error {
 	db := config.NewDBClient(a.config.Dsn)
 
 	itemRepo := repository.NewItemRepository(db)
+	iventRepo := repository.NewIventRepository(db)
 	
 	itemService := service.NewItemService(itemRepo)
+	iventService := service.NewIventService(iventRepo)
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
+	iventServiceHandler := api.NewIventServiceHandler(iventService)
 
-	handler := api.NewHandler(itemServiceHandler)
+	handler := api.NewHandler(itemServiceHandler, iventServiceHandler)
 
 	grpcServer := grpc.NewServer()
 

@@ -24,7 +24,7 @@ func NewIventRepository(db *gorm.DB) IventRepository {
 
 func (r *iventRepository) GetIventInfo(ctx context.Context, id uuid.UUID) (*models.Ivent, error) {
 	var ivent models.Ivent
-	if err := r.db.Preload("Pictures").Where("ID_Ivent = ?", id).First(&ivent).Error; err != nil {
+	if err := r.db.Preload("Pictures").Where("id_ivent = ?", id).First(&ivent).Error; err != nil {
 		return nil, err
 	}
 	return &ivent, nil

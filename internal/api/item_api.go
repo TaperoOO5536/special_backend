@@ -1,0 +1,55 @@
+package api
+
+import (
+	"context"
+
+	"github.com/TaperoOO5536/special_backend/internal/service"
+	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
+	"github.com/google/uuid"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+)
+
+type ItemServiceHandler struct {
+	itemService *service.ItemService
+}
+
+func NewItemServiceHandler(itemService *service.ItemService) *ItemServiceHandler {
+	return &ItemServiceHandler{ itemService: itemService }
+}
+
+func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInfoRequest) (*pb.GetItemInfoResponse, error) {
+	if req.Id == "" {
+		err := status.Error(codes.InvalidArgument, "item ID is required")
+		return nil, err
+	}
+	
+	itemID, err := uuid.Parse(req.Id)
+	if err != nil {
+		err := status.Error(codes.InvalidArgument, "invalid item ID")
+		return nil, err
+	}
+
+	item, err := h.itemService.GetItemInfo(ctx, itemID)
+	if err != nil {
+		if err == service.ErrItemNotFound {
+			err := status.Error(codes.NotFound, "item not found")
+			return nil, err
+		}
+		err := status.Error(codes.Internal, err.Error())
+		return nil, err
+	}
+
+	var pictures []string
+	for _, picture := range item.Pictures {
+		pictures = append(pictures, picture.Path)
+	}
+
+	return &pb.GetItemInfoResponse{
+		Id: item.ID.String(),
+		Title: item.Title,
+		Description: item.Description,
+		Price: item.Price,
+		Pictures: pictures,
+	}, nil
+}

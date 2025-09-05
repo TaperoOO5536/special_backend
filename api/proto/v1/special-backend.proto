@@ -13,91 +13,91 @@ service SpecialAppService {
   rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/v1/users"
-    }
+    };
   }
   rpc UpdateUser(UpdateUserRequest) returns (GetUserInfoResponse) {
     option (google.api.http) = {
       patch: "/v1/users"
       body: "*"
-    }
+    };
   }
   rpc GetUser(GetUserRequest) returns (GetUserInfoResponse) {
     option (google.api.http) = {
       get: "/v1/users"
-    }
+    };
   }
 
   rpc GetIventInfo(GetIventInfoRequest) returns (GetIventInfoResponse) {
     option (google.api.http) = {
       get: "/v1/ivents/{id}"
-    }
+    };
   }
   rpc GetIvents(GetIventsRequest) returns (GetIventsResponse) {
     option (google.api.http) = {
       get: "/v1/ivents"
-    }
+    };
   }
 
   rpc CreateUserIvent(CreateUserIventRequest) returns (GetUserIventInfoResponse) {
     option (google.api.http) = {
       post: "/v1/user_ivents"
       body: "*"
-    }
+    };
   }
   rpc GetUserIventInfo(GetUserIventInfoRequest) returns (GetUserIventInfoResponse) {
     option (google.api.http) = {
       get: "/v1/user_ivents/{id}"
-    }
+    };
   }
   rpc GetUserIvents(GetUserIventsRequest) returns (GetUserIventsResponse) {
     option (google.api.http) = {
       get: "/v1/user_ivents"
-    }
+    };
   }
   rpc UpdateUserIvent(UpdateUserIventRequest) returns (GetUserIventInfoResponse) {
     option (google.api.http) = {
       patch: "/v1/user_ivents/{id}"
       body: "*"
-    }
+    };
   }
   rpc DeleteUserIvent(DeleteUserIventRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v1/user_ivents/{id}"
-    }
+    };
   }
   
   rpc GetItemInfo(GetItemInfoRequest) returns (GetItemInfoResponse) {
     option (google.api.http) = {
       get: "/v1/items/{id}"
-    }
+    };
   }
   rpc GetItems(GetItemsRequest) returns (GetItemsResponse) {
     option (google.api.http) = {
       get: "/v1/items"
-    }
+    };
   }
 
   rpc CreateOrder(CreateOrderRequest) returns (GetOrderInfoResponse) {
     option (google.api.http) = {
       post: "/v1/orders"
       body: "*"
-    }
+    };
   }
   rpc GetOrderInfo(GetOrderInfoRequest) returns (GetOrderInfoResponse) {
     option (google.api.http) = {
       get: "/v1/orders/{id}"
-    }
+    };
   }
   rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {
     option (google.api.http) = {
       get: "/v1/orders"
-    }
+    };
   }
   rpc UpdateOrder(UpdateOrderRequest) returns (GetOrderInfoResponse) {
     option (google.api.http) = {
       patch: "/v1/orders/{id}"
       body: "*"
-    }
+    };
   }
 }
 
@@ -185,16 +185,16 @@ message GetUserIventInfoResponse {
   string picture = 6;
 }
 
-message UserIventInfoForList {
-  string id = 1;
-  string ivent_id = 2;
-  string title = 3;
-  google.protobuf.Timestamp datetime = 4;
-  string picture = 5;
-}
+//message UserIventInfoForList {
+//  string id = 1;
+//  string ivent_id = 2;
+//  string title = 3;
+//  google.protobuf.Timestamp datetime = 4;
+//  string picture = 5;
+//}
 
 message GetUserIventsResponse {
-  repeated UserIventInfoForList user_ivents = 2;
+  repeated GetUserIventInfoResponse user_ivents = 2;
 }
 
 // Item

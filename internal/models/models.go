@@ -7,46 +7,46 @@ import (
 )
 
 type User struct {
-	ID          string      `gorm:"column:ID_User"`
-	Name        string      `gorm:"column:F_N_User"`
-	Surname     string      `gorm:"column:S_N_User"`
-	Nickname    string      `gorm:"column:N_N_User"`
-	PhoneNumber string      `gorm:"column:Phone_N_User"`
+	ID          string      `gorm:"column:id_user;primaryKey"`
+	Name        string      `gorm:"column:f_n_user"`
+	Surname     string      `gorm:"column:s_n_user"`
+	Nickname    string      `gorm:"column:n_n_user"`
+	PhoneNumber string      `gorm:"column:phone_n_user"`
 	UserIvents  []UserIvent `gorm:"foreignKey:UserID"`
 	Orders      []Order     `gorm:"foreignKey:UserID"`
 }
 
 type Ivent struct {
-	ID            uuid.UUID      `gorm:"column:ID_Ivent"`
-	Title         string         `gorm:"column:Ivent_Title"`
-	Description   string         `gorm:"column:Ivent_Description"`
-	DateTime      time.Time      `gorm:"column:Ivent_DateTime"`
-	Price         int64          `gorm:"column:Ivent_Price"`
-	TotalSeats    int64          `gorm:"column:Total_Seats"`
-	OccupiedSeats int64          `gorm:"column:Occupied_Seats"`
-	LittlePicture string         `gorm:"column:Little_Picture"`
+	ID            uuid.UUID      `gorm:"column:id_ivent;primaryKey"`
+	Title         string         `gorm:"column:ivent_title"`
+	Description   string         `gorm:"column:ivent_description"`
+	DateTime      time.Time      `gorm:"column:ivent_datetime"`
+	Price         int64          `gorm:"column:ivent_price"`
+	TotalSeats    int64          `gorm:"column:total_seats"`
+	OccupiedSeats int64          `gorm:"column:occupied_seats"`
+	LittlePicture string         `gorm:"column:little_picture"`
 	UserIvents    []UserIvent    `gorm:"foreignKey:IventID"`
 	Pictures      []IventPicture `gorm:"foreignKey:IventID"`
 }
 
 type UserIvent struct {
-	ID             uuid.UUID `gorm:"column:ID_User_Ivent"`
-	UserID         string    `gorm:"column:User_ID;index"`
-	IventID        uuid.UUID `gorm:"column:Ivent_ID;index"`
-	NumberOfGuests int64     `gorm:"column:Number_Of_Guests"`
+	ID             uuid.UUID `gorm:"column:id_user_ivent;primaryKey"`
+	UserID         string    `gorm:"column:user_id"`
+	IventID        uuid.UUID `gorm:"column:ivent_id"`
+	NumberOfGuests int64     `gorm:"column:number_of_guests"`
 }
 
 type IventPicture struct {
-	ID      uuid.UUID `gorm:"column:ID_Ivent_Picture"`
-	IventID uuid.UUID `gorm:"column:Ivent_ID"`
-	Path    string    `gorm:"column:Picture_Path"`
+	ID      uuid.UUID `gorm:"column:id_ivent_picture;primaryKey"`
+	IventID uuid.UUID `gorm:"column:ivent_id"`
+	Path    string    `gorm:"column:picture_path"`
 }
 
 type Order struct {
-	ID             uuid.UUID   `gorm:"column:ID_Order"`
-	Number         string      `gorm:"column:Order_Number"`
-	UserID         string      `gorm:"column:User_ID"`
-	FormDate       time.Time   `gorm:"column:Order_Form_DateTime"`
+	ID             uuid.UUID   `gorm:"column:id_order;primaryKey"`
+	Number         string      `gorm:"column:order_number"`
+	UserID         string      `gorm:"column:user_od"`
+	FormDate       time.Time   `gorm:"column:order_form_datetime"`
 	CompletionDate time.Time   `gorm:"column:Completion_Date"`
 	Comment        string      `gorm:"column:Order_Comment"`
 	Status         string      `gorm:"column:Order_Status"`
@@ -55,24 +55,23 @@ type Order struct {
 }
 
 type Item struct {
-	ID            uuid.UUID     `gorm:"column:ID_Item"`
-	Title         string        `gorm:"column:Item_Title"`
-	Description   string        `gorm:"column:Item_Description"`
-	Price         int64         `gorm:"column:Item_Price"`
-	LittlePicture string        `gorm:"column:Little_Picture"`
-	OrderItems    []OrderItem   `gorm:"foreignKey:ItemID"`
+	ID            uuid.UUID     `gorm:"column:id_item;primaryKey"`
+	Title         string        `gorm:"column:item_title"`
+	Description   string        `gorm:"column:item_description"`
+	Price         int64         `gorm:"column:item_price"`
+	LittlePicture string        `gorm:"column:little_picture"`
 	Pictures      []ItemPicture `gorm:"foreignKey:ItemID"`
 }
 
 type OrderItem struct{
-	ID       uuid.UUID `gorm:"column:ID_Order_Item"`
+	ID       uuid.UUID `gorm:"column:ID_Order_Item;primaryKey"`
 	OrderID  uuid.UUID `gorm:"column:Order_ID;index"`
 	ItemID   uuid.UUID `gorm:"column:Item_ID;index"`
 	Quantity int64
 }
 
 type ItemPicture struct {
-	ID     uuid.UUID `gorm:"column:ID_Item_Picture"`
-	ItemID uuid.UUID `gorm:"column:Item_ID"`
-	Path   string    `gorm:"column:Picture_Path"`
+	ID     uuid.UUID `gorm:"column:id_item_picture;primaryKey"`
+	ItemID uuid.UUID `gorm:"column:item_id"`
+	Path   string    `gorm:"column:picture_path"`
 }

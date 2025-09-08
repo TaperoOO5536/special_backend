@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"path/filepath"
 
 	"net"
 	"net/http"
@@ -21,6 +22,7 @@ import (
 	"github.com/TaperoOO5536/special_backend/internal/api"
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -73,15 +75,33 @@ func (a *App) Start(ctx context.Context) error {
 		ctx,
 		gwmux,
 		"localhost:"+a.config.Port,
-		[]grpc.DialOption{grpc.WithInsecure()},
+		[]grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())},
 	)
 	if err != nil {
 		return fmt.Errorf("failed to register gateway: %v", err)
 	}
 
+httpMux := http.NewServeMux()
+
+    httpMux.Handle("/v1/", gwmux)
+
+    httpMux.HandleFunc("/swagger/swagger.json", func(w http.ResponseWriter, r *http.Request) {
+        log.Println("Serving swagger.json")
+        filePath := filepath.Join("pkg", "openapi", "special-backend.swagger.json")
+    log.Printf("Attempting to serve file: %s", filePath)
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        log.Printf("Swagger JSON file not found: %s", filePath)
+        http.Error(w, "Swagger JSON not found", http.StatusNotFound)
+        return
+    }
+    http.ServeFile(w, r, filePath)
+    })
+
+    httpMux.Handle("/swagger/", http.StripPrefix("/swagger/", http.FileServer(http.Dir(filepath.Join("internal", "app", "static", "swagger-ui")))))
+
 	httpServer := &http.Server{
 		Addr: ":8081",
-		Handler: gwmux,
+		Handler: httpMux,
 	}
 
 	serverError := make(chan error, 1)

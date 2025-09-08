@@ -31,6 +31,8 @@ func NewUserRepository(db *gorm.DB) UserRepository {
 }
 
 func (r *userRepository) CreateUser(ctx context.Context, user *models.User) (error) {
+	
+	
 	return nil
 }
 

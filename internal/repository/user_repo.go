@@ -11,7 +11,7 @@ import (
 
 type UserRepository interface {
 	CreateUser(ctx context.Context, user *models.User) (error)
-	GetUserInfo(ctx context.Context) (*models.User, error)
+	GetUserInfo(ctx context.Context, id string) (*models.User, error)
 	UpdateUser(ctx context.Context, updates *UserUpdates) (*models.User, error)
 }
 
@@ -34,8 +34,12 @@ func (r *userRepository) CreateUser(ctx context.Context, user *models.User) (err
 	return nil
 }
 
-func (r *userRepository) GetUserInfo(ctx context.Context) (*models.User, error) {
-	return nil, nil
+func (r *userRepository) GetUserInfo(ctx context.Context, id string) (*models.User, error) {
+	var user models.User
+	if err := r.db.Where("id_user = ?", id).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
 func (r *userRepository) UpdateUser(ctx context.Context, updates *UserUpdates) (*models.User, error) {

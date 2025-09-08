@@ -14,6 +14,7 @@
   "paths": {
     "/v1/items": {
       "get": {
+        "description": "get list of pastries",
         "operationId": "SpecialAppService_GetItems",
         "responses": {
           "200": {
@@ -34,6 +35,7 @@
     },
     "/v1/items/{id}": {
       "get": {
+        "description": "get full data by pastry id",
         "operationId": "SpecialAppService_GetItemInfo",
         "responses": {
           "200": {
@@ -62,6 +64,7 @@
     },
     "/v1/ivents": {
       "get": {
+        "description": "get list of ivents",
         "operationId": "SpecialAppService_GetIvents",
         "responses": {
           "200": {
@@ -82,6 +85,7 @@
     },
     "/v1/ivents/{id}": {
       "get": {
+        "description": "get full data by pastry id",
         "operationId": "SpecialAppService_GetIventInfo",
         "responses": {
           "200": {

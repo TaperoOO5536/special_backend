@@ -1,0 +1,824 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "special-backend.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "SpecialAppService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/items": {
+      "get": {
+        "operationId": "SpecialAppService_GetItems",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetItemsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
+    "/v1/items/{id}": {
+      "get": {
+        "operationId": "SpecialAppService_GetItemInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetItemInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
+    "/v1/ivents": {
+      "get": {
+        "operationId": "SpecialAppService_GetIvents",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetIventsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
+    "/v1/ivents/{id}": {
+      "get": {
+        "operationId": "SpecialAppService_GetIventInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetIventInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
+    "/v1/orders": {
+      "get": {
+        "operationId": "SpecialAppService_GetOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SpecialAppService"
+        ]
+      },
+      "post": {
+        "operationId": "SpecialAppService_CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetOrderInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/special_app_v1CreateOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
+    "/v1/orders/{id}": {
+      "get": {
+        "operationId": "SpecialAppService_GetOrderInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetOrderInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      },
+      "patch": {
+        "operationId": "SpecialAppService_UpdateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetOrderInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpecialAppServiceUpdateOrderBody"
+            }
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
+    "/v1/user_ivents": {
+      "get": {
+        "operationId": "SpecialAppService_GetUserIvents",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetUserIventsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SpecialAppService"
+        ]
+      },
+      "post": {
+        "operationId": "SpecialAppService_CreateUserIvent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetUserIventInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/special_app_v1CreateUserIventRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
+    "/v1/user_ivents/{id}": {
+      "get": {
+        "operationId": "SpecialAppService_GetUserIventInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetUserIventInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      },
+      "delete": {
+        "operationId": "SpecialAppService_DeleteUserIvent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      },
+      "patch": {
+        "operationId": "SpecialAppService_UpdateUserIvent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetUserIventInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpecialAppServiceUpdateUserIventBody"
+            }
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "operationId": "SpecialAppService_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetUserInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SpecialAppService"
+        ]
+      },
+      "post": {
+        "operationId": "SpecialAppService_CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SpecialAppService"
+        ]
+      },
+      "patch": {
+        "operationId": "SpecialAppService_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetUserInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/special_app_v1UpdateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SpecialAppServiceUpdateOrderBody": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "SpecialAppServiceUpdateUserIventBody": {
+      "type": "object",
+      "properties": {
+        "numberOfGuests": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "special_app_v1CreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "completionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "special_app_v1CreateUserIventRequest": {
+      "type": "object",
+      "properties": {
+        "iventId": {
+          "type": "string"
+        },
+        "numberOfGuests": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "special_app_v1GetItemInfoResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pictures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "special_app_v1GetItemsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/special_app_v1ItemInfoForList"
+          }
+        }
+      }
+    },
+    "special_app_v1GetIventInfoResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalSeats": {
+          "type": "string",
+          "format": "int64"
+        },
+        "occupiedSeats": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pictures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "special_app_v1GetIventsResponse": {
+      "type": "object",
+      "properties": {
+        "ivents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/special_app_v1IventInfoForList"
+          }
+        }
+      }
+    },
+    "special_app_v1GetOrderInfoResponse": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string"
+        },
+        "formDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "orderAmount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/special_app_v1OrderItemInfoForList"
+          }
+        }
+      }
+    },
+    "special_app_v1GetOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/special_app_v1OrderInfoForList"
+          }
+        }
+      }
+    },
+    "special_app_v1GetUserInfoResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "special_app_v1GetUserIventInfoResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "iventId": {
+          "type": "string"
+        },
+        "numberOfGuests": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "picture": {
+          "type": "string"
+        }
+      }
+    },
+    "special_app_v1GetUserIventsResponse": {
+      "type": "object",
+      "properties": {
+        "userIvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/special_app_v1GetUserIventInfoResponse"
+          }
+        }
+      }
+    },
+    "special_app_v1ItemInfoForList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "picture": {
+          "type": "string"
+        }
+      }
+    },
+    "special_app_v1IventInfoForList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalSeats": {
+          "type": "string",
+          "format": "int64"
+        },
+        "occupiedSeats": {
+          "type": "string",
+          "format": "int64"
+        },
+        "picture": {
+          "type": "string"
+        }
+      }
+    },
+    "special_app_v1OrderInfoForList": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string"
+        },
+        "orderAmount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "special_app_v1OrderItemInfoForList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "picture": {
+          "type": "string"
+        }
+      }
+    },
+    "special_app_v1UpdateUserRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

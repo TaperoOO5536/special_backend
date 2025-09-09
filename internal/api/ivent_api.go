@@ -47,14 +47,14 @@ func (h *IventServiceHandler) GetIventInfo(ctx context.Context, req *pb.GetIvent
 	}
 
 	return &pb.GetIventInfoResponse{
-		Id: ivent.ID.String(),
-		Title: ivent.Title,
-		Description: ivent.Description,
-		Datetime: timestamppb.New(ivent.DateTime),
-		Price: ivent.Price,
-		TotalSeats: ivent.TotalSeats,
+		Id:            ivent.ID.String(),
+		Title:         ivent.Title,
+		Description:   ivent.Description,
+		Datetime:      timestamppb.New(ivent.DateTime),
+		Price:         ivent.Price,
+		TotalSeats:    ivent.TotalSeats,
 		OccupiedSeats: ivent.OccupiedSeats,
-		Pictures: pictures,
+		Pictures:      pictures,
 	}, nil
 }
 
@@ -71,9 +71,9 @@ func (h *IventServiceHandler) GetIvents(ctx context.Context, req *pb.GetIventsRe
 	
 	for _, ivent := range ivents {
 		pbIvent := &pb.IventInfoForList{
-			Id: ivent.ID.String(),
-			Title: ivent.Title,
-			Price: ivent.Price,
+			Id:      ivent.ID.String(),
+			Title:   ivent.Title,
+			Price:   ivent.Price,
 			Picture: ivent.LittlePicture,
 		}
 		response.Ivents = append(response.Ivents, pbIvent)

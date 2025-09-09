@@ -23,6 +23,10 @@ func GetDsn() string {
 	return GetEnvDefault("DSN", "")
 }
 
+func GetToken() string {
+	return os.Getenv("TOKEN")
+}
+
 func GetEnvDefault(key, defaultValue string) string {
 	value := os.Getenv(key)
 	if value == "" {

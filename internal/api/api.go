@@ -4,22 +4,26 @@ import (
 	"context"
 
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
+	"google.golang.org/protobuf/types/known/emptypb"
 	// "google.golang.org/protobuf/types/known/emptypb"
 )
 
 type Handler struct {
 	pb.UnimplementedSpecialAppServiceServer
-	itemHandler *ItemServiceHandler
+	itemHandler  *ItemServiceHandler
 	iventHandler *IventServiceHandler
+	userHandler  *UserServiceHandler
 }
 
 func NewHandler(
-	itemHandlel *ItemServiceHandler,
+	itemHandlel  *ItemServiceHandler,
 	ivetnHandler *IventServiceHandler,
+	userHandler  *UserServiceHandler,
 ) *Handler {
 	return &Handler{
-		itemHandler: itemHandlel,
+		itemHandler:  itemHandlel,
 		iventHandler: ivetnHandler,
+		userHandler:  userHandler,
 	}
 }
 
@@ -42,4 +46,14 @@ func (h *Handler) GetIventInfo(ctx context.Context, req *pb.GetIventInfoRequest)
 
 func (h *Handler) GetIvents(ctx context.Context, req *pb.GetIventsRequest) (*pb.GetIventsResponse, error) {
 	return h.iventHandler.GetIvents(ctx, req)
+}
+
+//users
+
+func (h *Handler) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserInfoResponse, error) {
+	return h.userHandler.GetUserInfo(ctx, req)
+}
+
+func (h *Handler) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*emptypb.Empty, error) {
+	return h.userHandler.CreateUser(ctx, req)
 }

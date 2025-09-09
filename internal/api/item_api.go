@@ -46,11 +46,11 @@ func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInf
 	}
 
 	return &pb.GetItemInfoResponse{
-		Id: item.ID.String(),
-		Title: item.Title,
+		Id:          item.ID.String(),
+		Title:       item.Title,
 		Description: item.Description,
-		Price: item.Price,
-		Pictures: pictures,
+		Price:       item.Price,
+		Pictures:    pictures,
 	}, nil
 }
 
@@ -67,9 +67,9 @@ func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsReque
 	
 	for _, item := range items {
 		pbItem := &pb.ItemInfoForList{
-			Id: item.ID.String(),
-			Title: item.Title,
-			Price: item.Price,
+			Id:      item.ID.String(),
+			Title:   item.Title,
+			Price:   item.Price,
 			Picture: item.LittlePicture,
 		}
 		response.Items = append(response.Items, pbItem)

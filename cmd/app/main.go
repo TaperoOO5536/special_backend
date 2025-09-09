@@ -15,7 +15,6 @@ import (
 
 	"github.com/TaperoOO5536/special_backend/internal/app"
 	"github.com/TaperoOO5536/special_backend/internal/config"
-	// tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 type User struct {
@@ -43,10 +42,10 @@ func main() {
 	}
 
 	user := User{
-		ID:        123456789,
-		FirstName: "John",
+		ID:        1234234345,
+		FirstName: "Vlad",
 		LastName:  "Doe",
-		Username:  "@JohnDoe",
+		Username:  "@VladDoe",
 	}
 	botToken := config.GetToken()
 	initData, err := GenInitData(botToken, user)
@@ -54,7 +53,7 @@ func main() {
 		fmt.Printf("Error: %v\n", err)
 		return
 	}
-	fmt.Println("Test initData:", initData)
+	log.Println("Test initData:", initData)
 }
 
 func GenInitData(token string, user User) (string, error) {
@@ -75,8 +74,10 @@ func GenInitData(token string, user User) (string, error) {
 	sort.Strings(dataCheckStrings)
 	dataCheckString := strings.Join(dataCheckStrings, "\n")
 
-	secretKey := sha256.Sum256([]byte("WebAppData"))
-	h := hmac.New(sha256.New, secretKey[:])
+	h := sha256.New()
+	h.Write([]byte("WebAppData"))
+	secretKey := h.Sum(nil)
+	h = hmac.New(sha256.New, secretKey)
 	h.Write([]byte(token))
 	hmacKey := h.Sum(nil)
 

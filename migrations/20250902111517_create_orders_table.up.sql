@@ -6,5 +6,5 @@ create table if not exists Orders (
             Order_Comment varchar (300) null,
             Order_Amount int not null,
             Order_Status varchar (50) not null,
-            User_ID UUID not null references Users (ID_User)
+            User_ID text not null references Users (ID_User)
         );

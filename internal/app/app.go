@@ -47,14 +47,17 @@ func (a *App) Start(ctx context.Context) error {
 
 	itemRepo := repository.NewItemRepository(db)
 	iventRepo := repository.NewIventRepository(db)
+	userRepo := repository.NewUserRepository(db)
 	
 	itemService := service.NewItemService(itemRepo)
 	iventService := service.NewIventService(iventRepo)
+	userServive := service.NewUserService(userRepo, config.GetToken())
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
 	iventServiceHandler := api.NewIventServiceHandler(iventService)
+	userServiceHandler := api.NewUserServiceHandler(userServive)
 
-	handler := api.NewHandler(itemServiceHandler, iventServiceHandler)
+	handler := api.NewHandler(itemServiceHandler, iventServiceHandler, userServiceHandler)
 
 	grpcServer := grpc.NewServer()
 

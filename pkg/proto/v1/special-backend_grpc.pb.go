@@ -47,7 +47,7 @@ type SpecialAppServiceClient interface {
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
 	GetIventInfo(ctx context.Context, in *GetIventInfoRequest, opts ...grpc.CallOption) (*GetIventInfoResponse, error)
 	GetIvents(ctx context.Context, in *GetIventsRequest, opts ...grpc.CallOption) (*GetIventsResponse, error)
-	CreateUserIvent(ctx context.Context, in *CreateUserIventRequest, opts ...grpc.CallOption) (*GetUserIventInfoResponse, error)
+	CreateUserIvent(ctx context.Context, in *CreateUserIventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetUserIventInfo(ctx context.Context, in *GetUserIventInfoRequest, opts ...grpc.CallOption) (*GetUserIventInfoResponse, error)
 	GetUserIvents(ctx context.Context, in *GetUserIventsRequest, opts ...grpc.CallOption) (*GetUserIventsResponse, error)
 	UpdateUserIvent(ctx context.Context, in *UpdateUserIventRequest, opts ...grpc.CallOption) (*GetUserIventInfoResponse, error)
@@ -118,9 +118,9 @@ func (c *specialAppServiceClient) GetIvents(ctx context.Context, in *GetIventsRe
 	return out, nil
 }
 
-func (c *specialAppServiceClient) CreateUserIvent(ctx context.Context, in *CreateUserIventRequest, opts ...grpc.CallOption) (*GetUserIventInfoResponse, error) {
+func (c *specialAppServiceClient) CreateUserIvent(ctx context.Context, in *CreateUserIventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserIventInfoResponse)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, SpecialAppService_CreateUserIvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -237,7 +237,7 @@ type SpecialAppServiceServer interface {
 	GetUser(context.Context, *GetUserRequest) (*GetUserInfoResponse, error)
 	GetIventInfo(context.Context, *GetIventInfoRequest) (*GetIventInfoResponse, error)
 	GetIvents(context.Context, *GetIventsRequest) (*GetIventsResponse, error)
-	CreateUserIvent(context.Context, *CreateUserIventRequest) (*GetUserIventInfoResponse, error)
+	CreateUserIvent(context.Context, *CreateUserIventRequest) (*emptypb.Empty, error)
 	GetUserIventInfo(context.Context, *GetUserIventInfoRequest) (*GetUserIventInfoResponse, error)
 	GetUserIvents(context.Context, *GetUserIventsRequest) (*GetUserIventsResponse, error)
 	UpdateUserIvent(context.Context, *UpdateUserIventRequest) (*GetUserIventInfoResponse, error)
@@ -273,7 +273,7 @@ func (UnimplementedSpecialAppServiceServer) GetIventInfo(context.Context, *GetIv
 func (UnimplementedSpecialAppServiceServer) GetIvents(context.Context, *GetIventsRequest) (*GetIventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetIvents not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) CreateUserIvent(context.Context, *CreateUserIventRequest) (*GetUserIventInfoResponse, error) {
+func (UnimplementedSpecialAppServiceServer) CreateUserIvent(context.Context, *CreateUserIventRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUserIvent not implemented")
 }
 func (UnimplementedSpecialAppServiceServer) GetUserIventInfo(context.Context, *GetUserIventInfoRequest) (*GetUserIventInfoResponse, error) {

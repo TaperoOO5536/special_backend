@@ -5,17 +5,19 @@ import (
 )
 
 type Repository struct {
-	Item  ItemRepository
-	Ivent IventRepository
-	User  UserRepository
-	Order OrderRepository
+	Item      ItemRepository
+	Ivent     IventRepository
+	User      UserRepository
+	Order     OrderRepository
+	UserIvent UserIventRepository
 }
 
 func NewRepository(db *gorm.DB) *Repository {
 	return &Repository{
-		Item:  NewItemRepository(db),
-		Ivent: NewIventRepository(db),
-		User:  NewUserRepository(db),
-		Order: NewOrderRepository(db),
+		Item:      NewItemRepository(db),
+		Ivent:     NewIventRepository(db),
+		User:      NewUserRepository(db),
+		Order:     NewOrderRepository(db),
+		UserIvent: NewUserIventRepository(db),
 	}
 }

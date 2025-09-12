@@ -10,23 +10,26 @@ import (
 
 type Handler struct {
 	pb.UnimplementedSpecialAppServiceServer
-	itemHandler  *ItemServiceHandler
-	iventHandler *IventServiceHandler
-	userHandler  *UserServiceHandler
-	orderHandler *OrderServiceHandler
+	itemHandler      *ItemServiceHandler
+	iventHandler     *IventServiceHandler
+	userHandler      *UserServiceHandler
+	orderHandler     *OrderServiceHandler
+	userIventHandler *UserIventServiceHandler
 }
 
 func NewHandler(
-	itemHandlel  *ItemServiceHandler,
-	ivetnHandler *IventServiceHandler,
-	userHandler  *UserServiceHandler,
-	orderHandler *OrderServiceHandler,
+	itemHandlel      *ItemServiceHandler,
+	ivetnHandler     *IventServiceHandler,
+	userHandler      *UserServiceHandler,
+	orderHandler     *OrderServiceHandler,
+	userIventHandler *UserIventServiceHandler,
 ) *Handler {
 	return &Handler{
-		itemHandler:  itemHandlel,
-		iventHandler: ivetnHandler,
-		userHandler:  userHandler,
-		orderHandler: orderHandler,
+		itemHandler:      itemHandlel,
+		iventHandler:     ivetnHandler,
+		userHandler:      userHandler,
+		orderHandler:     orderHandler,
+		userIventHandler: userIventHandler,
 	}
 }
 
@@ -77,4 +80,26 @@ func (h *Handler) GetOrderInfo(ctx context.Context, req *pb.GetOrderInfoRequest)
 
 func (h *Handler) GetOrders(ctx context.Context, req *pb.GetOrdersRequest) (*pb.GetOrdersResponse, error) {
 	return h.orderHandler.GetOrders(ctx, req)
+}
+
+//userivents
+
+func (h *Handler) CreateUserIvent(ctx context.Context, req *pb.CreateUserIventRequest) (*emptypb.Empty, error) {
+	return h.userIventHandler.CreateUserIvent(ctx, req)
+}
+
+func (h *Handler) GetUserIventInfo(ctx context.Context, req *pb.GetUserIventInfoRequest) (*pb.GetUserIventInfoResponse, error) {
+	return h.userIventHandler.GetUserIventInfo(ctx, req)
+}
+
+func (h *Handler) GetUserIvents(ctx context.Context, req *pb.GetUserIventsRequest) (*pb.GetUserIventsResponse, error) {
+	return h.userIventHandler.GetUserIvents(ctx, req)
+}
+
+func (h *Handler) UpdateUserIvent(ctx context.Context, req *pb.UpdateUserIventRequest) (*pb.GetUserIventInfoResponse, error) {
+	return h.userIventHandler.UpdateUserIvent(ctx, req)
+}
+
+func (h *Handler) DeleteUserIvent(ctx context.Context, req *pb.DeleteUserIventRequest) (*emptypb.Empty, error) {
+	return h.userIventHandler.DeleteUserIvent(ctx, req)
 }

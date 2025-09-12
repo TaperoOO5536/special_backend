@@ -266,7 +266,8 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/special_app_v1GetUserIventInfoResponse"
+              "type": "object",
+              "properties": {}
             }
           },
           "default": {
@@ -693,7 +694,8 @@
           "type": "string"
         },
         "numberOfGuests": {
-          "type": "string"
+          "type": "string",
+          "format": "int64"
         },
         "title": {
           "type": "string"
@@ -714,7 +716,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/special_app_v1GetUserIventInfoResponse"
+            "$ref": "#/definitions/special_app_v1UserIventInfoForList"
           }
         }
       }
@@ -827,6 +829,27 @@
       "type": "object",
       "properties": {
         "phoneNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "special_app_v1UserIventInfoForList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "iventId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "picture": {
           "type": "string"
         }
       }

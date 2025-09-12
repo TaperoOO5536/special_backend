@@ -38,7 +38,7 @@ service SpecialAppService {
     };
   }
 
-  rpc CreateUserIvent(CreateUserIventRequest) returns (GetUserIventInfoResponse) {
+  rpc CreateUserIvent(CreateUserIventRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/v1/user_ivents"
       body: "*"
@@ -176,7 +176,7 @@ message DeleteUserIventRequest {
 message GetUserIventInfoResponse {
   string id = 1; 
   string ivent_id = 2;
-  string number_of_guests = 3;
+  int64 number_of_guests = 3;
   string title = 4; 
   google.protobuf.Timestamp datetime = 5;
   string picture = 6;
@@ -191,7 +191,7 @@ message UserIventInfoForList {
 }
 
 message GetUserIventsResponse {
-  repeated GetUserIventInfoResponse user_ivents = 2;
+  repeated UserIventInfoForList user_ivents = 2;
 }
 
 // Item

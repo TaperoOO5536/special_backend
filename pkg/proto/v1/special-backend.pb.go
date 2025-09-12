@@ -757,7 +757,7 @@ type GetUserIventInfoResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	IventId        string                 `protobuf:"bytes,2,opt,name=ivent_id,json=iventId,proto3" json:"ivent_id,omitempty"`
-	NumberOfGuests string                 `protobuf:"bytes,3,opt,name=number_of_guests,json=numberOfGuests,proto3" json:"number_of_guests,omitempty"`
+	NumberOfGuests int64                  `protobuf:"varint,3,opt,name=number_of_guests,json=numberOfGuests,proto3" json:"number_of_guests,omitempty"`
 	Title          string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
 	Datetime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=datetime,proto3" json:"datetime,omitempty"`
 	Picture        string                 `protobuf:"bytes,6,opt,name=picture,proto3" json:"picture,omitempty"`
@@ -809,11 +809,11 @@ func (x *GetUserIventInfoResponse) GetIventId() string {
 	return ""
 }
 
-func (x *GetUserIventInfoResponse) GetNumberOfGuests() string {
+func (x *GetUserIventInfoResponse) GetNumberOfGuests() int64 {
 	if x != nil {
 		return x.NumberOfGuests
 	}
-	return ""
+	return 0
 }
 
 func (x *GetUserIventInfoResponse) GetTitle() string {
@@ -914,8 +914,8 @@ func (x *UserIventInfoForList) GetPicture() string {
 }
 
 type GetUserIventsResponse struct {
-	state         protoimpl.MessageState      `protogen:"open.v1"`
-	UserIvents    []*GetUserIventInfoResponse `protobuf:"bytes,2,rep,name=user_ivents,json=userIvents,proto3" json:"user_ivents,omitempty"`
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	UserIvents    []*UserIventInfoForList `protobuf:"bytes,2,rep,name=user_ivents,json=userIvents,proto3" json:"user_ivents,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -950,7 +950,7 @@ func (*GetUserIventsResponse) Descriptor() ([]byte, []int) {
 	return file_special_backend_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *GetUserIventsResponse) GetUserIvents() []*GetUserIventInfoResponse {
+func (x *GetUserIventsResponse) GetUserIvents() []*UserIventInfoForList {
 	if x != nil {
 		return x.UserIvents
 	}
@@ -1810,7 +1810,7 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x18GetUserIventInfoResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bivent_id\x18\x02 \x01(\tR\aiventId\x12(\n" +
-	"\x10number_of_guests\x18\x03 \x01(\tR\x0enumberOfGuests\x12\x14\n" +
+	"\x10number_of_guests\x18\x03 \x01(\x03R\x0enumberOfGuests\x12\x14\n" +
 	"\x05title\x18\x04 \x01(\tR\x05title\x126\n" +
 	"\bdatetime\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x12\x18\n" +
 	"\apicture\x18\x06 \x01(\tR\apicture\"\xa9\x01\n" +
@@ -1819,9 +1819,9 @@ const file_special_backend_proto_rawDesc = "" +
 	"\bivent_id\x18\x02 \x01(\tR\aiventId\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x126\n" +
 	"\bdatetime\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x12\x18\n" +
-	"\apicture\x18\x05 \x01(\tR\apicture\"b\n" +
-	"\x15GetUserIventsResponse\x12I\n" +
-	"\vuser_ivents\x18\x02 \x03(\v2(.special_app_v1.GetUserIventInfoResponseR\n" +
+	"\apicture\x18\x05 \x01(\tR\apicture\"^\n" +
+	"\x15GetUserIventsResponse\x12E\n" +
+	"\vuser_ivents\x18\x02 \x03(\v2$.special_app_v1.UserIventInfoForListR\n" +
 	"userIvents\"$\n" +
 	"\x12GetItemInfoRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\x11\n" +
@@ -1875,7 +1875,7 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12!\n" +
 	"\forder_amount\x18\x04 \x01(\x03R\vorderAmount\"M\n" +
 	"\x11GetOrdersResponse\x128\n" +
-	"\x06orders\x18\x01 \x03(\v2 .special_app_v1.OrderInfoForListR\x06orders2\x91\x0e\n" +
+	"\x06orders\x18\x01 \x03(\v2 .special_app_v1.OrderInfoForListR\x06orders2\xff\r\n" +
 	"\x11SpecialAppService\x12Z\n" +
 	"\n" +
 	"CreateUser\x12!.special_app_v1.CreateUserRequest\x1a\x16.google.protobuf.Empty\"\x11\x82\xd3\xe4\x93\x02\v\"\t/v1/users\x12j\n" +
@@ -1884,8 +1884,8 @@ const file_special_backend_proto_rawDesc = "" +
 	"\aGetUser\x12\x1e.special_app_v1.GetUserRequest\x1a#.special_app_v1.GetUserInfoResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/v1/users\x12r\n" +
 	"\fGetIventInfo\x12#.special_app_v1.GetIventInfoRequest\x1a$.special_app_v1.GetIventInfoResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/ivents/{id}\x12d\n" +
 	"\tGetIvents\x12 .special_app_v1.GetIventsRequest\x1a!.special_app_v1.GetIventsResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/v1/ivents\x12\x7f\n" +
-	"\x0fCreateUserIvent\x12&.special_app_v1.CreateUserIventRequest\x1a(.special_app_v1.GetUserIventInfoResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/user_ivents\x12\x83\x01\n" +
+	"/v1/ivents\x12m\n" +
+	"\x0fCreateUserIvent\x12&.special_app_v1.CreateUserIventRequest\x1a\x16.google.protobuf.Empty\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/user_ivents\x12\x83\x01\n" +
 	"\x10GetUserIventInfo\x12'.special_app_v1.GetUserIventInfoRequest\x1a(.special_app_v1.GetUserIventInfoResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/user_ivents/{id}\x12u\n" +
 	"\rGetUserIvents\x12$.special_app_v1.GetUserIventsRequest\x1a%.special_app_v1.GetUserIventsResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/user_ivents\x12\x84\x01\n" +
 	"\x0fUpdateUserIvent\x12&.special_app_v1.UpdateUserIventRequest\x1a(.special_app_v1.GetUserIventInfoResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/v1/user_ivents/{id}\x12o\n" +
@@ -1953,7 +1953,7 @@ var file_special_backend_proto_depIdxs = []int32{
 	7,  // 2: special_app_v1.GetIventsResponse.ivents:type_name -> special_app_v1.IventInfoForList
 	31, // 3: special_app_v1.GetUserIventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
 	31, // 4: special_app_v1.UserIventInfoForList.datetime:type_name -> google.protobuf.Timestamp
-	14, // 5: special_app_v1.GetUserIventsResponse.user_ivents:type_name -> special_app_v1.GetUserIventInfoResponse
+	15, // 5: special_app_v1.GetUserIventsResponse.user_ivents:type_name -> special_app_v1.UserIventInfoForList
 	20, // 6: special_app_v1.GetItemsResponse.items:type_name -> special_app_v1.ItemInfoForList
 	31, // 7: special_app_v1.CreateOrderRequest.completion_date:type_name -> google.protobuf.Timestamp
 	22, // 8: special_app_v1.CreateOrderRequest.items:type_name -> special_app_v1.OrderItemInfoForCreatng
@@ -1983,7 +1983,7 @@ var file_special_backend_proto_depIdxs = []int32{
 	3,  // 32: special_app_v1.SpecialAppService.GetUser:output_type -> special_app_v1.GetUserInfoResponse
 	6,  // 33: special_app_v1.SpecialAppService.GetIventInfo:output_type -> special_app_v1.GetIventInfoResponse
 	8,  // 34: special_app_v1.SpecialAppService.GetIvents:output_type -> special_app_v1.GetIventsResponse
-	14, // 35: special_app_v1.SpecialAppService.CreateUserIvent:output_type -> special_app_v1.GetUserIventInfoResponse
+	32, // 35: special_app_v1.SpecialAppService.CreateUserIvent:output_type -> google.protobuf.Empty
 	14, // 36: special_app_v1.SpecialAppService.GetUserIventInfo:output_type -> special_app_v1.GetUserIventInfoResponse
 	16, // 37: special_app_v1.SpecialAppService.GetUserIvents:output_type -> special_app_v1.GetUserIventsResponse
 	14, // 38: special_app_v1.SpecialAppService.UpdateUserIvent:output_type -> special_app_v1.GetUserIventInfoResponse

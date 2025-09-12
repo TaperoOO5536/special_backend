@@ -13,17 +13,20 @@ type Handler struct {
 	itemHandler  *ItemServiceHandler
 	iventHandler *IventServiceHandler
 	userHandler  *UserServiceHandler
+	orderHandler *OrderServiceHandler
 }
 
 func NewHandler(
 	itemHandlel  *ItemServiceHandler,
 	ivetnHandler *IventServiceHandler,
 	userHandler  *UserServiceHandler,
+	orderHandler *OrderServiceHandler,
 ) *Handler {
 	return &Handler{
 		itemHandler:  itemHandlel,
 		iventHandler: ivetnHandler,
 		userHandler:  userHandler,
+		orderHandler: orderHandler,
 	}
 }
 
@@ -60,4 +63,18 @@ func (h *Handler) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*e
 
 func (h *Handler) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.GetUserInfoResponse, error) {
 	return h.userHandler.UpdateUser(ctx, req)
+}
+
+//orders
+
+func (h *Handler) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*emptypb.Empty, error) {
+	return h.orderHandler.CreateOrder(ctx, req)
+}
+
+func (h *Handler) GetOrderInfo(ctx context.Context, req *pb.GetOrderInfoRequest) (*pb.GetOrderInfoResponse, error) {
+	return h.orderHandler.GetOrderInfo(ctx, req)
+}
+
+func (h *Handler) GetOrders(ctx context.Context, req *pb.GetOrdersRequest) (*pb.GetOrdersResponse, error) {
+	return h.orderHandler.GetOrders(ctx, req)
 }

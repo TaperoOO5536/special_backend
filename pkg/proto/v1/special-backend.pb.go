@@ -758,6 +758,9 @@ type GetUserIventInfoResponse struct {
 	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	IventId        string                 `protobuf:"bytes,2,opt,name=ivent_id,json=iventId,proto3" json:"ivent_id,omitempty"`
 	NumberOfGuests string                 `protobuf:"bytes,3,opt,name=number_of_guests,json=numberOfGuests,proto3" json:"number_of_guests,omitempty"`
+	Title          string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	Datetime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=datetime,proto3" json:"datetime,omitempty"`
+	Picture        string                 `protobuf:"bytes,6,opt,name=picture,proto3" json:"picture,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -813,10 +816,34 @@ func (x *GetUserIventInfoResponse) GetNumberOfGuests() string {
 	return ""
 }
 
+func (x *GetUserIventInfoResponse) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *GetUserIventInfoResponse) GetDatetime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Datetime
+	}
+	return nil
+}
+
+func (x *GetUserIventInfoResponse) GetPicture() string {
+	if x != nil {
+		return x.Picture
+	}
+	return ""
+}
+
 type UserIventInfoForList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	IventId       string                 `protobuf:"bytes,2,opt,name=ivent_id,json=iventId,proto3" json:"ivent_id,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Datetime      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=datetime,proto3" json:"datetime,omitempty"`
+	Picture       string                 `protobuf:"bytes,5,opt,name=picture,proto3" json:"picture,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -861,6 +888,27 @@ func (x *UserIventInfoForList) GetId() string {
 func (x *UserIventInfoForList) GetIventId() string {
 	if x != nil {
 		return x.IventId
+	}
+	return ""
+}
+
+func (x *UserIventInfoForList) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *UserIventInfoForList) GetDatetime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Datetime
+	}
+	return nil
+}
+
+func (x *UserIventInfoForList) GetPicture() string {
+	if x != nil {
+		return x.Picture
 	}
 	return ""
 }
@@ -1758,14 +1806,20 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12(\n" +
 	"\x10number_of_guests\x18\x02 \x01(\x03R\x0enumberOfGuests\"(\n" +
 	"\x16DeleteUserIventRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"o\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\xd7\x01\n" +
 	"\x18GetUserIventInfoResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bivent_id\x18\x02 \x01(\tR\aiventId\x12(\n" +
-	"\x10number_of_guests\x18\x03 \x01(\tR\x0enumberOfGuests\"A\n" +
+	"\x10number_of_guests\x18\x03 \x01(\tR\x0enumberOfGuests\x12\x14\n" +
+	"\x05title\x18\x04 \x01(\tR\x05title\x126\n" +
+	"\bdatetime\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x12\x18\n" +
+	"\apicture\x18\x06 \x01(\tR\apicture\"\xa9\x01\n" +
 	"\x14UserIventInfoForList\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
-	"\bivent_id\x18\x02 \x01(\tR\aiventId\"b\n" +
+	"\bivent_id\x18\x02 \x01(\tR\aiventId\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x126\n" +
+	"\bdatetime\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x12\x18\n" +
+	"\apicture\x18\x05 \x01(\tR\apicture\"b\n" +
 	"\x15GetUserIventsResponse\x12I\n" +
 	"\vuser_ivents\x18\x02 \x03(\v2(.special_app_v1.GetUserIventInfoResponseR\n" +
 	"userIvents\"$\n" +
@@ -1821,7 +1875,7 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12!\n" +
 	"\forder_amount\x18\x04 \x01(\x03R\vorderAmount\"M\n" +
 	"\x11GetOrdersResponse\x128\n" +
-	"\x06orders\x18\x01 \x03(\v2 .special_app_v1.OrderInfoForListR\x06orders2\x9f\x0e\n" +
+	"\x06orders\x18\x01 \x03(\v2 .special_app_v1.OrderInfoForListR\x06orders2\x91\x0e\n" +
 	"\x11SpecialAppService\x12Z\n" +
 	"\n" +
 	"CreateUser\x12!.special_app_v1.CreateUserRequest\x1a\x16.google.protobuf.Empty\"\x11\x82\xd3\xe4\x93\x02\v\"\t/v1/users\x12j\n" +
@@ -1837,8 +1891,8 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x0fUpdateUserIvent\x12&.special_app_v1.UpdateUserIventRequest\x1a(.special_app_v1.GetUserIventInfoResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/v1/user_ivents/{id}\x12o\n" +
 	"\x0fDeleteUserIvent\x12&.special_app_v1.DeleteUserIventRequest\x1a\x16.google.protobuf.Empty\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/v1/user_ivents/{id}\x12n\n" +
 	"\vGetItemInfo\x12\".special_app_v1.GetItemInfoRequest\x1a#.special_app_v1.GetItemInfoResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/v1/items/{id}\x12`\n" +
-	"\bGetItems\x12\x1f.special_app_v1.GetItemsRequest\x1a .special_app_v1.GetItemsResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/v1/items\x12n\n" +
-	"\vCreateOrder\x12\".special_app_v1.CreateOrderRequest\x1a$.special_app_v1.GetOrderInfoResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"\bGetItems\x12\x1f.special_app_v1.GetItemsRequest\x1a .special_app_v1.GetItemsResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/v1/items\x12`\n" +
+	"\vCreateOrder\x12\".special_app_v1.CreateOrderRequest\x1a\x16.google.protobuf.Empty\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
 	"/v1/orders\x12r\n" +
 	"\fGetOrderInfo\x12#.special_app_v1.GetOrderInfoRequest\x1a$.special_app_v1.GetOrderInfoResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/orders/{id}\x12d\n" +
 	"\tGetOrders\x12 .special_app_v1.GetOrdersRequest\x1a!.special_app_v1.GetOrdersResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
@@ -1897,52 +1951,54 @@ var file_special_backend_proto_depIdxs = []int32{
 	31, // 0: special_app_v1.GetIventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
 	31, // 1: special_app_v1.IventInfoForList.datetime:type_name -> google.protobuf.Timestamp
 	7,  // 2: special_app_v1.GetIventsResponse.ivents:type_name -> special_app_v1.IventInfoForList
-	14, // 3: special_app_v1.GetUserIventsResponse.user_ivents:type_name -> special_app_v1.GetUserIventInfoResponse
-	20, // 4: special_app_v1.GetItemsResponse.items:type_name -> special_app_v1.ItemInfoForList
-	31, // 5: special_app_v1.CreateOrderRequest.completion_date:type_name -> google.protobuf.Timestamp
-	22, // 6: special_app_v1.CreateOrderRequest.items:type_name -> special_app_v1.OrderItemInfoForCreatng
-	31, // 7: special_app_v1.GetOrderInfoResponse.form_date:type_name -> google.protobuf.Timestamp
-	31, // 8: special_app_v1.GetOrderInfoResponse.completion_date:type_name -> google.protobuf.Timestamp
-	27, // 9: special_app_v1.GetOrderInfoResponse.items:type_name -> special_app_v1.OrderItemInfoForList
-	31, // 10: special_app_v1.OrderInfoForList.completion_date:type_name -> google.protobuf.Timestamp
-	29, // 11: special_app_v1.GetOrdersResponse.orders:type_name -> special_app_v1.OrderInfoForList
-	0,  // 12: special_app_v1.SpecialAppService.CreateUser:input_type -> special_app_v1.CreateUserRequest
-	1,  // 13: special_app_v1.SpecialAppService.UpdateUser:input_type -> special_app_v1.UpdateUserRequest
-	2,  // 14: special_app_v1.SpecialAppService.GetUser:input_type -> special_app_v1.GetUserRequest
-	4,  // 15: special_app_v1.SpecialAppService.GetIventInfo:input_type -> special_app_v1.GetIventInfoRequest
-	5,  // 16: special_app_v1.SpecialAppService.GetIvents:input_type -> special_app_v1.GetIventsRequest
-	9,  // 17: special_app_v1.SpecialAppService.CreateUserIvent:input_type -> special_app_v1.CreateUserIventRequest
-	10, // 18: special_app_v1.SpecialAppService.GetUserIventInfo:input_type -> special_app_v1.GetUserIventInfoRequest
-	11, // 19: special_app_v1.SpecialAppService.GetUserIvents:input_type -> special_app_v1.GetUserIventsRequest
-	12, // 20: special_app_v1.SpecialAppService.UpdateUserIvent:input_type -> special_app_v1.UpdateUserIventRequest
-	13, // 21: special_app_v1.SpecialAppService.DeleteUserIvent:input_type -> special_app_v1.DeleteUserIventRequest
-	17, // 22: special_app_v1.SpecialAppService.GetItemInfo:input_type -> special_app_v1.GetItemInfoRequest
-	18, // 23: special_app_v1.SpecialAppService.GetItems:input_type -> special_app_v1.GetItemsRequest
-	23, // 24: special_app_v1.SpecialAppService.CreateOrder:input_type -> special_app_v1.CreateOrderRequest
-	24, // 25: special_app_v1.SpecialAppService.GetOrderInfo:input_type -> special_app_v1.GetOrderInfoRequest
-	25, // 26: special_app_v1.SpecialAppService.GetOrders:input_type -> special_app_v1.GetOrdersRequest
-	26, // 27: special_app_v1.SpecialAppService.UpdateOrder:input_type -> special_app_v1.UpdateOrderRequest
-	32, // 28: special_app_v1.SpecialAppService.CreateUser:output_type -> google.protobuf.Empty
-	3,  // 29: special_app_v1.SpecialAppService.UpdateUser:output_type -> special_app_v1.GetUserInfoResponse
-	3,  // 30: special_app_v1.SpecialAppService.GetUser:output_type -> special_app_v1.GetUserInfoResponse
-	6,  // 31: special_app_v1.SpecialAppService.GetIventInfo:output_type -> special_app_v1.GetIventInfoResponse
-	8,  // 32: special_app_v1.SpecialAppService.GetIvents:output_type -> special_app_v1.GetIventsResponse
-	14, // 33: special_app_v1.SpecialAppService.CreateUserIvent:output_type -> special_app_v1.GetUserIventInfoResponse
-	14, // 34: special_app_v1.SpecialAppService.GetUserIventInfo:output_type -> special_app_v1.GetUserIventInfoResponse
-	16, // 35: special_app_v1.SpecialAppService.GetUserIvents:output_type -> special_app_v1.GetUserIventsResponse
-	14, // 36: special_app_v1.SpecialAppService.UpdateUserIvent:output_type -> special_app_v1.GetUserIventInfoResponse
-	32, // 37: special_app_v1.SpecialAppService.DeleteUserIvent:output_type -> google.protobuf.Empty
-	19, // 38: special_app_v1.SpecialAppService.GetItemInfo:output_type -> special_app_v1.GetItemInfoResponse
-	21, // 39: special_app_v1.SpecialAppService.GetItems:output_type -> special_app_v1.GetItemsResponse
-	28, // 40: special_app_v1.SpecialAppService.CreateOrder:output_type -> special_app_v1.GetOrderInfoResponse
-	28, // 41: special_app_v1.SpecialAppService.GetOrderInfo:output_type -> special_app_v1.GetOrderInfoResponse
-	30, // 42: special_app_v1.SpecialAppService.GetOrders:output_type -> special_app_v1.GetOrdersResponse
-	28, // 43: special_app_v1.SpecialAppService.UpdateOrder:output_type -> special_app_v1.GetOrderInfoResponse
-	28, // [28:44] is the sub-list for method output_type
-	12, // [12:28] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	31, // 3: special_app_v1.GetUserIventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
+	31, // 4: special_app_v1.UserIventInfoForList.datetime:type_name -> google.protobuf.Timestamp
+	14, // 5: special_app_v1.GetUserIventsResponse.user_ivents:type_name -> special_app_v1.GetUserIventInfoResponse
+	20, // 6: special_app_v1.GetItemsResponse.items:type_name -> special_app_v1.ItemInfoForList
+	31, // 7: special_app_v1.CreateOrderRequest.completion_date:type_name -> google.protobuf.Timestamp
+	22, // 8: special_app_v1.CreateOrderRequest.items:type_name -> special_app_v1.OrderItemInfoForCreatng
+	31, // 9: special_app_v1.GetOrderInfoResponse.form_date:type_name -> google.protobuf.Timestamp
+	31, // 10: special_app_v1.GetOrderInfoResponse.completion_date:type_name -> google.protobuf.Timestamp
+	27, // 11: special_app_v1.GetOrderInfoResponse.items:type_name -> special_app_v1.OrderItemInfoForList
+	31, // 12: special_app_v1.OrderInfoForList.completion_date:type_name -> google.protobuf.Timestamp
+	29, // 13: special_app_v1.GetOrdersResponse.orders:type_name -> special_app_v1.OrderInfoForList
+	0,  // 14: special_app_v1.SpecialAppService.CreateUser:input_type -> special_app_v1.CreateUserRequest
+	1,  // 15: special_app_v1.SpecialAppService.UpdateUser:input_type -> special_app_v1.UpdateUserRequest
+	2,  // 16: special_app_v1.SpecialAppService.GetUser:input_type -> special_app_v1.GetUserRequest
+	4,  // 17: special_app_v1.SpecialAppService.GetIventInfo:input_type -> special_app_v1.GetIventInfoRequest
+	5,  // 18: special_app_v1.SpecialAppService.GetIvents:input_type -> special_app_v1.GetIventsRequest
+	9,  // 19: special_app_v1.SpecialAppService.CreateUserIvent:input_type -> special_app_v1.CreateUserIventRequest
+	10, // 20: special_app_v1.SpecialAppService.GetUserIventInfo:input_type -> special_app_v1.GetUserIventInfoRequest
+	11, // 21: special_app_v1.SpecialAppService.GetUserIvents:input_type -> special_app_v1.GetUserIventsRequest
+	12, // 22: special_app_v1.SpecialAppService.UpdateUserIvent:input_type -> special_app_v1.UpdateUserIventRequest
+	13, // 23: special_app_v1.SpecialAppService.DeleteUserIvent:input_type -> special_app_v1.DeleteUserIventRequest
+	17, // 24: special_app_v1.SpecialAppService.GetItemInfo:input_type -> special_app_v1.GetItemInfoRequest
+	18, // 25: special_app_v1.SpecialAppService.GetItems:input_type -> special_app_v1.GetItemsRequest
+	23, // 26: special_app_v1.SpecialAppService.CreateOrder:input_type -> special_app_v1.CreateOrderRequest
+	24, // 27: special_app_v1.SpecialAppService.GetOrderInfo:input_type -> special_app_v1.GetOrderInfoRequest
+	25, // 28: special_app_v1.SpecialAppService.GetOrders:input_type -> special_app_v1.GetOrdersRequest
+	26, // 29: special_app_v1.SpecialAppService.UpdateOrder:input_type -> special_app_v1.UpdateOrderRequest
+	32, // 30: special_app_v1.SpecialAppService.CreateUser:output_type -> google.protobuf.Empty
+	3,  // 31: special_app_v1.SpecialAppService.UpdateUser:output_type -> special_app_v1.GetUserInfoResponse
+	3,  // 32: special_app_v1.SpecialAppService.GetUser:output_type -> special_app_v1.GetUserInfoResponse
+	6,  // 33: special_app_v1.SpecialAppService.GetIventInfo:output_type -> special_app_v1.GetIventInfoResponse
+	8,  // 34: special_app_v1.SpecialAppService.GetIvents:output_type -> special_app_v1.GetIventsResponse
+	14, // 35: special_app_v1.SpecialAppService.CreateUserIvent:output_type -> special_app_v1.GetUserIventInfoResponse
+	14, // 36: special_app_v1.SpecialAppService.GetUserIventInfo:output_type -> special_app_v1.GetUserIventInfoResponse
+	16, // 37: special_app_v1.SpecialAppService.GetUserIvents:output_type -> special_app_v1.GetUserIventsResponse
+	14, // 38: special_app_v1.SpecialAppService.UpdateUserIvent:output_type -> special_app_v1.GetUserIventInfoResponse
+	32, // 39: special_app_v1.SpecialAppService.DeleteUserIvent:output_type -> google.protobuf.Empty
+	19, // 40: special_app_v1.SpecialAppService.GetItemInfo:output_type -> special_app_v1.GetItemInfoResponse
+	21, // 41: special_app_v1.SpecialAppService.GetItems:output_type -> special_app_v1.GetItemsResponse
+	32, // 42: special_app_v1.SpecialAppService.CreateOrder:output_type -> google.protobuf.Empty
+	28, // 43: special_app_v1.SpecialAppService.GetOrderInfo:output_type -> special_app_v1.GetOrderInfoResponse
+	30, // 44: special_app_v1.SpecialAppService.GetOrders:output_type -> special_app_v1.GetOrdersResponse
+	28, // 45: special_app_v1.SpecialAppService.UpdateOrder:output_type -> special_app_v1.GetOrderInfoResponse
+	30, // [30:46] is the sub-list for method output_type
+	14, // [14:30] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_special_backend_proto_init() }

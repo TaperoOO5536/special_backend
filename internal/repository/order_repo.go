@@ -12,7 +12,7 @@ type OrderRepository interface {
 	CreateOrder(ctx context.Context, order *models.Order) error
 	GetOrderInfo(ctx context.Context, id uuid.UUID) (*models.Order, error)
 	GetOrders(ctx context.Context, userID string) ([]*models.Order, error)
-	// UpdateOrder(ctx context.Context, order *models.Order) (*models.Order, error)
+	// UpdateOrder(ctx context.Context, id uuid.UUID, newStatus string) (*models.Order, error)
 }
 
 type orderRepository struct {
@@ -32,7 +32,9 @@ func (r *orderRepository) CreateOrder(ctx context.Context, order *models.Order) 
 
 func (r *orderRepository) GetOrderInfo(ctx context.Context, id uuid.UUID) (*models.Order, error) {
 	var order models.Order
-	if err := r.db.Preload("OrderItems").Where("id_order = ?", id).First(&order).Error; err != nil {
+	if err := r.db.Preload("OrderItems.Item", func(db *gorm.DB) *gorm.DB {
+		return db.Select("id_item", "item_title", "item_price", "little_picture")
+	}).Where("id_order = ?", id).First(&order).Error; err != nil {
 		return nil, err
 	}
 	return &order, nil
@@ -45,3 +47,16 @@ func (r *orderRepository) GetOrders(ctx context.Context, userID string) ([]*mode
 	}
 	return orders, nil
 }
+
+// func (r *orderRepository) UpdateOrder(ctx context.Context, id uuid.UUID, newStatus string) (*models.Order, error) {
+// 	order, err := r.GetOrderInfo(ctx, id)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+
+// 	order.Status = newStatus
+// 	if err := r.db.Save(order).Error; err != nil {
+// 		return nil, err
+// 	}
+// 	return order, nil
+// }

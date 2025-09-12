@@ -77,7 +77,7 @@ service SpecialAppService {
     };
   }
 
-  rpc CreateOrder(CreateOrderRequest) returns (google.protbuf.Empty) {
+  rpc CreateOrder(CreateOrderRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/v1/orders"
       body: "*"
@@ -177,11 +177,17 @@ message GetUserIventInfoResponse {
   string id = 1; 
   string ivent_id = 2;
   string number_of_guests = 3;
+  string title = 4; 
+  google.protobuf.Timestamp datetime = 5;
+  string picture = 6;
 }
 
 message UserIventInfoForList {
   string id = 1;
   string ivent_id = 2;
+  string title = 3;
+  google.protobuf.Timestamp datetime = 4;
+  string picture = 5;
 }
 
 message GetUserIventsResponse {

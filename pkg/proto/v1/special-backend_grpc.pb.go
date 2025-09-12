@@ -54,7 +54,7 @@ type SpecialAppServiceClient interface {
 	DeleteUserIvent(ctx context.Context, in *DeleteUserIventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetItemInfo(ctx context.Context, in *GetItemInfoRequest, opts ...grpc.CallOption) (*GetItemInfoResponse, error)
 	GetItems(ctx context.Context, in *GetItemsRequest, opts ...grpc.CallOption) (*GetItemsResponse, error)
-	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*GetOrderInfoResponse, error)
+	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetOrderInfo(ctx context.Context, in *GetOrderInfoRequest, opts ...grpc.CallOption) (*GetOrderInfoResponse, error)
 	GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error)
 	UpdateOrder(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*GetOrderInfoResponse, error)
@@ -188,9 +188,9 @@ func (c *specialAppServiceClient) GetItems(ctx context.Context, in *GetItemsRequ
 	return out, nil
 }
 
-func (c *specialAppServiceClient) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*GetOrderInfoResponse, error) {
+func (c *specialAppServiceClient) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOrderInfoResponse)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, SpecialAppService_CreateOrder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -244,7 +244,7 @@ type SpecialAppServiceServer interface {
 	DeleteUserIvent(context.Context, *DeleteUserIventRequest) (*emptypb.Empty, error)
 	GetItemInfo(context.Context, *GetItemInfoRequest) (*GetItemInfoResponse, error)
 	GetItems(context.Context, *GetItemsRequest) (*GetItemsResponse, error)
-	CreateOrder(context.Context, *CreateOrderRequest) (*GetOrderInfoResponse, error)
+	CreateOrder(context.Context, *CreateOrderRequest) (*emptypb.Empty, error)
 	GetOrderInfo(context.Context, *GetOrderInfoRequest) (*GetOrderInfoResponse, error)
 	GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error)
 	UpdateOrder(context.Context, *UpdateOrderRequest) (*GetOrderInfoResponse, error)
@@ -294,7 +294,7 @@ func (UnimplementedSpecialAppServiceServer) GetItemInfo(context.Context, *GetIte
 func (UnimplementedSpecialAppServiceServer) GetItems(context.Context, *GetItemsRequest) (*GetItemsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetItems not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*GetOrderInfoResponse, error) {
+func (UnimplementedSpecialAppServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
 }
 func (UnimplementedSpecialAppServiceServer) GetOrderInfo(context.Context, *GetOrderInfoRequest) (*GetOrderInfoResponse, error) {

@@ -50,16 +50,19 @@ func (a *App) Start(ctx context.Context) error {
 	itemRepo := repository.NewItemRepository(db)
 	iventRepo := repository.NewIventRepository(db)
 	userRepo := repository.NewUserRepository(db)
+	orderRepo := repository.NewOrderRepository(db)
 	
 	itemService := service.NewItemService(itemRepo)
 	iventService := service.NewIventService(iventRepo)
 	userServive := service.NewUserService(userRepo, config.GetToken())
+	orderService := service.NewOrderService(orderRepo, config.GetToken())
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
 	iventServiceHandler := api.NewIventServiceHandler(iventService)
 	userServiceHandler := api.NewUserServiceHandler(userServive)
+	orderServiceHandler := api.NewOrderServiceHandler(orderService)
 
-	handler := api.NewHandler(itemServiceHandler, iventServiceHandler, userServiceHandler)
+	handler := api.NewHandler(itemServiceHandler, iventServiceHandler, userServiceHandler, orderServiceHandler)
 
 	grpcServer := grpc.NewServer()
 

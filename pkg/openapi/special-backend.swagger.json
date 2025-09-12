@@ -147,7 +147,8 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/special_app_v1GetOrderInfoResponse"
+              "type": "object",
+              "properties": {}
             }
           },
           "default": {
@@ -692,6 +693,16 @@
           "type": "string"
         },
         "numberOfGuests": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "picture": {
           "type": "string"
         }
       }

@@ -13,3 +13,5 @@ plugins:
     out: pkg/proto/v1
     opt:
       - paths=source_relative
+  - local: protoc-gen-openapiv2
+    out: pkg/openapi

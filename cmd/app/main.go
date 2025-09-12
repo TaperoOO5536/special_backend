@@ -42,10 +42,10 @@ func main() {
 	}
 
 	user := User{
-		ID:        1234234345,
-		FirstName: "Vlad",
-		LastName:  "Doe",
-		Username:  "@VladDoe",
+		ID:        1234234349,
+		FirstName: "Denis",
+		LastName:  "Abignale",
+		Username:  "@DenisRew",
 	}
 	botToken := config.GetToken()
 	initData, err := GenInitData(botToken, user)

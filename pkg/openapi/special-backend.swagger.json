@@ -514,6 +514,13 @@
         },
         "comment": {
           "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/special_app_v1OrderItemInfoForCreatng"
+          }
         }
       }
     },
@@ -686,16 +693,6 @@
         },
         "numberOfGuests": {
           "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "datetime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "picture": {
-          "type": "string"
         }
       }
     },
@@ -778,6 +775,18 @@
         }
       }
     },
+    "special_app_v1OrderItemInfoForCreatng": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "special_app_v1OrderItemInfoForList": {
       "type": "object",
       "properties": {
@@ -806,15 +815,6 @@
     "special_app_v1UpdateUserRequest": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "surname": {
-          "type": "string"
-        },
-        "nickname": {
-          "type": "string"
-        },
         "phoneNumber": {
           "type": "string"
         }

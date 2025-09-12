@@ -13,6 +13,7 @@ import (
 	"github.com/TaperoOO5536/special_backend/internal/repository"
 	"github.com/TaperoOO5536/special_backend/internal/service"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/rs/cors"
 
 	"os"
 	"os/signal"
@@ -21,6 +22,7 @@ import (
 	"github.com/TaperoOO5536/special_backend/internal/api"
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -76,15 +78,26 @@ func (a *App) Start(ctx context.Context) error {
 		ctx,
 		gwmux,
 		"localhost:"+a.config.Port,
-		[]grpc.DialOption{grpc.WithInsecure()},
+		[]grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())},
 	)
 	if err != nil {
 		return fmt.Errorf("failed to register gateway: %v", err)
 	}
 
+	c := cors.New(cors.Options{
+        AllowedOrigins:   []string{"http://192.168.1.212", "http://localhost:5173"},
+        AllowedMethods:   []string{"GET", "POST", "PATCH", "DELETE", "OPTIONS"},
+        AllowedHeaders:   []string{"Authorization", "Content-Type", "Accept", "X-Requested-With"},
+        AllowCredentials: true,
+        MaxAge:           300,
+				Debug:            true,
+    })
+
+	corshandler := c.Handler(gwmux)
+
 	httpServer := &http.Server{
-		Addr: ":8081",
-		Handler: gwmux,
+		Addr:    ":8081",
+		Handler: corshandler,
 	}
 
 	serverError := make(chan error, 1)

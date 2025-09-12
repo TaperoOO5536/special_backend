@@ -1,5 +1,3 @@
-// заглушка пока
-
 package repository
 
 import (
@@ -12,14 +10,7 @@ import (
 type UserRepository interface {
 	CreateUser(ctx context.Context, user *models.User) (error)
 	GetUserInfo(ctx context.Context, id string) (*models.User, error)
-	UpdateUser(ctx context.Context, updates *UserUpdates) (*models.User, error)
-}
-
-type UserUpdates struct {
-	Name        string
-	Surname     string
-	Nickname    string
-	PhoneNumber string
+	UpdateUser(ctx context.Context, user *models.User) (*models.User, error)
 }
 
 type userRepository struct {
@@ -45,6 +36,21 @@ func (r *userRepository) GetUserInfo(ctx context.Context, id string) (*models.Us
 	return &user, nil
 }
 
-func (r *userRepository) UpdateUser(ctx context.Context, updates *UserUpdates) (*models.User, error) {
-	return nil, nil
+func (r *userRepository) UpdateUser(ctx context.Context, newUser *models.User) (*models.User, error) {
+	user, err := r.GetUserInfo(ctx, newUser.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	user.Name = newUser.Name
+	user.Surname = newUser.Surname
+	user.Nickname = newUser.Nickname
+	if newUser.PhoneNumber != "" {
+		user.PhoneNumber = newUser.PhoneNumber
+	}
+
+	if err := r.db.Save(user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
 }

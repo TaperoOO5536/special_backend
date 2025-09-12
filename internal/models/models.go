@@ -45,7 +45,7 @@ type IventPicture struct {
 type Order struct {
 	ID             uuid.UUID   `gorm:"column:id_order;primaryKey"`
 	Number         string      `gorm:"column:order_number"`
-	UserID         string      `gorm:"column:user_od"`
+	UserID         string      `gorm:"column:user_id"`
 	FormDate       time.Time   `gorm:"column:order_form_datetime"`
 	CompletionDate time.Time   `gorm:"column:completion_date"`
 	Comment        string      `gorm:"column:order_comment"`

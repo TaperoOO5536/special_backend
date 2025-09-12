@@ -57,3 +57,7 @@ func (h *Handler) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetU
 func (h *Handler) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*emptypb.Empty, error) {
 	return h.userHandler.CreateUser(ctx, req)
 }
+
+func (h *Handler) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.GetUserInfoResponse, error) {
+	return h.userHandler.UpdateUser(ctx, req)
+}

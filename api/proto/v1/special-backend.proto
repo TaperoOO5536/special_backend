@@ -237,7 +237,8 @@ message OrderItemInfoForCreatng {
 message CreateOrderRequest {
   google.protobuf.Timestamp completion_date = 1;
   optional string comment = 2;
-  repeated OrderItemInfoForCreatng items = 3;
+  int64 order_amount = 3;
+  repeated OrderItemInfoForCreatng items = 4;
 }
 
 message GetOrderInfoRequest {

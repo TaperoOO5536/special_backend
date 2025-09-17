@@ -32,6 +32,7 @@ type OrderCreateInput struct {
 	CompletionDate time.Time
 	Comment        string
 	OrderItems     []models.OrderItem
+	OrderAmount    int64
 }
 
 func (s *OrderService) CreateOrder(ctx context.Context, initData string, input OrderCreateInput) error {
@@ -53,7 +54,7 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 		CompletionDate: input.CompletionDate,
 		Comment: input.Comment,
 		Status: "В обработке",
-		OrderAmount: 0,
+		OrderAmount: input.OrderAmount,
 		OrderItems: input.OrderItems,
 	}
 

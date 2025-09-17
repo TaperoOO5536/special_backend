@@ -1332,7 +1332,8 @@ type CreateOrderRequest struct {
 	state          protoimpl.MessageState     `protogen:"open.v1"`
 	CompletionDate *timestamppb.Timestamp     `protobuf:"bytes,1,opt,name=completion_date,json=completionDate,proto3" json:"completion_date,omitempty"`
 	Comment        *string                    `protobuf:"bytes,2,opt,name=comment,proto3,oneof" json:"comment,omitempty"`
-	Items          []*OrderItemInfoForCreatng `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	OrderAmount    int64                      `protobuf:"varint,3,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
+	Items          []*OrderItemInfoForCreatng `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1379,6 +1380,13 @@ func (x *CreateOrderRequest) GetComment() string {
 		return *x.Comment
 	}
 	return ""
+}
+
+func (x *CreateOrderRequest) GetOrderAmount() int64 {
+	if x != nil {
+		return x.OrderAmount
+	}
+	return 0
 }
 
 func (x *CreateOrderRequest) GetItems() []*OrderItemInfoForCreatng {
@@ -1895,11 +1903,12 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2\x1f.special_app_v1.ItemInfoForListR\x05items\"N\n" +
 	"\x17OrderItemInfoForCreatng\x12\x17\n" +
 	"\aitem_id\x18\x01 \x01(\tR\x06itemId\x12\x1a\n" +
-	"\bquantity\x18\x02 \x01(\x03R\bquantity\"\xc3\x01\n" +
+	"\bquantity\x18\x02 \x01(\x03R\bquantity\"\xe6\x01\n" +
 	"\x12CreateOrderRequest\x12C\n" +
 	"\x0fcompletion_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecompletionDate\x12\x1d\n" +
-	"\acomment\x18\x02 \x01(\tH\x00R\acomment\x88\x01\x01\x12=\n" +
-	"\x05items\x18\x03 \x03(\v2'.special_app_v1.OrderItemInfoForCreatngR\x05itemsB\n" +
+	"\acomment\x18\x02 \x01(\tH\x00R\acomment\x88\x01\x01\x12!\n" +
+	"\forder_amount\x18\x03 \x01(\x03R\vorderAmount\x12=\n" +
+	"\x05items\x18\x04 \x03(\v2'.special_app_v1.OrderItemInfoForCreatngR\x05itemsB\n" +
 	"\n" +
 	"\b_comment\"%\n" +
 	"\x13GetOrderInfoRequest\x12\x0e\n" +

@@ -37,6 +37,11 @@ func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrd
 		return nil, err
 	}
 
+	if req.OrderAmount == 0 {
+		err := status.Error(codes.InvalidArgument, "order amount is required")
+		return nil, err
+	}
+
 	orderID := uuid.New()
 
 	var items []models.OrderItem
@@ -59,6 +64,7 @@ func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrd
 		CompletionDate: req.CompletionDate.AsTime(),
 		Comment: *req.Comment,
 		OrderItems: items,
+		OrderAmount: req.OrderAmount,
 	}
 
 	err = h.orderService.CreateOrder(ctx, initData, input)

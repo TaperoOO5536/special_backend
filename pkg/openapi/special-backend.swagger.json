@@ -517,6 +517,10 @@
         "comment": {
           "type": "string"
         },
+        "orderAmount": {
+          "type": "string",
+          "format": "int64"
+        },
         "items": {
           "type": "array",
           "items": {

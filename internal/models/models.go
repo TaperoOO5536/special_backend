@@ -24,7 +24,8 @@ type Ivent struct {
 	Price         int64          `gorm:"column:ivent_price"`
 	TotalSeats    int64          `gorm:"column:total_seats"`
 	OccupiedSeats int64          `gorm:"column:occupied_seats"`
-	LittlePicture string         `gorm:"column:little_picture"`
+	LittlePicture []byte         `gorm:"column:little_picture"`
+	MimeType			string         `gorm:"column:mime_type"`
 	UserIvents    []UserIvent    `gorm:"foreignKey:IventID"`
 	Pictures      []IventPicture `gorm:"foreignKey:IventID"`
 }
@@ -40,7 +41,8 @@ type UserIvent struct {
 type IventPicture struct {
 	ID      uuid.UUID `gorm:"column:id_ivent_picture;primaryKey"`
 	IventID uuid.UUID `gorm:"column:ivent_id"`
-	Path    string    `gorm:"column:picture_path"`
+	Path    []byte    `gorm:"column:picture_path"`
+	MimeType string   `gorm:"column:mime_type"`
 }
 
 type Order struct {
@@ -60,7 +62,8 @@ type Item struct {
 	Title         string        `gorm:"column:item_title"`
 	Description   string        `gorm:"column:item_description"`
 	Price         int64         `gorm:"column:item_price"`
-	LittlePicture string        `gorm:"column:little_picture"`
+	LittlePicture []byte        `gorm:"column:little_picture"`
+	MimeType			string        `gorm:"column:mime_type"`
 	Pictures      []ItemPicture `gorm:"foreignKey:ItemID"`
 }
 
@@ -75,5 +78,6 @@ type OrderItem struct{
 type ItemPicture struct {
 	ID     uuid.UUID `gorm:"column:id_item_picture;primaryKey"`
 	ItemID uuid.UUID `gorm:"column:item_id"`
-	Path   string    `gorm:"column:picture_path"`
+	Path   []byte    `gorm:"column:picture_path"`
+	MimeType string  `gorm:"column:mime_type"`
 }

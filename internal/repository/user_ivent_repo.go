@@ -34,7 +34,7 @@ func (r *userIventRepository) CreateUserIvent(ctx context.Context, userIvent *mo
 func (r *userIventRepository) GetUserIventInfo(ctx context.Context, id uuid.UUID) (*models.UserIvent, error) {
 	var userIvent *models.UserIvent
 	if err := r.db.Preload("Ivent", func(db *gorm.DB) *gorm.DB {
-		return db.Select("id_ivent", "ivent_title", "ivent_datetime", "little_picture")
+		return db.Select("id_ivent", "ivent_title", "ivent_datetime", "little_picture", "mime_type")
 	}).Where("id_user_ivent = ?", id).First(&userIvent).Error; err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func (r *userIventRepository) GetUserIventInfo(ctx context.Context, id uuid.UUID
 func (r *userIventRepository) GetUserIvents(ctx context.Context, userID string) ([]*models.UserIvent, error) {
 	var userIvents []*models.UserIvent
 	if err := r.db.Preload("Ivent", func(db *gorm.DB) *gorm.DB {
-		return db.Select("id_ivent", "ivent_title", "ivent_datetime", "little_picture")
+		return db.Select("id_ivent", "ivent_title", "ivent_datetime", "little_picture", "mime_type")
 	}).Where("user_id = ?", userID).Find(&userIvents).Error; err != nil {
 		return nil, err
 	}

@@ -41,9 +41,13 @@ func (h *IventServiceHandler) GetIventInfo(ctx context.Context, req *pb.GetIvent
 		return nil, err
 	}
 
-	var pictures []string
+	pbPictures := make([]*pb.PictureInfo, 0, len(ivent.Pictures))
 	for _, picture := range ivent.Pictures {
-		pictures = append(pictures, picture.Path)
+		pbPicture := &pb.PictureInfo{
+			Picture: picture.Path,
+			MimeType: picture.MimeType,
+		}
+		pbPictures = append(pbPictures, pbPicture)
 	}
 
 	return &pb.GetIventInfoResponse{
@@ -54,7 +58,7 @@ func (h *IventServiceHandler) GetIventInfo(ctx context.Context, req *pb.GetIvent
 		Price:         ivent.Price,
 		TotalSeats:    ivent.TotalSeats,
 		OccupiedSeats: ivent.OccupiedSeats,
-		Pictures:      pictures,
+		Pictures:      pbPictures,
 	}, nil
 }
 
@@ -74,7 +78,10 @@ func (h *IventServiceHandler) GetIvents(ctx context.Context, req *pb.GetIventsRe
 			Id:      ivent.ID.String(),
 			Title:   ivent.Title,
 			Price:   ivent.Price,
+			Picture: &pb.PictureInfo{
 			Picture: ivent.LittlePicture,
+			MimeType: ivent.MimeType,
+		},
 		}
 		response.Ivents = append(response.Ivents, pbIvent)
 	}

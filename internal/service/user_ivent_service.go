@@ -15,11 +15,12 @@ var (
 )
 
 type UserIventService struct {
+	iventRepo     repository.IventRepository
 	userIventRepo repository.UserIventRepository
-	token    string
+	token         string
 }
 
-func NewUserIventService(userIventRepo repository.UserIventRepository, token string) *UserIventService {
+func NewUserIventService(userIventRepo repository.UserIventRepository, iventRepo repository.IventRepository, token string) *UserIventService {
 	return &UserIventService{
 		userIventRepo: userIventRepo,
 		token: token,
@@ -39,6 +40,11 @@ func (s *UserIventService) CreateUserIvent(ctx context.Context, initData string,
 	}
 
 	user, err := ParseInitData(initData)
+	if err != nil {
+		return err
+	}
+
+	err = s.iventRepo.UpdateIvent(ctx, input.IventID, input.NumberOfGuests)
 	if err != nil {
 		return err
 	}
@@ -67,7 +73,7 @@ func (s *UserIventService) GetUserIventInfo(ctx context.Context, initData string
 	userIvent, err := s.userIventRepo.GetUserIventInfo(ctx, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrIventNotFound
+			return nil, ErrUserIventNotFound
 		}
 		return nil, err
 	}
@@ -88,9 +94,6 @@ func (s *UserIventService) GetUserIvents(ctx context.Context, initData string) (
 
 	userIvents, err := s.userIventRepo.GetUserIvents(ctx, user.ID)
 	if err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return nil, ErrIventNotFound
-		}
 		return nil, err
 	}
 
@@ -103,7 +106,20 @@ func (s *UserIventService) UpdateUserIvent(ctx context.Context, initData string,
 		return nil, err
 	}
 
-	userIvent, err := s.userIventRepo.UpdateUserIvent(ctx, id, newGuestNumber)
+	userIvent, err := s.userIventRepo.GetUserIventInfo(ctx, id)
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, ErrUserIventNotFound
+		}
+		return nil, err
+	}
+
+	err = s.iventRepo.UpdateIvent(ctx, userIvent.ID, newGuestNumber-userIvent.NumberOfGuests)
+	if err != nil {
+		return nil, err
+	}
+
+	userIvent, err = s.userIventRepo.UpdateUserIvent(ctx, id, newGuestNumber)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, ErrIventNotFound
@@ -120,11 +136,16 @@ func (s *UserIventService) DeleteUserIvent(ctx context.Context, initData string,
 		return err
 	}
 
-	_, err = s.userIventRepo.GetUserIventInfo(ctx, id)
+	userIvent, err := s.userIventRepo.GetUserIventInfo(ctx, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return ErrIventNotFound
 		}
+		return err
+	}
+
+	err = s.iventRepo.UpdateIvent(ctx, userIvent.ID, -userIvent.NumberOfGuests)
+	if err != nil {
 		return err
 	}
 

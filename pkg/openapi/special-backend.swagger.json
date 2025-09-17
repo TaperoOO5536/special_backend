@@ -557,7 +557,8 @@
         "pictures": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/special_app_v1PictureInfo"
           }
         }
       }
@@ -605,7 +606,8 @@
         "pictures": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/special_app_v1PictureInfo"
           }
         }
       }
@@ -705,7 +707,7 @@
           "format": "date-time"
         },
         "picture": {
-          "type": "string"
+          "$ref": "#/definitions/special_app_v1PictureInfo"
         }
       }
     },
@@ -735,7 +737,7 @@
           "format": "int64"
         },
         "picture": {
-          "type": "string"
+          "$ref": "#/definitions/special_app_v1PictureInfo"
         }
       }
     },
@@ -765,7 +767,7 @@
           "format": "int64"
         },
         "picture": {
-          "type": "string"
+          "$ref": "#/definitions/special_app_v1PictureInfo"
         }
       }
     },
@@ -821,6 +823,18 @@
           "format": "int64"
         },
         "picture": {
+          "$ref": "#/definitions/special_app_v1PictureInfo"
+        }
+      }
+    },
+    "special_app_v1PictureInfo": {
+      "type": "object",
+      "properties": {
+        "picture": {
+          "type": "string",
+          "format": "byte"
+        },
+        "mimeType": {
           "type": "string"
         }
       }
@@ -850,7 +864,7 @@
           "format": "date-time"
         },
         "picture": {
-          "type": "string"
+          "$ref": "#/definitions/special_app_v1PictureInfo"
         }
       }
     }

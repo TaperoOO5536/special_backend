@@ -41,6 +41,6 @@ func (s *IventService) GetIvents(ctx context.Context) ([]*models.Ivent, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return ivents, nil
 }

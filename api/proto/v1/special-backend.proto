@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
@@ -101,6 +100,13 @@ service SpecialAppService {
   }
 }
 
+// pictures
+
+message PictureInfo {
+  bytes picture = 1;
+  string mime_type = 2;
+}
+
 // Users
 
 message CreateUserRequest {}
@@ -134,7 +140,7 @@ message GetIventInfoResponse {
   int64 price = 5;
   int64 total_seats = 6;
   int64 occupied_seats = 7;
-  repeated string pictures = 8;
+  repeated PictureInfo pictures = 8;
 }
 
 message IventInfoForList {
@@ -144,7 +150,7 @@ message IventInfoForList {
   int64 price = 4;
   int64 total_seats = 5;
   int64 occupied_seats = 6;
-  string picture = 7;
+  PictureInfo picture = 7;
 }
 
 message GetIventsResponse {
@@ -179,7 +185,7 @@ message GetUserIventInfoResponse {
   int64 number_of_guests = 3;
   string title = 4; 
   google.protobuf.Timestamp datetime = 5;
-  string picture = 6;
+  PictureInfo picture = 6;
 }
 
 message UserIventInfoForList {
@@ -187,7 +193,7 @@ message UserIventInfoForList {
   string ivent_id = 2;
   string title = 3;
   google.protobuf.Timestamp datetime = 4;
-  string picture = 5;
+  PictureInfo picture = 5;
 }
 
 message GetUserIventsResponse {
@@ -207,14 +213,14 @@ message GetItemInfoResponse {
   string title = 2;
   string description = 3;
   int64 price = 4;
-  repeated string pictures = 5;
+  repeated PictureInfo pictures = 5;
 }
 
 message ItemInfoForList {
   string id = 1;
   string title = 2;
   int64 price = 3;
-  string picture = 4;
+  PictureInfo picture = 4;
 }
 
 message GetItemsResponse {
@@ -251,7 +257,7 @@ message OrderItemInfoForList {
   string title = 3;
   int64 price = 4;
   int64 quantity = 5;
-  string picture = 6;
+  PictureInfo picture = 6;
 
 }
 

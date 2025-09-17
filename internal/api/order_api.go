@@ -99,7 +99,10 @@ func (h *OrderServiceHandler) GetOrderInfo(ctx context.Context, req *pb.GetOrder
 			Title: orderItem.Item.Title,
 			Price: orderItem.Item.Price,
 			Quantity: orderItem.Quantity,
+			Picture: &pb.PictureInfo{
 			Picture: orderItem.Item.LittlePicture,
+			MimeType: orderItem.Item.MimeType,
+		},
 		}
 		orderItems = append(orderItems, pbItem)
 	}

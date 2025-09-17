@@ -86,7 +86,10 @@ func (h *UserIventServiceHandler) GetUserIventInfo(ctx context.Context, req *pb.
 		NumberOfGuests: userIvent.NumberOfGuests,
 		Title: userIvent.Ivent.Title,
 		Datetime: timestamppb.New(userIvent.Ivent.DateTime),
-		Picture: userIvent.Ivent.LittlePicture,
+		Picture: &pb.PictureInfo{
+			Picture: userIvent.Ivent.LittlePicture,
+			MimeType: userIvent.Ivent.MimeType,
+		},
 	}, nil
 }
 
@@ -108,7 +111,10 @@ func (h *UserIventServiceHandler) GetUserIvents(ctx context.Context, req *pb.Get
 			IventId: userIvent.IventID.String(),
 			Title: userIvent.Ivent.Title,
 			Datetime: timestamppb.New(userIvent.Ivent.DateTime),
+			Picture: &pb.PictureInfo{
 			Picture: userIvent.Ivent.LittlePicture,
+			MimeType: userIvent.Ivent.MimeType,
+		},
 		}
 		pbUserIvents = append(pbUserIvents, pbUserIvent)
 	}
@@ -151,7 +157,10 @@ func (h *UserIventServiceHandler) UpdateUserIvent(ctx context.Context, req *pb.U
 		NumberOfGuests: userIvent.NumberOfGuests,
 		Title: userIvent.Ivent.Title,
 		Datetime: timestamppb.New(userIvent.Ivent.DateTime),
-		Picture: userIvent.Ivent.LittlePicture,
+		Picture: &pb.PictureInfo{
+			Picture: userIvent.Ivent.LittlePicture,
+			MimeType: userIvent.Ivent.MimeType,
+		},
 	}, nil
 }
 

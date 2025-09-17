@@ -6,5 +6,5 @@ create table if not exists Ivents (
             Ivent_Price int not null,
             Total_Seats int null,
             Occupied_Seats int null,
-            Little_Picture varchar not null
+            Little_Picture bytea not null
         ); 

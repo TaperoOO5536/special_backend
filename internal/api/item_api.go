@@ -40,9 +40,13 @@ func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInf
 		return nil, err
 	}
 
-	var pictures []string
+	pbPictures := make([]*pb.PictureInfo, 0, len(item.Pictures))
 	for _, picture := range item.Pictures {
-		pictures = append(pictures, picture.Path)
+		pbPicture := &pb.PictureInfo{
+			Picture: picture.Path,
+			MimeType: picture.MimeType,
+		}
+		pbPictures = append(pbPictures, pbPicture)
 	}
 
 	return &pb.GetItemInfoResponse{
@@ -50,7 +54,7 @@ func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInf
 		Title:       item.Title,
 		Description: item.Description,
 		Price:       item.Price,
-		Pictures:    pictures,
+		Pictures:    pbPictures,
 	}, nil
 }
 
@@ -70,7 +74,10 @@ func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsReque
 			Id:      item.ID.String(),
 			Title:   item.Title,
 			Price:   item.Price,
+			Picture: &pb.PictureInfo{
 			Picture: item.LittlePicture,
+			MimeType: item.MimeType,
+		},
 		}
 		response.Items = append(response.Items, pbItem)
 	}

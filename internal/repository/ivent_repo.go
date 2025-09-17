@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"errors"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"gorm.io/gorm"
@@ -9,9 +10,12 @@ import (
 	"github.com/google/uuid"
 )
 
+var (	ErrNotEnoughSeats = errors.New("ivent does not have enough seats"))
+
 type IventRepository interface {
 	GetIventInfo(ctx context.Context, id uuid.UUID) (*models.Ivent, error)
 	GetIvents(ctx context.Context) ([]*models.Ivent, error)
+	UpdateIvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error
 }
 
 type iventRepository struct {
@@ -36,4 +40,22 @@ func (r *iventRepository) GetIvents(ctx context.Context) ([]*models.Ivent, error
 		return nil, err
 	}
 	return ivents, nil
+}
+
+func (r *iventRepository) UpdateIvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error {
+	ivent, err := r.GetIventInfo(ctx, id)
+	if err != nil {
+		return err
+	}
+
+	if (ivent.TotalSeats - (ivent.OccupiedSeats + newOccupiedSeats) < 0) {
+		return ErrNotEnoughSeats
+	}
+
+	ivent.OccupiedSeats = ivent.OccupiedSeats + newOccupiedSeats
+	if err := r.db.Save(ivent).Error; err != nil {
+		return err
+	}
+
+	return nil
 }

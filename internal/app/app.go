@@ -57,7 +57,7 @@ func (a *App) Start(ctx context.Context) error {
 	iventService := service.NewIventService(iventRepo)
 	userServive := service.NewUserService(userRepo, config.GetToken())
 	orderService := service.NewOrderService(orderRepo, config.GetToken())
-	userIventService := service.NewUserIventService(userIventRepo, config.GetToken())
+	userIventService := service.NewUserIventService(userIventRepo, iventRepo, config.GetToken())
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
 	iventServiceHandler := api.NewIventServiceHandler(iventService)

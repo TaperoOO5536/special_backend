@@ -11,36 +11,36 @@ import (
 )
 
 var (
-	ErrIventNotFound = errors.New("ivent not found")
+	ErrEventNotFound = errors.New("event not found")
 )
 
-type IventService struct {
-	iventRepo repository.IventRepository
+type EventService struct {
+	eventRepo repository.EventRepository
 }
 
-func NewIventService(iventRepo repository.IventRepository) *IventService {
-	return &IventService{
-		iventRepo: iventRepo,
+func NewEventService(eventRepo repository.EventRepository) *EventService {
+	return &EventService{
+		eventRepo: eventRepo,
 	}
 }
 
-func (s *IventService) GetIventInfo(ctx context.Context, id uuid.UUID) (*models.Ivent, error) {
-	ivent, err := s.iventRepo.GetIventInfo(ctx, id)
+func (s *EventService) GetEventInfo(ctx context.Context, id uuid.UUID) (*models.Event, error) {
+	event, err := s.eventRepo.GetEventInfo(ctx, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrIventNotFound
+			return nil, ErrEventNotFound
 		}
 		return nil, err
 	}
 	
-	return ivent, nil
+	return event, nil
 }
 
-func (s *IventService) GetIvents(ctx context.Context) ([]*models.Ivent, error) {
-	ivents, err := s.iventRepo.GetIvents(ctx)
+func (s *EventService) GetEvents(ctx context.Context) ([]*models.Event, error) {
+	events, err := s.eventRepo.GetEvents(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	return ivents, nil
+	return events, nil
 }

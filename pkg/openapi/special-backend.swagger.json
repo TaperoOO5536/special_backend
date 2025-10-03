@@ -9,12 +9,8 @@
       "name": "SpecialAppService"
     }
   ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/v1/items": {
       "get": {
@@ -33,9 +29,7 @@
             }
           }
         },
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     },
     "/v1/items/{id}": {
@@ -63,19 +57,17 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     },
-    "/v1/ivents": {
+    "/v1/events": {
       "get": {
-        "operationId": "SpecialAppService_GetIvents",
+        "operationId": "SpecialAppService_GetEvents",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/special_app_v1GetIventsResponse"
+              "$ref": "#/definitions/special_app_v1GetEventsResponse"
             }
           },
           "default": {
@@ -85,19 +77,17 @@
             }
           }
         },
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     },
-    "/v1/ivents/{id}": {
+    "/v1/events/{id}": {
       "get": {
-        "operationId": "SpecialAppService_GetIventInfo",
+        "operationId": "SpecialAppService_GetEventInfo",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/special_app_v1GetIventInfoResponse"
+              "$ref": "#/definitions/special_app_v1GetEventInfoResponse"
             }
           },
           "default": {
@@ -115,9 +105,7 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     },
     "/v1/orders": {
@@ -137,9 +125,7 @@
             }
           }
         },
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       },
       "post": {
         "operationId": "SpecialAppService_CreateOrder",
@@ -168,9 +154,7 @@
             }
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     },
     "/v1/orders/{id}": {
@@ -198,9 +182,7 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       },
       "patch": {
         "operationId": "SpecialAppService_UpdateOrder",
@@ -234,19 +216,17 @@
             }
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     },
-    "/v1/user_ivents": {
+    "/v1/user_events": {
       "get": {
-        "operationId": "SpecialAppService_GetUserIvents",
+        "operationId": "SpecialAppService_GetUserEvents",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/special_app_v1GetUserIventsResponse"
+              "$ref": "#/definitions/special_app_v1GetUserEventsResponse"
             }
           },
           "default": {
@@ -256,12 +236,10 @@
             }
           }
         },
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       },
       "post": {
-        "operationId": "SpecialAppService_CreateUserIvent",
+        "operationId": "SpecialAppService_CreateUserEvent",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -283,23 +261,21 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/special_app_v1CreateUserIventRequest"
+              "$ref": "#/definitions/special_app_v1CreateUserEventRequest"
             }
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     },
-    "/v1/user_ivents/{id}": {
+    "/v1/user_events/{id}": {
       "get": {
-        "operationId": "SpecialAppService_GetUserIventInfo",
+        "operationId": "SpecialAppService_GetUserEventInfo",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/special_app_v1GetUserIventInfoResponse"
+              "$ref": "#/definitions/special_app_v1GetUserEventInfoResponse"
             }
           },
           "default": {
@@ -317,12 +293,10 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       },
       "delete": {
-        "operationId": "SpecialAppService_DeleteUserIvent",
+        "operationId": "SpecialAppService_DeleteUserEvent",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -346,17 +320,15 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       },
       "patch": {
-        "operationId": "SpecialAppService_UpdateUserIvent",
+        "operationId": "SpecialAppService_UpdateUserEvent",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/special_app_v1GetUserIventInfoResponse"
+              "$ref": "#/definitions/special_app_v1GetUserEventInfoResponse"
             }
           },
           "default": {
@@ -378,13 +350,11 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SpecialAppServiceUpdateUserIventBody"
+              "$ref": "#/definitions/SpecialAppServiceUpdateUserEventBody"
             }
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     },
     "/v1/users": {
@@ -404,9 +374,7 @@
             }
           }
         },
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       },
       "post": {
         "operationId": "SpecialAppService_CreateUser",
@@ -425,9 +393,7 @@
             }
           }
         },
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       },
       "patch": {
         "operationId": "SpecialAppService_UpdateUser",
@@ -455,9 +421,7 @@
             }
           }
         ],
-        "tags": [
-          "SpecialAppService"
-        ]
+        "tags": ["SpecialAppService"]
       }
     }
   },
@@ -470,7 +434,7 @@
         }
       }
     },
-    "SpecialAppServiceUpdateUserIventBody": {
+    "SpecialAppServiceUpdateUserEventBody": {
       "type": "object",
       "properties": {
         "numberOfGuests": {
@@ -530,10 +494,10 @@
         }
       }
     },
-    "special_app_v1CreateUserIventRequest": {
+    "special_app_v1CreateUserEventRequest": {
       "type": "object",
       "properties": {
-        "iventId": {
+        "eventId": {
           "type": "string"
         },
         "numberOfGuests": {
@@ -579,7 +543,7 @@
         }
       }
     },
-    "special_app_v1GetIventInfoResponse": {
+    "special_app_v1GetEventInfoResponse": {
       "type": "object",
       "properties": {
         "id": {
@@ -616,14 +580,14 @@
         }
       }
     },
-    "special_app_v1GetIventsResponse": {
+    "special_app_v1GetEventsResponse": {
       "type": "object",
       "properties": {
-        "ivents": {
+        "events": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/special_app_v1IventInfoForList"
+            "$ref": "#/definitions/special_app_v1EventInfoForList"
           }
         }
       }
@@ -690,13 +654,13 @@
         }
       }
     },
-    "special_app_v1GetUserIventInfoResponse": {
+    "special_app_v1GetUserEventInfoResponse": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
         },
-        "iventId": {
+        "eventId": {
           "type": "string"
         },
         "numberOfGuests": {
@@ -715,14 +679,14 @@
         }
       }
     },
-    "special_app_v1GetUserIventsResponse": {
+    "special_app_v1GetUserEventsResponse": {
       "type": "object",
       "properties": {
-        "userIvents": {
+        "userEvents": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/special_app_v1UserIventInfoForList"
+            "$ref": "#/definitions/special_app_v1UserEventInfoForList"
           }
         }
       }
@@ -745,7 +709,7 @@
         }
       }
     },
-    "special_app_v1IventInfoForList": {
+    "special_app_v1EventInfoForList": {
       "type": "object",
       "properties": {
         "id": {
@@ -851,13 +815,13 @@
         }
       }
     },
-    "special_app_v1UserIventInfoForList": {
+    "special_app_v1UserEventInfoForList": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
         },
-        "iventId": {
+        "eventId": {
           "type": "string"
         },
         "title": {

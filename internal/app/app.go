@@ -27,7 +27,8 @@ import (
 )
 
 type Config struct {
-	Port string
+	GrpcPort     string
+	HttpPort     string
 	ReadTimeout  time.Duration
 	WriteTimeout time.Duration
 	IdleTimeout  time.Duration
@@ -48,24 +49,24 @@ func (a *App) Start(ctx context.Context) error {
 	db := config.NewDBClient(a.config.Dsn)
 
 	itemRepo := repository.NewItemRepository(db)
-	iventRepo := repository.NewIventRepository(db)
+	eventRepo := repository.NewEventRepository(db)
 	userRepo := repository.NewUserRepository(db)
 	orderRepo := repository.NewOrderRepository(db)
-	userIventRepo := repository.NewUserIventRepository(db)
+	userEventRepo := repository.NewUserEventRepository(db)
 	
 	itemService := service.NewItemService(itemRepo)
-	iventService := service.NewIventService(iventRepo)
+	eventService := service.NewEventService(eventRepo)
 	userServive := service.NewUserService(userRepo, config.GetToken())
 	orderService := service.NewOrderService(orderRepo, config.GetToken())
-	userIventService := service.NewUserIventService(userIventRepo, iventRepo, config.GetToken())
+	userEventService := service.NewUserEventService(userEventRepo, eventRepo, config.GetToken())
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
-	iventServiceHandler := api.NewIventServiceHandler(iventService)
+	eventServiceHandler := api.NewEventServiceHandler(eventService)
 	userServiceHandler := api.NewUserServiceHandler(userServive)
 	orderServiceHandler := api.NewOrderServiceHandler(orderService)
-	userIventServiceHandler := api.NewUserIventServiceHandler(userIventService)
+	userEventServiceHandler := api.NewUserEventServiceHandler(userEventService)
 
-	handler := api.NewHandler(itemServiceHandler, iventServiceHandler, userServiceHandler, orderServiceHandler, userIventServiceHandler)
+	handler := api.NewHandler(itemServiceHandler, eventServiceHandler, userServiceHandler, orderServiceHandler, userEventServiceHandler)
 
 	grpcServer := grpc.NewServer()
 
@@ -73,7 +74,7 @@ func (a *App) Start(ctx context.Context) error {
 
 	reflection.Register(grpcServer)
 
-	l, err := net.Listen("tcp", ":"+a.config.Port)
+	l, err := net.Listen("tcp", ":"+a.config.GrpcPort)
 	if err != nil {
 		return fmt.Errorf("failed to listen: %v", err)
 	}
@@ -83,7 +84,7 @@ func (a *App) Start(ctx context.Context) error {
 	err = pb.RegisterSpecialAppServiceHandlerFromEndpoint(
 		ctx,
 		gwmux,
-		"localhost:"+a.config.Port,
+		"localhost:"+a.config.GrpcPort,
 		[]grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())},
 	)
 	if err != nil {
@@ -102,18 +103,18 @@ func (a *App) Start(ctx context.Context) error {
 	corshandler := c.Handler(gwmux)
 
 	httpServer := &http.Server{
-		Addr:    ":8081",
+		Addr:    ":"+a.config.HttpPort,
 		Handler: corshandler,
 	}
 
 	serverError := make(chan error, 1)
 	go func() {
-		log.Printf("Starting gRPC server on port%s", a.config.Port)
+		log.Printf("Starting gRPC server on port %s", a.config.GrpcPort)
 		serverError <- grpcServer.Serve(l)
 	}()
 
 	go func() {
-		log.Printf("Starting http server on port :8081")
+		log.Printf("Starting http server on port %s", a.config.HttpPort)
 		serverError <- httpServer.ListenAndServe()
 	}()
 
@@ -126,9 +127,11 @@ func (a *App) Start(ctx context.Context) error {
 	case <-shutdown:
 		log.Println("shutting down gRPC server...")
 		grpcServer.GracefulStop()
+		log.Println("shutting down http server...")
 		if err := httpServer.Shutdown(ctx); err != nil {
 			log.Printf("http server shutdown error: %v", err)
 		}
+		log.Println("http server stopped")
 		log.Println("gRPC server stopped")
 		return nil
 	}

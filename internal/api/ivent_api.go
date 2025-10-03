@@ -11,38 +11,38 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-type IventServiceHandler struct {
-	iventService *service.IventService
+type EventServiceHandler struct {
+	eventService *service.EventService
 }
 
-func NewIventServiceHandler(iventService *service.IventService) *IventServiceHandler {
-	return &IventServiceHandler{ iventService: iventService }
+func NewEventServiceHandler(eventService *service.EventService) *EventServiceHandler {
+	return &EventServiceHandler{ eventService: eventService }
 }
 
-func (h *IventServiceHandler) GetIventInfo(ctx context.Context, req *pb.GetIventInfoRequest) (*pb.GetIventInfoResponse, error) {
+func (h *EventServiceHandler) GetEventInfo(ctx context.Context, req *pb.GetEventInfoRequest) (*pb.GetEventInfoResponse, error) {
 	if req.Id == "" {
-		err := status.Error(codes.InvalidArgument, "ivent ID is required")
+		err := status.Error(codes.InvalidArgument, "event ID is required")
 		return nil, err
 	}
 	
-	iventID, err := uuid.Parse(req.Id)
+	eventID, err := uuid.Parse(req.Id)
 	if err != nil {
-		err := status.Error(codes.InvalidArgument, "invalid ivent ID")
+		err := status.Error(codes.InvalidArgument, "invalid event ID")
 		return nil, err
 	}
 
-	ivent, err := h.iventService.GetIventInfo(ctx, iventID)
+	event, err := h.eventService.GetEventInfo(ctx, eventID)
 	if err != nil {
-		if err == service.ErrIventNotFound {
-			err := status.Error(codes.NotFound, "ivent not found")
+		if err == service.ErrEventNotFound {
+			err := status.Error(codes.NotFound, "event not found")
 			return nil, err
 		}
 		err := status.Error(codes.Internal, err.Error())
 		return nil, err
 	}
 
-	pbPictures := make([]*pb.PictureInfo, 0, len(ivent.Pictures))
-	for _, picture := range ivent.Pictures {
+	pbPictures := make([]*pb.PictureInfo, 0, len(event.Pictures))
+	for _, picture := range event.Pictures {
 		pbPicture := &pb.PictureInfo{
 			Picture: picture.Path,
 			MimeType: picture.MimeType,
@@ -50,40 +50,40 @@ func (h *IventServiceHandler) GetIventInfo(ctx context.Context, req *pb.GetIvent
 		pbPictures = append(pbPictures, pbPicture)
 	}
 
-	return &pb.GetIventInfoResponse{
-		Id:            ivent.ID.String(),
-		Title:         ivent.Title,
-		Description:   ivent.Description,
-		Datetime:      timestamppb.New(ivent.DateTime),
-		Price:         ivent.Price,
-		TotalSeats:    ivent.TotalSeats,
-		OccupiedSeats: ivent.OccupiedSeats,
+	return &pb.GetEventInfoResponse{
+		Id:            event.ID.String(),
+		Title:         event.Title,
+		Description:   event.Description,
+		Datetime:      timestamppb.New(event.DateTime),
+		Price:         event.Price,
+		TotalSeats:    event.TotalSeats,
+		OccupiedSeats: event.OccupiedSeats,
 		Pictures:      pbPictures,
 	}, nil
 }
 
-func (h *IventServiceHandler) GetIvents(ctx context.Context, req *pb.GetIventsRequest) (*pb.GetIventsResponse, error) {
-	ivents, err := h.iventService.GetIvents(ctx)
+func (h *EventServiceHandler) GetEvents(ctx context.Context, req *pb.GetEventsRequest) (*pb.GetEventsResponse, error) {
+	events, err := h.eventService.GetEvents(ctx)
 	if err != nil {
 		err := status.Error(codes.Internal, err.Error())
 		return nil, err
 	}
 
-	response := &pb.GetIventsResponse{
-		Ivents: make([]*pb.IventInfoForList, 0, len(ivents)),
+	response := &pb.GetEventsResponse{
+		Events: make([]*pb.EventInfoForList, 0, len(events)),
 	}
 	
-	for _, ivent := range ivents {
-		pbIvent := &pb.IventInfoForList{
-			Id:      ivent.ID.String(),
-			Title:   ivent.Title,
-			Price:   ivent.Price,
+	for _, event := range events {
+		pbEvent := &pb.EventInfoForList{
+			Id:      event.ID.String(),
+			Title:   event.Title,
+			Price:   event.Price,
 			Picture: &pb.PictureInfo{
-			Picture: ivent.LittlePicture,
-			MimeType: ivent.MimeType,
+			Picture: event.LittlePicture,
+			MimeType: event.MimeType,
 		},
 		}
-		response.Ivents = append(response.Ivents, pbIvent)
+		response.Events = append(response.Events, pbEvent)
 	}
 
 	return response, nil

@@ -12,35 +12,35 @@ type User struct {
 	Surname     string      `gorm:"column:s_n_user"`
 	Nickname    string      `gorm:"column:n_n_user"`
 	PhoneNumber string      `gorm:"column:phone_n_user"`
-	UserIvents  []UserIvent `gorm:"foreignKey:UserID"`
+	UserEvents  []UserEvent `gorm:"foreignKey:UserID"`
 	Orders      []Order     `gorm:"foreignKey:UserID"`
 }
 
-type Ivent struct {
-	ID            uuid.UUID      `gorm:"column:id_ivent;primaryKey"`
-	Title         string         `gorm:"column:ivent_title"`
-	Description   string         `gorm:"column:ivent_description"`
-	DateTime      time.Time      `gorm:"column:ivent_datetime"`
-	Price         int64          `gorm:"column:ivent_price"`
+type Event struct {
+	ID            uuid.UUID      `gorm:"column:id_event;primaryKey"`
+	Title         string         `gorm:"column:event_title"`
+	Description   string         `gorm:"column:event_description"`
+	DateTime      time.Time      `gorm:"column:event_datetime"`
+	Price         int64          `gorm:"column:event_price"`
 	TotalSeats    int64          `gorm:"column:total_seats"`
 	OccupiedSeats int64          `gorm:"column:occupied_seats"`
 	LittlePicture []byte         `gorm:"column:little_picture"`
 	MimeType			string         `gorm:"column:mime_type"`
-	UserIvents    []UserIvent    `gorm:"foreignKey:IventID"`
-	Pictures      []IventPicture `gorm:"foreignKey:IventID"`
+	UserEvents    []UserEvent    `gorm:"foreignKey:EventID"`
+	Pictures      []EventPicture `gorm:"foreignKey:EventID"`
 }
 
-type UserIvent struct {
-	ID             uuid.UUID `gorm:"column:id_user_ivent;primaryKey"`
+type UserEvent struct {
+	ID             uuid.UUID `gorm:"column:id_user_event;primaryKey"`
 	UserID         string    `gorm:"column:user_id"`
-	IventID        uuid.UUID `gorm:"column:ivent_id"`
+	EventID        uuid.UUID `gorm:"column:event_id"`
 	NumberOfGuests int64     `gorm:"column:number_of_guests"`
-	Ivent          Ivent     `gorm:"foreignKey:IventID"`
+	Event          Event     `gorm:"foreignKey:EventID"`
 }
 
-type IventPicture struct {
-	ID      uuid.UUID `gorm:"column:id_ivent_picture;primaryKey"`
-	IventID uuid.UUID `gorm:"column:ivent_id"`
+type EventPicture struct {
+	ID      uuid.UUID `gorm:"column:id_event_picture;primaryKey"`
+	EventID uuid.UUID `gorm:"column:event_id"`
 	Path    []byte    `gorm:"column:picture_path"`
 	MimeType string   `gorm:"column:mime_type"`
 }

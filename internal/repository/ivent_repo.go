@@ -10,50 +10,50 @@ import (
 	"github.com/google/uuid"
 )
 
-var (	ErrNotEnoughSeats = errors.New("ivent does not have enough seats"))
+var (	ErrNotEnoughSeats = errors.New("event does not have enough seats"))
 
-type IventRepository interface {
-	GetIventInfo(ctx context.Context, id uuid.UUID) (*models.Ivent, error)
-	GetIvents(ctx context.Context) ([]*models.Ivent, error)
-	UpdateIvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error
+type EventRepository interface {
+	GetEventInfo(ctx context.Context, id uuid.UUID) (*models.Event, error)
+	GetEvents(ctx context.Context) ([]*models.Event, error)
+	UpdateEvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error
 }
 
-type iventRepository struct {
+type eventRepository struct {
 	db *gorm.DB
 }
 
-func NewIventRepository(db *gorm.DB) IventRepository {
-	return &iventRepository{db: db}
+func NewEventRepository(db *gorm.DB) EventRepository {
+	return &eventRepository{db: db}
 }
 
-func (r *iventRepository) GetIventInfo(ctx context.Context, id uuid.UUID) (*models.Ivent, error) {
-	var ivent models.Ivent
-	if err := r.db.Preload("Pictures").Where("id_ivent = ?", id).First(&ivent).Error; err != nil {
+func (r *eventRepository) GetEventInfo(ctx context.Context, id uuid.UUID) (*models.Event, error) {
+	var event models.Event
+	if err := r.db.Preload("Pictures").Where("id_event = ?", id).First(&event).Error; err != nil {
 		return nil, err
 	}
-	return &ivent, nil
+	return &event, nil
 }
 
-func (r *iventRepository) GetIvents(ctx context.Context) ([]*models.Ivent, error) {
-	var ivents []*models.Ivent
-	if err := r.db.Find(&ivents).Error; err != nil {
+func (r *eventRepository) GetEvents(ctx context.Context) ([]*models.Event, error) {
+	var events []*models.Event
+	if err := r.db.Find(&events).Error; err != nil {
 		return nil, err
 	}
-	return ivents, nil
+	return events, nil
 }
 
-func (r *iventRepository) UpdateIvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error {
-	ivent, err := r.GetIventInfo(ctx, id)
+func (r *eventRepository) UpdateEvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error {
+	event, err := r.GetEventInfo(ctx, id)
 	if err != nil {
 		return err
 	}
 
-	if (ivent.TotalSeats - (ivent.OccupiedSeats + newOccupiedSeats) < 0) {
+	if (event.TotalSeats - (event.OccupiedSeats + newOccupiedSeats) < 0) {
 		return ErrNotEnoughSeats
 	}
 
-	ivent.OccupiedSeats = ivent.OccupiedSeats + newOccupiedSeats
-	if err := r.db.Save(ivent).Error; err != nil {
+	event.OccupiedSeats = event.OccupiedSeats + newOccupiedSeats
+	if err := r.db.Save(event).Error; err != nil {
 		return err
 	}
 

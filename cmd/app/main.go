@@ -28,7 +28,8 @@ func main() {
 	config.LoadEnv()
 
 	cfg := &app.Config{
-		Port:         "8080",
+		GrpcPort:     "8080",
+		HttpPort:     "8081",
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  120 * time.Second,
@@ -42,10 +43,10 @@ func main() {
 	}
 
 	user := User{
-		ID:        1234234349,
-		FirstName: "Denis",
-		LastName:  "Abignale",
-		Username:  "@DenisRew",
+		ID:        9876543210,
+		FirstName: "Some",
+		LastName:  "Body",
+		Username:  "@Somebody",
 	}
 	botToken := config.GetToken()
 	initData, err := GenInitData(botToken, user)

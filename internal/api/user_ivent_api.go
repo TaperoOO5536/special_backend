@@ -12,45 +12,45 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-type UserIventServiceHandler struct {
-	userIventService *service.UserIventService
+type UserEventServiceHandler struct {
+	userEventService *service.UserEventService
 }
 
-func NewUserIventServiceHandler(userIventService *service.UserIventService) *UserIventServiceHandler {
-	return &UserIventServiceHandler{ userIventService: userIventService}
+func NewUserEventServiceHandler(userEventService *service.UserEventService) *UserEventServiceHandler {
+	return &UserEventServiceHandler{ userEventService: userEventService}
 }
 
-func (h *UserIventServiceHandler) CreateUserIvent(ctx context.Context, req *pb.CreateUserIventRequest) (*emptypb.Empty, error) {
+func (h *UserEventServiceHandler) CreateUserEvent(ctx context.Context, req *pb.CreateUserEventRequest) (*emptypb.Empty, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	if req.IventId == "" {
-		err := status.Error(codes.InvalidArgument, "ivent id is required")
+	if req.EventId == "" {
+		err := status.Error(codes.InvalidArgument, "event id is required")
 		return nil, err
 	}
 
 	if req.NumberOfGuests == 0 {
-		err := status.Error(codes.InvalidArgument, "number of guests are required")
+		err := status.Error(codes.InvalidArgument, "number of guests is required")
 		return nil, err
 	}
 
-	IventID, err := uuid.Parse(req.IventId)
+	EventID, err := uuid.Parse(req.EventId)
 	if err != nil {
-		err := status.Error(codes.InvalidArgument, "invalid ivent id")
+		err := status.Error(codes.InvalidArgument, "invalid event id")
 		return nil, err
 	}
 
-	userIventID := uuid.New()
+	userEventID := uuid.New()
 
-	input := service.UserIventCreateInput{
-		UserIventID: userIventID,
-		IventID: IventID,
+	input := service.UserEventCreateInput{
+		UserEventID: userEventID,
+		EventID: EventID,
 		NumberOfGuests: req.NumberOfGuests,
 	}
 
-	err = h.userIventService.CreateUserIvent(ctx, initData, input)
+	err = h.userEventService.CreateUserEvent(ctx, initData, input)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
 	}
@@ -58,80 +58,80 @@ func (h *UserIventServiceHandler) CreateUserIvent(ctx context.Context, req *pb.C
 	return &emptypb.Empty{}, nil
 }
 
-func (h *UserIventServiceHandler) GetUserIventInfo(ctx context.Context, req *pb.GetUserIventInfoRequest) (*pb.GetUserIventInfoResponse, error) {
+func (h *UserEventServiceHandler) GetUserEventInfo(ctx context.Context, req *pb.GetUserEventInfoRequest) (*pb.GetUserEventInfoResponse, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
 
 	if req.Id == "" {
-		err := status.Error(codes.InvalidArgument, "user ivent id is required")
+		err := status.Error(codes.InvalidArgument, "user event id is required")
 		return nil, err
 	}	
 
-	userIventID, err := uuid.Parse(req.Id)
+	userEventID, err := uuid.Parse(req.Id)
 	if err != nil {
-		err := status.Error(codes.InvalidArgument, "invalid user ivent id")
+		err := status.Error(codes.InvalidArgument, "invalid user event id")
 		return nil, err
 	}
 
-	userIvent, err := h.userIventService.GetUserIventInfo(ctx, initData, userIventID)
+	userEvent, err := h.userEventService.GetUserEventInfo(ctx, initData, userEventID)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
 	}
 
-	return &pb.GetUserIventInfoResponse{
-		Id: userIvent.ID.String(),
-		IventId: userIvent.IventID.String(),
-		NumberOfGuests: userIvent.NumberOfGuests,
-		Title: userIvent.Ivent.Title,
-		Datetime: timestamppb.New(userIvent.Ivent.DateTime),
+	return &pb.GetUserEventInfoResponse{
+		Id: userEvent.ID.String(),
+		EventId: userEvent.EventID.String(),
+		NumberOfGuests: userEvent.NumberOfGuests,
+		Title: userEvent.Event.Title,
+		Datetime: timestamppb.New(userEvent.Event.DateTime),
 		Picture: &pb.PictureInfo{
-			Picture: userIvent.Ivent.LittlePicture,
-			MimeType: userIvent.Ivent.MimeType,
+			Picture: userEvent.Event.LittlePicture,
+			MimeType: userEvent.Event.MimeType,
 		},
 	}, nil
 }
 
-func (h *UserIventServiceHandler) GetUserIvents(ctx context.Context, req *pb.GetUserIventsRequest) (*pb.GetUserIventsResponse, error) {
+func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.GetUserEventsRequest) (*pb.GetUserEventsResponse, error) {
  initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	userIvents, err := h.userIventService.GetUserIvents(ctx, initData)
+	userEvents, err := h.userEventService.GetUserEvents(ctx, initData)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
 	}
 
-	pbUserIvents := make([]*pb.UserIventInfoForList, 0, len(userIvents))
-	for _, userIvent := range userIvents {
-		pbUserIvent := &pb.UserIventInfoForList{
-			Id: userIvent.ID.String(),
-			IventId: userIvent.IventID.String(),
-			Title: userIvent.Ivent.Title,
-			Datetime: timestamppb.New(userIvent.Ivent.DateTime),
+	pbUserEvents := make([]*pb.UserEventInfoForList, 0, len(userEvents))
+	for _, userEvent := range userEvents {
+		pbUserEvent := &pb.UserEventInfoForList{
+			Id: userEvent.ID.String(),
+			EventId: userEvent.EventID.String(),
+			Title: userEvent.Event.Title,
+			Datetime: timestamppb.New(userEvent.Event.DateTime),
 			Picture: &pb.PictureInfo{
-			Picture: userIvent.Ivent.LittlePicture,
-			MimeType: userIvent.Ivent.MimeType,
+			Picture: userEvent.Event.LittlePicture,
+			MimeType: userEvent.Event.MimeType,
 		},
 		}
-		pbUserIvents = append(pbUserIvents, pbUserIvent)
+		pbUserEvents = append(pbUserEvents, pbUserEvent)
 	}
 
-	return &pb.GetUserIventsResponse{
-		UserIvents: pbUserIvents,
+	return &pb.GetUserEventsResponse{
+		UserEvents: pbUserEvents,
 	}, nil
 }
 
-func (h *UserIventServiceHandler) UpdateUserIvent(ctx context.Context, req *pb.UpdateUserIventRequest) (*pb.GetUserIventInfoResponse, error) {
+func (h *UserEventServiceHandler) UpdateUserEvent(ctx context.Context, req *pb.UpdateUserEventRequest) (*pb.GetUserEventInfoResponse, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
 
 	if req.Id == "" {
-		err := status.Error(codes.InvalidArgument, "user ivent id is required")
+		err := status.Error(codes.InvalidArgument, "user event id is required")
 		return nil, err
 	}	
 
@@ -140,48 +140,48 @@ func (h *UserIventServiceHandler) UpdateUserIvent(ctx context.Context, req *pb.U
 		return nil, err
 	}
 
-	userIventID, err := uuid.Parse(req.Id)
+	userEventID, err := uuid.Parse(req.Id)
 	if err != nil {
-		err := status.Error(codes.InvalidArgument, "invalid user ivent id")
+		err := status.Error(codes.InvalidArgument, "invalid user event id")
 		return nil, err
 	}
 
-	userIvent, err := h.userIventService.UpdateUserIvent(ctx, initData, userIventID, req.NumberOfGuests)
+	userEvent, err := h.userEventService.UpdateUserEvent(ctx, initData, userEventID, req.NumberOfGuests)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
 	}
 	
-	return &pb.GetUserIventInfoResponse{
-		Id: userIvent.ID.String(),
-		IventId: userIvent.IventID.String(),
-		NumberOfGuests: userIvent.NumberOfGuests,
-		Title: userIvent.Ivent.Title,
-		Datetime: timestamppb.New(userIvent.Ivent.DateTime),
+	return &pb.GetUserEventInfoResponse{
+		Id: userEvent.ID.String(),
+		EventId: userEvent.EventID.String(),
+		NumberOfGuests: userEvent.NumberOfGuests,
+		Title: userEvent.Event.Title,
+		Datetime: timestamppb.New(userEvent.Event.DateTime),
 		Picture: &pb.PictureInfo{
-			Picture: userIvent.Ivent.LittlePicture,
-			MimeType: userIvent.Ivent.MimeType,
+			Picture: userEvent.Event.LittlePicture,
+			MimeType: userEvent.Event.MimeType,
 		},
 	}, nil
 }
 
-func (h *UserIventServiceHandler) DeleteUserIvent(ctx context.Context, req *pb.DeleteUserIventRequest) (*emptypb.Empty, error) {
+func (h *UserEventServiceHandler) DeleteUserEvent(ctx context.Context, req *pb.DeleteUserEventRequest) (*emptypb.Empty, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
 
 	if req.Id == "" {
-		err := status.Error(codes.InvalidArgument, "user ivent id is required")
+		err := status.Error(codes.InvalidArgument, "user event id is required")
 		return nil, err
 	}
 
-	userIventID, err := uuid.Parse(req.Id)
+	userEventID, err := uuid.Parse(req.Id)
 	if err != nil {
-		err := status.Error(codes.InvalidArgument, "invalid user ivent id")
+		err := status.Error(codes.InvalidArgument, "invalid user event id")
 		return nil, err
 	}
 
-	err = h.userIventService.DeleteUserIvent(ctx, initData, userIventID)
+	err = h.userEventService.DeleteUserEvent(ctx, initData, userEventID)
 	if err != nil {
 		return nil, err
 	}

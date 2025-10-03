@@ -75,7 +75,7 @@ func (s *OrderService) GetOrderInfo(ctx context.Context, initData string, id uui
 	order, err := s.orderRepo.GetOrderInfo(ctx, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrIventNotFound
+			return nil, ErrEventNotFound
 		}
 		return nil, err
 	}
@@ -97,7 +97,7 @@ func (s *OrderService) GetOrders(ctx context.Context, initData string) ([]*model
 	orders, err := s.orderRepo.GetOrders(ctx, user.ID)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrIventNotFound
+			return nil, ErrEventNotFound
 		}
 		return nil, err
 	}
@@ -114,7 +114,7 @@ func (s *OrderService) GetOrders(ctx context.Context, initData string) ([]*model
 // 	order, err := s.orderRepo.UpdateOrder(ctx, id, newStatus)
 // 	if err != nil {
 // 		if err == gorm.ErrRecordNotFound {
-// 			return nil, ErrIventNotFound
+// 			return nil, ErrEventNotFound
 // 		}
 // 		return nil, err
 // 	}

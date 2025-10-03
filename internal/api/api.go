@@ -5,31 +5,30 @@ import (
 
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
 	"google.golang.org/protobuf/types/known/emptypb"
-	// "google.golang.org/protobuf/types/known/emptypb"
 )
 
 type Handler struct {
 	pb.UnimplementedSpecialAppServiceServer
 	itemHandler      *ItemServiceHandler
-	iventHandler     *IventServiceHandler
+	eventHandler     *EventServiceHandler
 	userHandler      *UserServiceHandler
 	orderHandler     *OrderServiceHandler
-	userIventHandler *UserIventServiceHandler
+	userEventHandler *UserEventServiceHandler
 }
 
 func NewHandler(
 	itemHandlel      *ItemServiceHandler,
-	ivetnHandler     *IventServiceHandler,
+	ivetnHandler     *EventServiceHandler,
 	userHandler      *UserServiceHandler,
 	orderHandler     *OrderServiceHandler,
-	userIventHandler *UserIventServiceHandler,
+	userEventHandler *UserEventServiceHandler,
 ) *Handler {
 	return &Handler{
 		itemHandler:      itemHandlel,
-		iventHandler:     ivetnHandler,
+		eventHandler:     ivetnHandler,
 		userHandler:      userHandler,
 		orderHandler:     orderHandler,
-		userIventHandler: userIventHandler,
+		userEventHandler: userEventHandler,
 	}
 }
 
@@ -44,14 +43,14 @@ func (h *Handler) GetItems(ctx context.Context, req *pb.GetItemsRequest) (*pb.Ge
 }
 
 
-//ivents
+//events
 
-func (h *Handler) GetIventInfo(ctx context.Context, req *pb.GetIventInfoRequest) (*pb.GetIventInfoResponse, error) {
-	return h.iventHandler.GetIventInfo(ctx, req)
+func (h *Handler) GetEventInfo(ctx context.Context, req *pb.GetEventInfoRequest) (*pb.GetEventInfoResponse, error) {
+	return h.eventHandler.GetEventInfo(ctx, req)
 }
 
-func (h *Handler) GetIvents(ctx context.Context, req *pb.GetIventsRequest) (*pb.GetIventsResponse, error) {
-	return h.iventHandler.GetIvents(ctx, req)
+func (h *Handler) GetEvents(ctx context.Context, req *pb.GetEventsRequest) (*pb.GetEventsResponse, error) {
+	return h.eventHandler.GetEvents(ctx, req)
 }
 
 //users
@@ -82,24 +81,24 @@ func (h *Handler) GetOrders(ctx context.Context, req *pb.GetOrdersRequest) (*pb.
 	return h.orderHandler.GetOrders(ctx, req)
 }
 
-//userivents
+//userevents
 
-func (h *Handler) CreateUserIvent(ctx context.Context, req *pb.CreateUserIventRequest) (*emptypb.Empty, error) {
-	return h.userIventHandler.CreateUserIvent(ctx, req)
+func (h *Handler) CreateUserEvent(ctx context.Context, req *pb.CreateUserEventRequest) (*emptypb.Empty, error) {
+	return h.userEventHandler.CreateUserEvent(ctx, req)
 }
 
-func (h *Handler) GetUserIventInfo(ctx context.Context, req *pb.GetUserIventInfoRequest) (*pb.GetUserIventInfoResponse, error) {
-	return h.userIventHandler.GetUserIventInfo(ctx, req)
+func (h *Handler) GetUserEventInfo(ctx context.Context, req *pb.GetUserEventInfoRequest) (*pb.GetUserEventInfoResponse, error) {
+	return h.userEventHandler.GetUserEventInfo(ctx, req)
 }
 
-func (h *Handler) GetUserIvents(ctx context.Context, req *pb.GetUserIventsRequest) (*pb.GetUserIventsResponse, error) {
-	return h.userIventHandler.GetUserIvents(ctx, req)
+func (h *Handler) GetUserEvents(ctx context.Context, req *pb.GetUserEventsRequest) (*pb.GetUserEventsResponse, error) {
+	return h.userEventHandler.GetUserEvents(ctx, req)
 }
 
-func (h *Handler) UpdateUserIvent(ctx context.Context, req *pb.UpdateUserIventRequest) (*pb.GetUserIventInfoResponse, error) {
-	return h.userIventHandler.UpdateUserIvent(ctx, req)
+func (h *Handler) UpdateUserEvent(ctx context.Context, req *pb.UpdateUserEventRequest) (*pb.GetUserEventInfoResponse, error) {
+	return h.userEventHandler.UpdateUserEvent(ctx, req)
 }
 
-func (h *Handler) DeleteUserIvent(ctx context.Context, req *pb.DeleteUserIventRequest) (*emptypb.Empty, error) {
-	return h.userIventHandler.DeleteUserIvent(ctx, req)
+func (h *Handler) DeleteUserEvent(ctx context.Context, req *pb.DeleteUserEventRequest) (*emptypb.Empty, error) {
+	return h.userEventHandler.DeleteUserEvent(ctx, req)
 }

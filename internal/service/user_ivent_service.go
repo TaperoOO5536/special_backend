@@ -11,29 +11,29 @@ import (
 )
 
 var (
-	ErrUserIventNotFound = errors.New("userivent not found")
+	ErrUserEventNotFound = errors.New("userevent not found")
 )
 
-type UserIventService struct {
-	iventRepo     repository.IventRepository
-	userIventRepo repository.UserIventRepository
+type UserEventService struct {
+	eventRepo     repository.EventRepository
+	userEventRepo repository.UserEventRepository
 	token         string
 }
 
-func NewUserIventService(userIventRepo repository.UserIventRepository, iventRepo repository.IventRepository, token string) *UserIventService {
-	return &UserIventService{
-		userIventRepo: userIventRepo,
+func NewUserEventService(userEventRepo repository.UserEventRepository, eventRepo repository.EventRepository, token string) *UserEventService {
+	return &UserEventService{
+		userEventRepo: userEventRepo,
 		token: token,
 	}
 }
 
-type UserIventCreateInput struct {
-	UserIventID    uuid.UUID
-	IventID        uuid.UUID
+type UserEventCreateInput struct {
+	UserEventID    uuid.UUID
+	EventID        uuid.UUID
 	NumberOfGuests int64
 }
 
-func (s *UserIventService) CreateUserIvent(ctx context.Context, initData string, input UserIventCreateInput) error {
+func (s *UserEventService) CreateUserEvent(ctx context.Context, initData string, input UserEventCreateInput) error {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
 		return err
@@ -44,19 +44,19 @@ func (s *UserIventService) CreateUserIvent(ctx context.Context, initData string,
 		return err
 	}
 
-	err = s.iventRepo.UpdateIvent(ctx, input.IventID, input.NumberOfGuests)
+	err = s.eventRepo.UpdateEvent(ctx, input.EventID, input.NumberOfGuests)
 	if err != nil {
 		return err
 	}
 
-	userIvent := &models.UserIvent{
-		ID: input.UserIventID,
+	userEvent := &models.UserEvent{
+		ID: input.UserEventID,
 		UserID: user.ID,
-		IventID: input.IventID,
+		EventID: input.EventID,
 		NumberOfGuests: input.NumberOfGuests,
 	}
 
-	err = s.userIventRepo.CreateUserIvent(ctx, userIvent)
+	err = s.userEventRepo.CreateUserEvent(ctx, userEvent)
 	if err != nil {
 		return err
 	}
@@ -64,24 +64,24 @@ func (s *UserIventService) CreateUserIvent(ctx context.Context, initData string,
 	return nil
 }
 
-func (s *UserIventService) GetUserIventInfo(ctx context.Context, initData string, id uuid.UUID) (*models.UserIvent, error) {
+func (s *UserEventService) GetUserEventInfo(ctx context.Context, initData string, id uuid.UUID) (*models.UserEvent, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
 		return nil, err
 	}
 
-	userIvent, err := s.userIventRepo.GetUserIventInfo(ctx, id)
+	userEvent, err := s.userEventRepo.GetUserEventInfo(ctx, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrUserIventNotFound
+			return nil, ErrUserEventNotFound
 		}
 		return nil, err
 	}
 	
-	return userIvent, nil 
+	return userEvent, nil 
 }
 
-func (s *UserIventService) GetUserIvents(ctx context.Context, initData string) ([]*models.UserIvent, error) {
+func (s *UserEventService) GetUserEvents(ctx context.Context, initData string) ([]*models.UserEvent, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
 		return nil, err
@@ -92,64 +92,64 @@ func (s *UserIventService) GetUserIvents(ctx context.Context, initData string) (
 		return nil, err
 	}
 
-	userIvents, err := s.userIventRepo.GetUserIvents(ctx, user.ID)
+	userEvents, err := s.userEventRepo.GetUserEvents(ctx, user.ID)
 	if err != nil {
 		return nil, err
 	}
 
-	return userIvents, nil
+	return userEvents, nil
 }
 
-func (s *UserIventService) UpdateUserIvent(ctx context.Context, initData string, id uuid.UUID, newGuestNumber int64) (*models.UserIvent, error) {
+func (s *UserEventService) UpdateUserEvent(ctx context.Context, initData string, id uuid.UUID, newGuestNumber int64) (*models.UserEvent, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
 		return nil, err
 	}
 
-	userIvent, err := s.userIventRepo.GetUserIventInfo(ctx, id)
+	userEvent, err := s.userEventRepo.GetUserEventInfo(ctx, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrUserIventNotFound
+			return nil, ErrUserEventNotFound
 		}
 		return nil, err
 	}
 
-	err = s.iventRepo.UpdateIvent(ctx, userIvent.ID, newGuestNumber-userIvent.NumberOfGuests)
+	err = s.eventRepo.UpdateEvent(ctx, userEvent.ID, newGuestNumber-userEvent.NumberOfGuests)
 	if err != nil {
 		return nil, err
 	}
 
-	userIvent, err = s.userIventRepo.UpdateUserIvent(ctx, id, newGuestNumber)
+	userEvent, err = s.userEventRepo.UpdateUserEvent(ctx, id, newGuestNumber)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrIventNotFound
+			return nil, ErrEventNotFound
 		}
 		return nil, err
 	}
 
-	return userIvent, nil
+	return userEvent, nil
 }
 
-func (s *UserIventService) DeleteUserIvent(ctx context.Context, initData string, id uuid.UUID) error {
+func (s *UserEventService) DeleteUserEvent(ctx context.Context, initData string, id uuid.UUID) error {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
 		return err
 	}
 
-	userIvent, err := s.userIventRepo.GetUserIventInfo(ctx, id)
+	userEvent, err := s.userEventRepo.GetUserEventInfo(ctx, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return ErrIventNotFound
+			return ErrEventNotFound
 		}
 		return err
 	}
 
-	err = s.iventRepo.UpdateIvent(ctx, userIvent.ID, -userIvent.NumberOfGuests)
+	err = s.eventRepo.UpdateEvent(ctx, userEvent.ID, -userEvent.NumberOfGuests)
 	if err != nil {
 		return err
 	}
 
-	err = s.userIventRepo.DeleteUserIvent(ctx, id)
+	err = s.userEventRepo.DeleteUserEvent(ctx, id)
 	if err != nil {
 		return err
 	}

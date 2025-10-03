@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS User_Ivents;
+DROP TABLE IF EXISTS User_Events;

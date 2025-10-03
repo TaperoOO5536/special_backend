@@ -23,13 +23,13 @@ const (
 	SpecialAppService_CreateUser_FullMethodName       = "/special_app_v1.SpecialAppService/CreateUser"
 	SpecialAppService_UpdateUser_FullMethodName       = "/special_app_v1.SpecialAppService/UpdateUser"
 	SpecialAppService_GetUser_FullMethodName          = "/special_app_v1.SpecialAppService/GetUser"
-	SpecialAppService_GetIventInfo_FullMethodName     = "/special_app_v1.SpecialAppService/GetIventInfo"
-	SpecialAppService_GetIvents_FullMethodName        = "/special_app_v1.SpecialAppService/GetIvents"
-	SpecialAppService_CreateUserIvent_FullMethodName  = "/special_app_v1.SpecialAppService/CreateUserIvent"
-	SpecialAppService_GetUserIventInfo_FullMethodName = "/special_app_v1.SpecialAppService/GetUserIventInfo"
-	SpecialAppService_GetUserIvents_FullMethodName    = "/special_app_v1.SpecialAppService/GetUserIvents"
-	SpecialAppService_UpdateUserIvent_FullMethodName  = "/special_app_v1.SpecialAppService/UpdateUserIvent"
-	SpecialAppService_DeleteUserIvent_FullMethodName  = "/special_app_v1.SpecialAppService/DeleteUserIvent"
+	SpecialAppService_GetEventInfo_FullMethodName     = "/special_app_v1.SpecialAppService/GetEventInfo"
+	SpecialAppService_GetEvents_FullMethodName        = "/special_app_v1.SpecialAppService/GetEvents"
+	SpecialAppService_CreateUserEvent_FullMethodName  = "/special_app_v1.SpecialAppService/CreateUserEvent"
+	SpecialAppService_GetUserEventInfo_FullMethodName = "/special_app_v1.SpecialAppService/GetUserEventInfo"
+	SpecialAppService_GetUserEvents_FullMethodName    = "/special_app_v1.SpecialAppService/GetUserEvents"
+	SpecialAppService_UpdateUserEvent_FullMethodName  = "/special_app_v1.SpecialAppService/UpdateUserEvent"
+	SpecialAppService_DeleteUserEvent_FullMethodName  = "/special_app_v1.SpecialAppService/DeleteUserEvent"
 	SpecialAppService_GetItemInfo_FullMethodName      = "/special_app_v1.SpecialAppService/GetItemInfo"
 	SpecialAppService_GetItems_FullMethodName         = "/special_app_v1.SpecialAppService/GetItems"
 	SpecialAppService_CreateOrder_FullMethodName      = "/special_app_v1.SpecialAppService/CreateOrder"
@@ -45,13 +45,13 @@ type SpecialAppServiceClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
-	GetIventInfo(ctx context.Context, in *GetIventInfoRequest, opts ...grpc.CallOption) (*GetIventInfoResponse, error)
-	GetIvents(ctx context.Context, in *GetIventsRequest, opts ...grpc.CallOption) (*GetIventsResponse, error)
-	CreateUserIvent(ctx context.Context, in *CreateUserIventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetUserIventInfo(ctx context.Context, in *GetUserIventInfoRequest, opts ...grpc.CallOption) (*GetUserIventInfoResponse, error)
-	GetUserIvents(ctx context.Context, in *GetUserIventsRequest, opts ...grpc.CallOption) (*GetUserIventsResponse, error)
-	UpdateUserIvent(ctx context.Context, in *UpdateUserIventRequest, opts ...grpc.CallOption) (*GetUserIventInfoResponse, error)
-	DeleteUserIvent(ctx context.Context, in *DeleteUserIventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetEventInfo(ctx context.Context, in *GetEventInfoRequest, opts ...grpc.CallOption) (*GetEventInfoResponse, error)
+	GetEvents(ctx context.Context, in *GetEventsRequest, opts ...grpc.CallOption) (*GetEventsResponse, error)
+	CreateUserEvent(ctx context.Context, in *CreateUserEventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetUserEventInfo(ctx context.Context, in *GetUserEventInfoRequest, opts ...grpc.CallOption) (*GetUserEventInfoResponse, error)
+	GetUserEvents(ctx context.Context, in *GetUserEventsRequest, opts ...grpc.CallOption) (*GetUserEventsResponse, error)
+	UpdateUserEvent(ctx context.Context, in *UpdateUserEventRequest, opts ...grpc.CallOption) (*GetUserEventInfoResponse, error)
+	DeleteUserEvent(ctx context.Context, in *DeleteUserEventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetItemInfo(ctx context.Context, in *GetItemInfoRequest, opts ...grpc.CallOption) (*GetItemInfoResponse, error)
 	GetItems(ctx context.Context, in *GetItemsRequest, opts ...grpc.CallOption) (*GetItemsResponse, error)
 	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -98,70 +98,70 @@ func (c *specialAppServiceClient) GetUser(ctx context.Context, in *GetUserReques
 	return out, nil
 }
 
-func (c *specialAppServiceClient) GetIventInfo(ctx context.Context, in *GetIventInfoRequest, opts ...grpc.CallOption) (*GetIventInfoResponse, error) {
+func (c *specialAppServiceClient) GetEventInfo(ctx context.Context, in *GetEventInfoRequest, opts ...grpc.CallOption) (*GetEventInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetIventInfoResponse)
-	err := c.cc.Invoke(ctx, SpecialAppService_GetIventInfo_FullMethodName, in, out, cOpts...)
+	out := new(GetEventInfoResponse)
+	err := c.cc.Invoke(ctx, SpecialAppService_GetEventInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *specialAppServiceClient) GetIvents(ctx context.Context, in *GetIventsRequest, opts ...grpc.CallOption) (*GetIventsResponse, error) {
+func (c *specialAppServiceClient) GetEvents(ctx context.Context, in *GetEventsRequest, opts ...grpc.CallOption) (*GetEventsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetIventsResponse)
-	err := c.cc.Invoke(ctx, SpecialAppService_GetIvents_FullMethodName, in, out, cOpts...)
+	out := new(GetEventsResponse)
+	err := c.cc.Invoke(ctx, SpecialAppService_GetEvents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *specialAppServiceClient) CreateUserIvent(ctx context.Context, in *CreateUserIventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *specialAppServiceClient) CreateUserEvent(ctx context.Context, in *CreateUserEventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, SpecialAppService_CreateUserIvent_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, SpecialAppService_CreateUserEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *specialAppServiceClient) GetUserIventInfo(ctx context.Context, in *GetUserIventInfoRequest, opts ...grpc.CallOption) (*GetUserIventInfoResponse, error) {
+func (c *specialAppServiceClient) GetUserEventInfo(ctx context.Context, in *GetUserEventInfoRequest, opts ...grpc.CallOption) (*GetUserEventInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserIventInfoResponse)
-	err := c.cc.Invoke(ctx, SpecialAppService_GetUserIventInfo_FullMethodName, in, out, cOpts...)
+	out := new(GetUserEventInfoResponse)
+	err := c.cc.Invoke(ctx, SpecialAppService_GetUserEventInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *specialAppServiceClient) GetUserIvents(ctx context.Context, in *GetUserIventsRequest, opts ...grpc.CallOption) (*GetUserIventsResponse, error) {
+func (c *specialAppServiceClient) GetUserEvents(ctx context.Context, in *GetUserEventsRequest, opts ...grpc.CallOption) (*GetUserEventsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserIventsResponse)
-	err := c.cc.Invoke(ctx, SpecialAppService_GetUserIvents_FullMethodName, in, out, cOpts...)
+	out := new(GetUserEventsResponse)
+	err := c.cc.Invoke(ctx, SpecialAppService_GetUserEvents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *specialAppServiceClient) UpdateUserIvent(ctx context.Context, in *UpdateUserIventRequest, opts ...grpc.CallOption) (*GetUserIventInfoResponse, error) {
+func (c *specialAppServiceClient) UpdateUserEvent(ctx context.Context, in *UpdateUserEventRequest, opts ...grpc.CallOption) (*GetUserEventInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserIventInfoResponse)
-	err := c.cc.Invoke(ctx, SpecialAppService_UpdateUserIvent_FullMethodName, in, out, cOpts...)
+	out := new(GetUserEventInfoResponse)
+	err := c.cc.Invoke(ctx, SpecialAppService_UpdateUserEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *specialAppServiceClient) DeleteUserIvent(ctx context.Context, in *DeleteUserIventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *specialAppServiceClient) DeleteUserEvent(ctx context.Context, in *DeleteUserEventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, SpecialAppService_DeleteUserIvent_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, SpecialAppService_DeleteUserEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -235,13 +235,13 @@ type SpecialAppServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*emptypb.Empty, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*GetUserInfoResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserInfoResponse, error)
-	GetIventInfo(context.Context, *GetIventInfoRequest) (*GetIventInfoResponse, error)
-	GetIvents(context.Context, *GetIventsRequest) (*GetIventsResponse, error)
-	CreateUserIvent(context.Context, *CreateUserIventRequest) (*emptypb.Empty, error)
-	GetUserIventInfo(context.Context, *GetUserIventInfoRequest) (*GetUserIventInfoResponse, error)
-	GetUserIvents(context.Context, *GetUserIventsRequest) (*GetUserIventsResponse, error)
-	UpdateUserIvent(context.Context, *UpdateUserIventRequest) (*GetUserIventInfoResponse, error)
-	DeleteUserIvent(context.Context, *DeleteUserIventRequest) (*emptypb.Empty, error)
+	GetEventInfo(context.Context, *GetEventInfoRequest) (*GetEventInfoResponse, error)
+	GetEvents(context.Context, *GetEventsRequest) (*GetEventsResponse, error)
+	CreateUserEvent(context.Context, *CreateUserEventRequest) (*emptypb.Empty, error)
+	GetUserEventInfo(context.Context, *GetUserEventInfoRequest) (*GetUserEventInfoResponse, error)
+	GetUserEvents(context.Context, *GetUserEventsRequest) (*GetUserEventsResponse, error)
+	UpdateUserEvent(context.Context, *UpdateUserEventRequest) (*GetUserEventInfoResponse, error)
+	DeleteUserEvent(context.Context, *DeleteUserEventRequest) (*emptypb.Empty, error)
 	GetItemInfo(context.Context, *GetItemInfoRequest) (*GetItemInfoResponse, error)
 	GetItems(context.Context, *GetItemsRequest) (*GetItemsResponse, error)
 	CreateOrder(context.Context, *CreateOrderRequest) (*emptypb.Empty, error)
@@ -267,26 +267,26 @@ func (UnimplementedSpecialAppServiceServer) UpdateUser(context.Context, *UpdateU
 func (UnimplementedSpecialAppServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) GetIventInfo(context.Context, *GetIventInfoRequest) (*GetIventInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetIventInfo not implemented")
+func (UnimplementedSpecialAppServiceServer) GetEventInfo(context.Context, *GetEventInfoRequest) (*GetEventInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEventInfo not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) GetIvents(context.Context, *GetIventsRequest) (*GetIventsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetIvents not implemented")
+func (UnimplementedSpecialAppServiceServer) GetEvents(context.Context, *GetEventsRequest) (*GetEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEvents not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) CreateUserIvent(context.Context, *CreateUserIventRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateUserIvent not implemented")
+func (UnimplementedSpecialAppServiceServer) CreateUserEvent(context.Context, *CreateUserEventRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUserEvent not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) GetUserIventInfo(context.Context, *GetUserIventInfoRequest) (*GetUserIventInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserIventInfo not implemented")
+func (UnimplementedSpecialAppServiceServer) GetUserEventInfo(context.Context, *GetUserEventInfoRequest) (*GetUserEventInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserEventInfo not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) GetUserIvents(context.Context, *GetUserIventsRequest) (*GetUserIventsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserIvents not implemented")
+func (UnimplementedSpecialAppServiceServer) GetUserEvents(context.Context, *GetUserEventsRequest) (*GetUserEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserEvents not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) UpdateUserIvent(context.Context, *UpdateUserIventRequest) (*GetUserIventInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserIvent not implemented")
+func (UnimplementedSpecialAppServiceServer) UpdateUserEvent(context.Context, *UpdateUserEventRequest) (*GetUserEventInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserEvent not implemented")
 }
-func (UnimplementedSpecialAppServiceServer) DeleteUserIvent(context.Context, *DeleteUserIventRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserIvent not implemented")
+func (UnimplementedSpecialAppServiceServer) DeleteUserEvent(context.Context, *DeleteUserEventRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserEvent not implemented")
 }
 func (UnimplementedSpecialAppServiceServer) GetItemInfo(context.Context, *GetItemInfoRequest) (*GetItemInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetItemInfo not implemented")
@@ -381,128 +381,128 @@ func _SpecialAppService_GetUser_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpecialAppService_GetIventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIventInfoRequest)
+func _SpecialAppService_GetEventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEventInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SpecialAppServiceServer).GetIventInfo(ctx, in)
+		return srv.(SpecialAppServiceServer).GetEventInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SpecialAppService_GetIventInfo_FullMethodName,
+		FullMethod: SpecialAppService_GetEventInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpecialAppServiceServer).GetIventInfo(ctx, req.(*GetIventInfoRequest))
+		return srv.(SpecialAppServiceServer).GetEventInfo(ctx, req.(*GetEventInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpecialAppService_GetIvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIventsRequest)
+func _SpecialAppService_GetEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEventsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SpecialAppServiceServer).GetIvents(ctx, in)
+		return srv.(SpecialAppServiceServer).GetEvents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SpecialAppService_GetIvents_FullMethodName,
+		FullMethod: SpecialAppService_GetEvents_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpecialAppServiceServer).GetIvents(ctx, req.(*GetIventsRequest))
+		return srv.(SpecialAppServiceServer).GetEvents(ctx, req.(*GetEventsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpecialAppService_CreateUserIvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateUserIventRequest)
+func _SpecialAppService_CreateUserEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserEventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SpecialAppServiceServer).CreateUserIvent(ctx, in)
+		return srv.(SpecialAppServiceServer).CreateUserEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SpecialAppService_CreateUserIvent_FullMethodName,
+		FullMethod: SpecialAppService_CreateUserEvent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpecialAppServiceServer).CreateUserIvent(ctx, req.(*CreateUserIventRequest))
+		return srv.(SpecialAppServiceServer).CreateUserEvent(ctx, req.(*CreateUserEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpecialAppService_GetUserIventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserIventInfoRequest)
+func _SpecialAppService_GetUserEventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserEventInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SpecialAppServiceServer).GetUserIventInfo(ctx, in)
+		return srv.(SpecialAppServiceServer).GetUserEventInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SpecialAppService_GetUserIventInfo_FullMethodName,
+		FullMethod: SpecialAppService_GetUserEventInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpecialAppServiceServer).GetUserIventInfo(ctx, req.(*GetUserIventInfoRequest))
+		return srv.(SpecialAppServiceServer).GetUserEventInfo(ctx, req.(*GetUserEventInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpecialAppService_GetUserIvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserIventsRequest)
+func _SpecialAppService_GetUserEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserEventsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SpecialAppServiceServer).GetUserIvents(ctx, in)
+		return srv.(SpecialAppServiceServer).GetUserEvents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SpecialAppService_GetUserIvents_FullMethodName,
+		FullMethod: SpecialAppService_GetUserEvents_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpecialAppServiceServer).GetUserIvents(ctx, req.(*GetUserIventsRequest))
+		return srv.(SpecialAppServiceServer).GetUserEvents(ctx, req.(*GetUserEventsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpecialAppService_UpdateUserIvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateUserIventRequest)
+func _SpecialAppService_UpdateUserEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserEventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SpecialAppServiceServer).UpdateUserIvent(ctx, in)
+		return srv.(SpecialAppServiceServer).UpdateUserEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SpecialAppService_UpdateUserIvent_FullMethodName,
+		FullMethod: SpecialAppService_UpdateUserEvent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpecialAppServiceServer).UpdateUserIvent(ctx, req.(*UpdateUserIventRequest))
+		return srv.(SpecialAppServiceServer).UpdateUserEvent(ctx, req.(*UpdateUserEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpecialAppService_DeleteUserIvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteUserIventRequest)
+func _SpecialAppService_DeleteUserEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserEventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SpecialAppServiceServer).DeleteUserIvent(ctx, in)
+		return srv.(SpecialAppServiceServer).DeleteUserEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SpecialAppService_DeleteUserIvent_FullMethodName,
+		FullMethod: SpecialAppService_DeleteUserEvent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpecialAppServiceServer).DeleteUserIvent(ctx, req.(*DeleteUserIventRequest))
+		return srv.(SpecialAppServiceServer).DeleteUserEvent(ctx, req.(*DeleteUserEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -635,32 +635,32 @@ var SpecialAppService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SpecialAppService_GetUser_Handler,
 		},
 		{
-			MethodName: "GetIventInfo",
-			Handler:    _SpecialAppService_GetIventInfo_Handler,
+			MethodName: "GetEventInfo",
+			Handler:    _SpecialAppService_GetEventInfo_Handler,
 		},
 		{
-			MethodName: "GetIvents",
-			Handler:    _SpecialAppService_GetIvents_Handler,
+			MethodName: "GetEvents",
+			Handler:    _SpecialAppService_GetEvents_Handler,
 		},
 		{
-			MethodName: "CreateUserIvent",
-			Handler:    _SpecialAppService_CreateUserIvent_Handler,
+			MethodName: "CreateUserEvent",
+			Handler:    _SpecialAppService_CreateUserEvent_Handler,
 		},
 		{
-			MethodName: "GetUserIventInfo",
-			Handler:    _SpecialAppService_GetUserIventInfo_Handler,
+			MethodName: "GetUserEventInfo",
+			Handler:    _SpecialAppService_GetUserEventInfo_Handler,
 		},
 		{
-			MethodName: "GetUserIvents",
-			Handler:    _SpecialAppService_GetUserIvents_Handler,
+			MethodName: "GetUserEvents",
+			Handler:    _SpecialAppService_GetUserEvents_Handler,
 		},
 		{
-			MethodName: "UpdateUserIvent",
-			Handler:    _SpecialAppService_UpdateUserIvent_Handler,
+			MethodName: "UpdateUserEvent",
+			Handler:    _SpecialAppService_UpdateUserEvent_Handler,
 		},
 		{
-			MethodName: "DeleteUserIvent",
-			Handler:    _SpecialAppService_DeleteUserIvent_Handler,
+			MethodName: "DeleteUserEvent",
+			Handler:    _SpecialAppService_DeleteUserEvent_Handler,
 		},
 		{
 			MethodName: "GetItemInfo",

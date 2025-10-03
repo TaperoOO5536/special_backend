@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS Ivent_Pictures;
+DROP TABLE IF EXISTS Event_Pictures;

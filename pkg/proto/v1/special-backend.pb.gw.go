@@ -104,9 +104,9 @@ func local_request_SpecialAppService_GetUser_0(ctx context.Context, marshaler ru
 	return msg, metadata, err
 }
 
-func request_SpecialAppService_GetIventInfo_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_SpecialAppService_GetEventInfo_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetIventInfoRequest
+		protoReq GetEventInfoRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -121,13 +121,13 @@ func request_SpecialAppService_GetIventInfo_0(ctx context.Context, marshaler run
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := client.GetIventInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetEventInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_SpecialAppService_GetIventInfo_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_SpecialAppService_GetEventInfo_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetIventInfoRequest
+		protoReq GetEventInfoRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -139,34 +139,34 @@ func local_request_SpecialAppService_GetIventInfo_0(ctx context.Context, marshal
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := server.GetIventInfo(ctx, &protoReq)
+	msg, err := server.GetEventInfo(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_SpecialAppService_GetIvents_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_SpecialAppService_GetEvents_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetIventsRequest
+		protoReq GetEventsRequest
 		metadata runtime.ServerMetadata
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	msg, err := client.GetIvents(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetEvents(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_SpecialAppService_GetIvents_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_SpecialAppService_GetEvents_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetIventsRequest
+		protoReq GetEventsRequest
 		metadata runtime.ServerMetadata
 	)
-	msg, err := server.GetIvents(ctx, &protoReq)
+	msg, err := server.GetEvents(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_SpecialAppService_CreateUserIvent_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_SpecialAppService_CreateUserEvent_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq CreateUserIventRequest
+		protoReq CreateUserEventRequest
 		metadata runtime.ServerMetadata
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
@@ -175,25 +175,25 @@ func request_SpecialAppService_CreateUserIvent_0(ctx context.Context, marshaler 
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	msg, err := client.CreateUserIvent(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.CreateUserEvent(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_SpecialAppService_CreateUserIvent_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_SpecialAppService_CreateUserEvent_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq CreateUserIventRequest
+		protoReq CreateUserEventRequest
 		metadata runtime.ServerMetadata
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	msg, err := server.CreateUserIvent(ctx, &protoReq)
+	msg, err := server.CreateUserEvent(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_SpecialAppService_GetUserIventInfo_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_SpecialAppService_GetUserEventInfo_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetUserIventInfoRequest
+		protoReq GetUserEventInfoRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -208,13 +208,13 @@ func request_SpecialAppService_GetUserIventInfo_0(ctx context.Context, marshaler
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := client.GetUserIventInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetUserEventInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_SpecialAppService_GetUserIventInfo_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_SpecialAppService_GetUserEventInfo_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetUserIventInfoRequest
+		protoReq GetUserEventInfoRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -226,64 +226,43 @@ func local_request_SpecialAppService_GetUserIventInfo_0(ctx context.Context, mar
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := server.GetUserIventInfo(ctx, &protoReq)
+	msg, err := server.GetUserEventInfo(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_SpecialAppService_GetUserIvents_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_SpecialAppService_GetUserEvents_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetUserIventsRequest
+		protoReq GetUserEventsRequest
 		metadata runtime.ServerMetadata
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	msg, err := client.GetUserIvents(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetUserEvents(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_SpecialAppService_GetUserIvents_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_SpecialAppService_GetUserEvents_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetUserIventsRequest
+		protoReq GetUserEventsRequest
 		metadata runtime.ServerMetadata
 	)
-	msg, err := server.GetUserIvents(ctx, &protoReq)
+	msg, err := server.GetUserEvents(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_SpecialAppService_UpdateUserIvent_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_SpecialAppService_UpdateUserEvent_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq UpdateUserIventRequest
-		metadata runtime.ServerMetadata
-		err      error
-	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if req.Body != nil {
-		_, _ = io.Copy(io.Discard, req.Body)
-	}
-	val, ok := pathParams["id"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
-	}
-	protoReq.Id, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
-	}
-	msg, err := client.UpdateUserIvent(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-}
-
-func local_request_SpecialAppService_UpdateUserIvent_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var (
-		protoReq UpdateUserIventRequest
+		protoReq UpdateUserEventRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -292,13 +271,34 @@ func local_request_SpecialAppService_UpdateUserIvent_0(ctx context.Context, mars
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := server.UpdateUserIvent(ctx, &protoReq)
+	msg, err := client.UpdateUserEvent(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func request_SpecialAppService_DeleteUserIvent_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_SpecialAppService_UpdateUserEvent_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq DeleteUserIventRequest
+		protoReq UpdateUserEventRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	val, ok := pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+	msg, err := server.UpdateUserEvent(ctx, &protoReq)
+	return msg, metadata, err
+}
+
+func request_SpecialAppService_DeleteUserEvent_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeleteUserEventRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -313,13 +313,13 @@ func request_SpecialAppService_DeleteUserIvent_0(ctx context.Context, marshaler 
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := client.DeleteUserIvent(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.DeleteUserEvent(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_SpecialAppService_DeleteUserIvent_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_SpecialAppService_DeleteUserEvent_0(ctx context.Context, marshaler runtime.Marshaler, server SpecialAppServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq DeleteUserIventRequest
+		protoReq DeleteUserEventRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -331,7 +331,7 @@ func local_request_SpecialAppService_DeleteUserIvent_0(ctx context.Context, mars
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := server.DeleteUserIvent(ctx, &protoReq)
+	msg, err := server.DeleteUserEvent(ctx, &protoReq)
 	return msg, metadata, err
 }
 
@@ -593,145 +593,145 @@ func RegisterSpecialAppServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		}
 		forward_SpecialAppService_GetUser_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetIventInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetEventInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetIventInfo", runtime.WithHTTPPathPattern("/v1/ivents/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetEventInfo", runtime.WithHTTPPathPattern("/v1/events/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SpecialAppService_GetIventInfo_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_SpecialAppService_GetEventInfo_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_GetIventInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_GetEventInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetIvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetEvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetIvents", runtime.WithHTTPPathPattern("/v1/ivents"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetEvents", runtime.WithHTTPPathPattern("/v1/events"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SpecialAppService_GetIvents_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_SpecialAppService_GetEvents_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_GetIvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_GetEvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_SpecialAppService_CreateUserIvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_SpecialAppService_CreateUserEvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/CreateUserIvent", runtime.WithHTTPPathPattern("/v1/user_ivents"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/CreateUserEvent", runtime.WithHTTPPathPattern("/v1/user_events"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SpecialAppService_CreateUserIvent_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_SpecialAppService_CreateUserEvent_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_CreateUserIvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_CreateUserEvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetUserIventInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetUserEventInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetUserIventInfo", runtime.WithHTTPPathPattern("/v1/user_ivents/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetUserEventInfo", runtime.WithHTTPPathPattern("/v1/user_events/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SpecialAppService_GetUserIventInfo_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_SpecialAppService_GetUserEventInfo_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_GetUserIventInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_GetUserEventInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetUserIvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetUserEvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetUserIvents", runtime.WithHTTPPathPattern("/v1/user_ivents"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetUserEvents", runtime.WithHTTPPathPattern("/v1/user_events"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SpecialAppService_GetUserIvents_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_SpecialAppService_GetUserEvents_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_GetUserIvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_GetUserEvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPatch, pattern_SpecialAppService_UpdateUserIvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPatch, pattern_SpecialAppService_UpdateUserEvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/UpdateUserIvent", runtime.WithHTTPPathPattern("/v1/user_ivents/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/UpdateUserEvent", runtime.WithHTTPPathPattern("/v1/user_events/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SpecialAppService_UpdateUserIvent_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_SpecialAppService_UpdateUserEvent_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_UpdateUserIvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_UpdateUserEvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodDelete, pattern_SpecialAppService_DeleteUserIvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodDelete, pattern_SpecialAppService_DeleteUserEvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/DeleteUserIvent", runtime.WithHTTPPathPattern("/v1/user_ivents/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/special_app_v1.SpecialAppService/DeleteUserEvent", runtime.WithHTTPPathPattern("/v1/user_events/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SpecialAppService_DeleteUserIvent_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_SpecialAppService_DeleteUserEvent_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_DeleteUserIvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_DeleteUserEvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetItemInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -944,124 +944,124 @@ func RegisterSpecialAppServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		}
 		forward_SpecialAppService_GetUser_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetIventInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetEventInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetIventInfo", runtime.WithHTTPPathPattern("/v1/ivents/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetEventInfo", runtime.WithHTTPPathPattern("/v1/events/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SpecialAppService_GetIventInfo_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_SpecialAppService_GetEventInfo_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_GetIventInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_GetEventInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetIvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetEvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetIvents", runtime.WithHTTPPathPattern("/v1/ivents"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetEvents", runtime.WithHTTPPathPattern("/v1/events"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SpecialAppService_GetIvents_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_SpecialAppService_GetEvents_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_GetIvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_GetEvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_SpecialAppService_CreateUserIvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_SpecialAppService_CreateUserEvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/CreateUserIvent", runtime.WithHTTPPathPattern("/v1/user_ivents"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/CreateUserEvent", runtime.WithHTTPPathPattern("/v1/user_events"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SpecialAppService_CreateUserIvent_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_SpecialAppService_CreateUserEvent_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_CreateUserIvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_CreateUserEvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetUserIventInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetUserEventInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetUserIventInfo", runtime.WithHTTPPathPattern("/v1/user_ivents/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetUserEventInfo", runtime.WithHTTPPathPattern("/v1/user_events/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SpecialAppService_GetUserIventInfo_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_SpecialAppService_GetUserEventInfo_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_GetUserIventInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_GetUserEventInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetUserIvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetUserEvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetUserIvents", runtime.WithHTTPPathPattern("/v1/user_ivents"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/GetUserEvents", runtime.WithHTTPPathPattern("/v1/user_events"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SpecialAppService_GetUserIvents_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_SpecialAppService_GetUserEvents_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_GetUserIvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_GetUserEvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPatch, pattern_SpecialAppService_UpdateUserIvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPatch, pattern_SpecialAppService_UpdateUserEvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/UpdateUserIvent", runtime.WithHTTPPathPattern("/v1/user_ivents/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/UpdateUserEvent", runtime.WithHTTPPathPattern("/v1/user_events/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SpecialAppService_UpdateUserIvent_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_SpecialAppService_UpdateUserEvent_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_UpdateUserIvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_UpdateUserEvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodDelete, pattern_SpecialAppService_DeleteUserIvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodDelete, pattern_SpecialAppService_DeleteUserEvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/DeleteUserIvent", runtime.WithHTTPPathPattern("/v1/user_ivents/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/special_app_v1.SpecialAppService/DeleteUserEvent", runtime.WithHTTPPathPattern("/v1/user_events/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SpecialAppService_DeleteUserIvent_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_SpecialAppService_DeleteUserEvent_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_SpecialAppService_DeleteUserIvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SpecialAppService_DeleteUserEvent_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodGet, pattern_SpecialAppService_GetItemInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -1172,13 +1172,13 @@ var (
 	pattern_SpecialAppService_CreateUser_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "users"}, ""))
 	pattern_SpecialAppService_UpdateUser_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "users"}, ""))
 	pattern_SpecialAppService_GetUser_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "users"}, ""))
-	pattern_SpecialAppService_GetIventInfo_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "ivents", "id"}, ""))
-	pattern_SpecialAppService_GetIvents_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "ivents"}, ""))
-	pattern_SpecialAppService_CreateUserIvent_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "user_ivents"}, ""))
-	pattern_SpecialAppService_GetUserIventInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "user_ivents", "id"}, ""))
-	pattern_SpecialAppService_GetUserIvents_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "user_ivents"}, ""))
-	pattern_SpecialAppService_UpdateUserIvent_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "user_ivents", "id"}, ""))
-	pattern_SpecialAppService_DeleteUserIvent_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "user_ivents", "id"}, ""))
+	pattern_SpecialAppService_GetEventInfo_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "events", "id"}, ""))
+	pattern_SpecialAppService_GetEvents_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "events"}, ""))
+	pattern_SpecialAppService_CreateUserEvent_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "user_events"}, ""))
+	pattern_SpecialAppService_GetUserEventInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "user_events", "id"}, ""))
+	pattern_SpecialAppService_GetUserEvents_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "user_events"}, ""))
+	pattern_SpecialAppService_UpdateUserEvent_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "user_events", "id"}, ""))
+	pattern_SpecialAppService_DeleteUserEvent_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "user_events", "id"}, ""))
 	pattern_SpecialAppService_GetItemInfo_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "items", "id"}, ""))
 	pattern_SpecialAppService_GetItems_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "items"}, ""))
 	pattern_SpecialAppService_CreateOrder_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "orders"}, ""))
@@ -1191,13 +1191,13 @@ var (
 	forward_SpecialAppService_CreateUser_0       = runtime.ForwardResponseMessage
 	forward_SpecialAppService_UpdateUser_0       = runtime.ForwardResponseMessage
 	forward_SpecialAppService_GetUser_0          = runtime.ForwardResponseMessage
-	forward_SpecialAppService_GetIventInfo_0     = runtime.ForwardResponseMessage
-	forward_SpecialAppService_GetIvents_0        = runtime.ForwardResponseMessage
-	forward_SpecialAppService_CreateUserIvent_0  = runtime.ForwardResponseMessage
-	forward_SpecialAppService_GetUserIventInfo_0 = runtime.ForwardResponseMessage
-	forward_SpecialAppService_GetUserIvents_0    = runtime.ForwardResponseMessage
-	forward_SpecialAppService_UpdateUserIvent_0  = runtime.ForwardResponseMessage
-	forward_SpecialAppService_DeleteUserIvent_0  = runtime.ForwardResponseMessage
+	forward_SpecialAppService_GetEventInfo_0     = runtime.ForwardResponseMessage
+	forward_SpecialAppService_GetEvents_0        = runtime.ForwardResponseMessage
+	forward_SpecialAppService_CreateUserEvent_0  = runtime.ForwardResponseMessage
+	forward_SpecialAppService_GetUserEventInfo_0 = runtime.ForwardResponseMessage
+	forward_SpecialAppService_GetUserEvents_0    = runtime.ForwardResponseMessage
+	forward_SpecialAppService_UpdateUserEvent_0  = runtime.ForwardResponseMessage
+	forward_SpecialAppService_DeleteUserEvent_0  = runtime.ForwardResponseMessage
 	forward_SpecialAppService_GetItemInfo_0      = runtime.ForwardResponseMessage
 	forward_SpecialAppService_GetItems_0         = runtime.ForwardResponseMessage
 	forward_SpecialAppService_CreateOrder_0      = runtime.ForwardResponseMessage

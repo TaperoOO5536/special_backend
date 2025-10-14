@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 
+	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/service"
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
 	"github.com/google/uuid"
@@ -63,23 +64,42 @@ func (h *EventServiceHandler) GetEventInfo(ctx context.Context, req *pb.GetEvent
 }
 
 func (h *EventServiceHandler) GetEvents(ctx context.Context, req *pb.GetEventsRequest) (*pb.GetEventsResponse, error) {
-	events, err := h.eventService.GetEvents(ctx)
+	pagination := models.Pagination{}	
+
+	if req.Page == 0 {
+		pagination.Page = 1
+	} else {
+		pagination.Page = int(req.Page)
+	}
+	if req.PerPage == 0 {
+		pagination.PerPage = 1
+	} else {
+		pagination.PerPage = int(req.PerPage)
+	}
+
+	paginatedEvents, err := h.eventService.GetEvents(ctx, pagination)
 	if err != nil {
 		err := status.Error(codes.Internal, err.Error())
 		return nil, err
 	}
 
 	response := &pb.GetEventsResponse{
-		Events: make([]*pb.EventInfoForList, 0, len(events)),
+		Events:  make([]*pb.EventInfoForList, 0, len(paginatedEvents.Events)),
+		Total:   paginatedEvents.TotalCount,
+		Page:    int32(paginatedEvents.Page),
+		PerPage: int32(paginatedEvents.PerPage),
 	}
 	
-	for _, event := range events {
+	for _, event := range paginatedEvents.Events {
 		pbEvent := &pb.EventInfoForList{
-			Id:      event.ID.String(),
-			Title:   event.Title,
-			Price:   event.Price,
-			Picture: &pb.PictureInfo{
-			Picture: event.LittlePicture,
+			Id:            event.ID.String(),
+			Title:         event.Title,
+			Datetime:      timestamppb.New(event.DateTime),
+			Price:         event.Price,
+			TotalSeats:    event.TotalSeats,
+			OccupiedSeats: event.OccupiedSeats,
+			Picture:       &pb.PictureInfo{
+			Picture:  event.LittlePicture,
 			MimeType: event.MimeType,
 		},
 		}

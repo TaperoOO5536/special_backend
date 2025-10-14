@@ -83,7 +83,7 @@ func (s *OrderService) GetOrderInfo(ctx context.Context, initData string, id uui
 	return order, nil
 }
 
-func (s *OrderService) GetOrders(ctx context.Context, initData string) ([]*models.Order, error) {
+func (s *OrderService) GetOrders(ctx context.Context, initData string, pagination models.Pagination) (*models.PaginatedOrders, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
 		return nil, err
@@ -94,7 +94,7 @@ func (s *OrderService) GetOrders(ctx context.Context, initData string) ([]*model
 		return nil, err
 	}
 
-	orders, err := s.orderRepo.GetOrders(ctx, user.ID)
+	orders, err := s.orderRepo.GetOrders(ctx, user.ID, pagination)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, ErrEventNotFound

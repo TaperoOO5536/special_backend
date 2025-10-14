@@ -11,7 +11,7 @@ import (
 type UserEventRepository interface {
 	CreateUserEvent(ctx context.Context, userEvent *models.UserEvent) error
 	GetUserEventInfo(ctx context.Context, id uuid.UUID) (*models.UserEvent, error)
-	GetUserEvents(ctx context.Context, userID string) ([]*models.UserEvent, error)
+	GetUserEvents(ctx context.Context, userID string, pagination models.Pagination) (*models.PaginatedUserEvents, error)
 	UpdateUserEvent(ctx context.Context, id uuid.UUID, newGuestNumber int64) (*models.UserEvent, error)
 	DeleteUserEvent(ctx context.Context, id uuid.UUID) error
 }
@@ -41,15 +41,28 @@ func (r *userEventRepository) GetUserEventInfo(ctx context.Context, id uuid.UUID
 	return userEvent, nil
 }
 
-func (r *userEventRepository) GetUserEvents(ctx context.Context, userID string) ([]*models.UserEvent, error) {
-	var userEvents []*models.UserEvent
+func (r *userEventRepository) GetUserEvents(ctx context.Context, userID string, pagination models.Pagination) (*models.PaginatedUserEvents, error) {
+	var userEvents []models.UserEvent
+	var total int64
+
+	if err := r.db.Model(&models.UserEvent{}).Count(&total).Error; err != nil {
+    return nil, err
+  }
+
+	offset := (pagination.Page - 1) * pagination.PerPage
+	
 	if err := r.db.Preload("Event", func(db *gorm.DB) *gorm.DB {
 		return db.Select("id_event", "event_title", "event_datetime", "little_picture", "mime_type")
-	}).Where("user_id = ?", userID).Find(&userEvents).Error; err != nil {
+	}).Where("user_id = ?", userID).Limit(pagination.PerPage).Offset(offset).Find(&userEvents).Error; err != nil {
 		return nil, err
 	}
 
-	return userEvents, nil
+	return &models.PaginatedUserEvents{
+		UserEvents: userEvents,
+		TotalCount: total,
+		Page:       pagination.Page,
+		PerPage:    pagination.PerPage,
+	}, nil
 }
 
 func (r *userEventRepository) UpdateUserEvent(ctx context.Context, id uuid.UUID, newGuestNumber int64) (*models.UserEvent, error) {

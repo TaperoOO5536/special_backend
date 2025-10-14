@@ -33,6 +33,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "tags": [
           "SpecialAppService"
         ]
@@ -85,6 +101,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "tags": [
           "SpecialAppService"
         ]
@@ -137,6 +169,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "tags": [
           "SpecialAppService"
         ]
@@ -256,6 +304,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "tags": [
           "SpecialAppService"
         ]
@@ -618,6 +682,18 @@
             "type": "object",
             "$ref": "#/definitions/special_app_v1EventInfoForList"
           }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -655,6 +731,18 @@
             "type": "object",
             "$ref": "#/definitions/special_app_v1ItemInfoForList"
           }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -700,6 +788,18 @@
             "type": "object",
             "$ref": "#/definitions/special_app_v1OrderInfoForList"
           }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -737,6 +837,18 @@
             "type": "object",
             "$ref": "#/definitions/special_app_v1UserEventInfoForList"
           }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

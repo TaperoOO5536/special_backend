@@ -306,6 +306,8 @@ func (x *GetEventInfoRequest) GetId() string {
 
 type GetEventsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PerPage       int32                  `protobuf:"varint,2,opt,name=per_page,json=perPage,proto3" json:"per_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -338,6 +340,20 @@ func (x *GetEventsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetEventsRequest.ProtoReflect.Descriptor instead.
 func (*GetEventsRequest) Descriptor() ([]byte, []int) {
 	return file_special_backend_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetEventsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetEventsRequest) GetPerPage() int32 {
+	if x != nil {
+		return x.PerPage
+	}
+	return 0
 }
 
 type GetEventInfoResponse struct {
@@ -535,6 +551,9 @@ func (x *EventInfoForList) GetPicture() *PictureInfo {
 type GetEventsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Events        []*EventInfoForList    `protobuf:"bytes,1,rep,name=events,proto3" json:"events,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PerPage       int32                  `protobuf:"varint,4,opt,name=per_page,json=perPage,proto3" json:"per_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -574,6 +593,27 @@ func (x *GetEventsResponse) GetEvents() []*EventInfoForList {
 		return x.Events
 	}
 	return nil
+}
+
+func (x *GetEventsResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *GetEventsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetEventsResponse) GetPerPage() int32 {
+	if x != nil {
+		return x.PerPage
+	}
+	return 0
 }
 
 type CreateUserEventRequest struct {
@@ -674,6 +714,8 @@ func (x *GetUserEventInfoRequest) GetId() string {
 
 type GetUserEventsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PerPage       int32                  `protobuf:"varint,2,opt,name=per_page,json=perPage,proto3" json:"per_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -706,6 +748,20 @@ func (x *GetUserEventsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetUserEventsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserEventsRequest) Descriptor() ([]byte, []int) {
 	return file_special_backend_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *GetUserEventsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetUserEventsRequest) GetPerPage() int32 {
+	if x != nil {
+		return x.PerPage
+	}
+	return 0
 }
 
 type UpdateUserEventRequest struct {
@@ -966,7 +1022,10 @@ func (x *UserEventInfoForList) GetPicture() *PictureInfo {
 
 type GetUserEventsResponse struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
-	UserEvents    []*UserEventInfoForList `protobuf:"bytes,2,rep,name=user_events,json=userEvents,proto3" json:"user_events,omitempty"`
+	UserEvents    []*UserEventInfoForList `protobuf:"bytes,1,rep,name=user_events,json=userEvents,proto3" json:"user_events,omitempty"`
+	Total         int64                   `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                   `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PerPage       int32                   `protobuf:"varint,4,opt,name=per_page,json=perPage,proto3" json:"per_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1006,6 +1065,27 @@ func (x *GetUserEventsResponse) GetUserEvents() []*UserEventInfoForList {
 		return x.UserEvents
 	}
 	return nil
+}
+
+func (x *GetUserEventsResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *GetUserEventsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetUserEventsResponse) GetPerPage() int32 {
+	if x != nil {
+		return x.PerPage
+	}
+	return 0
 }
 
 type GetItemInfoRequest struct {
@@ -1054,6 +1134,8 @@ func (x *GetItemInfoRequest) GetId() string {
 
 type GetItemsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PerPage       int32                  `protobuf:"varint,2,opt,name=per_page,json=perPage,proto3" json:"per_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1086,6 +1168,20 @@ func (x *GetItemsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetItemsRequest.ProtoReflect.Descriptor instead.
 func (*GetItemsRequest) Descriptor() ([]byte, []int) {
 	return file_special_backend_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetItemsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetItemsRequest) GetPerPage() int32 {
+	if x != nil {
+		return x.PerPage
+	}
+	return 0
 }
 
 type GetItemInfoResponse struct {
@@ -1235,6 +1331,9 @@ func (x *ItemInfoForList) GetPicture() *PictureInfo {
 type GetItemsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Items         []*ItemInfoForList     `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PerPage       int32                  `protobuf:"varint,4,opt,name=per_page,json=perPage,proto3" json:"per_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1274,6 +1373,27 @@ func (x *GetItemsResponse) GetItems() []*ItemInfoForList {
 		return x.Items
 	}
 	return nil
+}
+
+func (x *GetItemsResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *GetItemsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetItemsResponse) GetPerPage() int32 {
+	if x != nil {
+		return x.PerPage
+	}
+	return 0
 }
 
 type OrderItemInfoForCreatng struct {
@@ -1442,6 +1562,8 @@ func (x *GetOrderInfoRequest) GetId() string {
 
 type GetOrdersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PerPage       int32                  `protobuf:"varint,2,opt,name=per_page,json=perPage,proto3" json:"per_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1474,6 +1596,20 @@ func (x *GetOrdersRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetOrdersRequest.ProtoReflect.Descriptor instead.
 func (*GetOrdersRequest) Descriptor() ([]byte, []int) {
 	return file_special_backend_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetOrdersRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetOrdersRequest) GetPerPage() int32 {
+	if x != nil {
+		return x.PerPage
+	}
+	return 0
 }
 
 type UpdateOrderRequest struct {
@@ -1775,6 +1911,9 @@ func (x *OrderInfoForList) GetOrderAmount() int64 {
 type GetOrdersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Orders        []*OrderInfoForList    `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PerPage       int32                  `protobuf:"varint,4,opt,name=per_page,json=perPage,proto3" json:"per_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1816,6 +1955,27 @@ func (x *GetOrdersResponse) GetOrders() []*OrderInfoForList {
 	return nil
 }
 
+func (x *GetOrdersResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *GetOrdersResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetOrdersResponse) GetPerPage() int32 {
+	if x != nil {
+		return x.PerPage
+	}
+	return 0
+}
+
 var File_special_backend_proto protoreflect.FileDescriptor
 
 const file_special_backend_proto_rawDesc = "" +
@@ -1835,8 +1995,10 @@ const file_special_backend_proto_rawDesc = "" +
 	"\bnickname\x18\x03 \x01(\tR\bnickname\x12!\n" +
 	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"%\n" +
 	"\x13GetEventInfoRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x12\n" +
-	"\x10GetEventsRequest\"\xad\x02\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"A\n" +
+	"\x10GetEventsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x19\n" +
+	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\xad\x02\n" +
 	"\x14GetEventInfoResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
@@ -1855,15 +2017,20 @@ const file_special_backend_proto_rawDesc = "" +
 	"\vtotal_seats\x18\x05 \x01(\x03R\n" +
 	"totalSeats\x12%\n" +
 	"\x0eoccupied_seats\x18\x06 \x01(\x03R\roccupiedSeats\x125\n" +
-	"\apicture\x18\a \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"M\n" +
+	"\apicture\x18\a \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\x92\x01\n" +
 	"\x11GetEventsResponse\x128\n" +
-	"\x06events\x18\x01 \x03(\v2 .special_app_v1.EventInfoForListR\x06events\"]\n" +
+	"\x06events\x18\x01 \x03(\v2 .special_app_v1.EventInfoForListR\x06events\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x19\n" +
+	"\bper_page\x18\x04 \x01(\x05R\aperPage\"]\n" +
 	"\x16CreateUserEventRequest\x12\x19\n" +
 	"\bevent_id\x18\x01 \x01(\tR\aeventId\x12(\n" +
 	"\x10number_of_guests\x18\x02 \x01(\x03R\x0enumberOfGuests\")\n" +
 	"\x17GetUserEventInfoRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x16\n" +
-	"\x14GetUserEventsRequest\"R\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"E\n" +
+	"\x14GetUserEventsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x19\n" +
+	"\bper_page\x18\x02 \x01(\x05R\aperPage\"R\n" +
 	"\x16UpdateUserEventRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12(\n" +
 	"\x10number_of_guests\x18\x02 \x01(\x03R\x0enumberOfGuests\"(\n" +
@@ -1881,13 +2048,18 @@ const file_special_backend_proto_rawDesc = "" +
 	"\bevent_id\x18\x02 \x01(\tR\aeventId\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x126\n" +
 	"\bdatetime\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x125\n" +
-	"\apicture\x18\x05 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"^\n" +
+	"\apicture\x18\x05 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\xa3\x01\n" +
 	"\x15GetUserEventsResponse\x12E\n" +
-	"\vuser_events\x18\x02 \x03(\v2$.special_app_v1.UserEventInfoForListR\n" +
-	"userEvents\"$\n" +
+	"\vuser_events\x18\x01 \x03(\v2$.special_app_v1.UserEventInfoForListR\n" +
+	"userEvents\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x19\n" +
+	"\bper_page\x18\x04 \x01(\x05R\aperPage\"$\n" +
 	"\x12GetItemInfoRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x11\n" +
-	"\x0fGetItemsRequest\"\xac\x01\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"@\n" +
+	"\x0fGetItemsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x19\n" +
+	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\xac\x01\n" +
 	"\x13GetItemInfoResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
@@ -1898,9 +2070,12 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x14\n" +
 	"\x05price\x18\x03 \x01(\x03R\x05price\x125\n" +
-	"\apicture\x18\x04 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"I\n" +
+	"\apicture\x18\x04 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\x8e\x01\n" +
 	"\x10GetItemsResponse\x125\n" +
-	"\x05items\x18\x01 \x03(\v2\x1f.special_app_v1.ItemInfoForListR\x05items\"N\n" +
+	"\x05items\x18\x01 \x03(\v2\x1f.special_app_v1.ItemInfoForListR\x05items\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x19\n" +
+	"\bper_page\x18\x04 \x01(\x05R\aperPage\"N\n" +
 	"\x17OrderItemInfoForCreatng\x12\x17\n" +
 	"\aitem_id\x18\x01 \x01(\tR\x06itemId\x12\x1a\n" +
 	"\bquantity\x18\x02 \x01(\x03R\bquantity\"\xe6\x01\n" +
@@ -1912,8 +2087,10 @@ const file_special_backend_proto_rawDesc = "" +
 	"\n" +
 	"\b_comment\"%\n" +
 	"\x13GetOrderInfoRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x12\n" +
-	"\x10GetOrdersRequest\"<\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"A\n" +
+	"\x10GetOrdersRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x19\n" +
+	"\bper_page\x18\x02 \x01(\x05R\aperPage\"<\n" +
 	"\x12UpdateOrderRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\"\xbe\x01\n" +
@@ -1936,9 +2113,12 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x06number\x18\x01 \x01(\tR\x06number\x12C\n" +
 	"\x0fcompletion_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecompletionDate\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12!\n" +
-	"\forder_amount\x18\x04 \x01(\x03R\vorderAmount\"M\n" +
+	"\forder_amount\x18\x04 \x01(\x03R\vorderAmount\"\x92\x01\n" +
 	"\x11GetOrdersResponse\x128\n" +
-	"\x06orders\x18\x01 \x03(\v2 .special_app_v1.OrderInfoForListR\x06orders2\xff\r\n" +
+	"\x06orders\x18\x01 \x03(\v2 .special_app_v1.OrderInfoForListR\x06orders\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x19\n" +
+	"\bper_page\x18\x04 \x01(\x05R\aperPage2\xff\r\n" +
 	"\x11SpecialAppService\x12Z\n" +
 	"\n" +
 	"CreateUser\x12!.special_app_v1.CreateUserRequest\x1a\x16.google.protobuf.Empty\"\x11\x82\xd3\xe4\x93\x02\v\"\t/v1/users\x12j\n" +

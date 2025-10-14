@@ -14,7 +14,7 @@ var (	ErrNotEnoughSeats = errors.New("event does not have enough seats"))
 
 type EventRepository interface {
 	GetEventInfo(ctx context.Context, id uuid.UUID) (*models.Event, error)
-	GetEvents(ctx context.Context) ([]*models.Event, error)
+	GetEvents(ctx context.Context, pagination models.Pagination) (*models.PaginatedEvents, error)
 	UpdateEvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error
 }
 
@@ -34,12 +34,24 @@ func (r *eventRepository) GetEventInfo(ctx context.Context, id uuid.UUID) (*mode
 	return &event, nil
 }
 
-func (r *eventRepository) GetEvents(ctx context.Context) ([]*models.Event, error) {
-	var events []*models.Event
-	if err := r.db.Find(&events).Error; err != nil {
+func (r *eventRepository) GetEvents(ctx context.Context, pagination models.Pagination) (*models.PaginatedEvents, error) {
+	var events []models.Event
+	var total int64
+
+	if err := r.db.Model(&models.Event{}).Count(&total).Error; err != nil {
+    return nil, err
+  }
+
+	offset := (pagination.Page - 1) * pagination.PerPage
+	if err := r.db.Limit(pagination.PerPage).Offset(offset).Find(&events).Error; err != nil {
 		return nil, err
 	}
-	return events, nil
+	return &models.PaginatedEvents{
+		Events:     events,
+		TotalCount: total,
+		Page:       pagination.Page,
+		PerPage:    pagination.PerPage,
+	}, nil
 }
 
 func (r *eventRepository) UpdateEvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error {

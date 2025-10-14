@@ -11,7 +11,7 @@ import (
 
 type ItemRepository interface {
 	GetItemInfo(ctx context.Context, id uuid.UUID) (*models.Item, error)
-	GetItems(ctx context.Context) ([]*models.Item, error)
+	GetItems(ctx context.Context, pagination models.Pagination) (*models.PaginatedItems, error)
 }
 
 type itemRepository struct {
@@ -30,10 +30,22 @@ func (r *itemRepository) GetItemInfo(ctx context.Context, id uuid.UUID) (*models
 	return &item, nil
 }
 
-func (r *itemRepository) GetItems(ctx context.Context) ([]*models.Item, error) {
-	var items []*models.Item
-	if err := r.db.Find(&items).Error; err != nil {
+func (r *itemRepository) GetItems(ctx context.Context, pagination models.Pagination) (*models.PaginatedItems, error) {
+	var items []models.Item
+	var total int64
+
+	if err := r.db.Model(&models.Item{}).Count(&total).Error; err != nil {
+    return nil, err
+  }
+
+	offset := (pagination.Page - 1) * pagination.PerPage
+	if err := r.db.Limit(pagination.PerPage).Offset(offset).Find(&items).Error; err != nil {
 		return nil, err
 	}
-	return items, nil
+	return &models.PaginatedItems{
+		Items:      items,
+		TotalCount: total,
+		Page:       pagination.Page,
+		PerPage:    pagination.PerPage,
+	}, nil
 }

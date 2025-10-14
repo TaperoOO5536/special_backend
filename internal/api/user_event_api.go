@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 
+	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/service"
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
 	"github.com/google/uuid"
@@ -99,13 +100,26 @@ func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.Get
 		return nil, err
 	}
 
-	userEvents, err := h.userEventService.GetUserEvents(ctx, initData)
+	pagination := models.Pagination{}	
+
+	if req.Page == 0 {
+		pagination.Page = 1
+	} else {
+		pagination.Page = int(req.Page)
+	}
+	if req.PerPage == 0 {
+		pagination.PerPage = 1
+	} else {
+		pagination.PerPage = int(req.PerPage)
+	}
+
+	paginatedUserEvents, err := h.userEventService.GetUserEvents(ctx, initData, pagination)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
 	}
 
-	pbUserEvents := make([]*pb.UserEventInfoForList, 0, len(userEvents))
-	for _, userEvent := range userEvents {
+	pbUserEvents := make([]*pb.UserEventInfoForList, 0, len(paginatedUserEvents.UserEvents))
+	for _, userEvent := range paginatedUserEvents.UserEvents {
 		pbUserEvent := &pb.UserEventInfoForList{
 			Id: userEvent.ID.String(),
 			EventId: userEvent.EventID.String(),
@@ -121,6 +135,9 @@ func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.Get
 
 	return &pb.GetUserEventsResponse{
 		UserEvents: pbUserEvents,
+		Total:   paginatedUserEvents.TotalCount,
+		Page:    int32(paginatedUserEvents.Page),
+		PerPage: int32(paginatedUserEvents.PerPage),
 	}, nil
 }
 

@@ -36,8 +36,8 @@ func (s *EventService) GetEventInfo(ctx context.Context, id uuid.UUID) (*models.
 	return event, nil
 }
 
-func (s *EventService) GetEvents(ctx context.Context) ([]*models.Event, error) {
-	events, err := s.eventRepo.GetEvents(ctx)
+func (s *EventService) GetEvents(ctx context.Context, pagination models.Pagination) (*models.PaginatedEvents, error) {
+	events, err := s.eventRepo.GetEvents(ctx, pagination)
 	if err != nil {
 		return nil, err
 	}

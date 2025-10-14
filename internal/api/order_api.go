@@ -130,13 +130,26 @@ func (h *OrderServiceHandler) GetOrders(ctx context.Context, req *pb.GetOrdersRe
 		return nil, err
 	}
 
-	orders, err := h.orderService.GetOrders(ctx, initData)
+	pagination := models.Pagination{}	
+
+	if req.Page == 0 {
+		pagination.Page = 1
+	} else {
+		pagination.Page = int(req.Page)
+	}
+	if req.PerPage == 0 {
+		pagination.PerPage = 1
+	} else {
+		pagination.PerPage = int(req.PerPage)
+	}
+
+	paginatedOrders, err := h.orderService.GetOrders(ctx, initData, pagination)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
 	}
 
-	pbOrders := make([]*pb.OrderInfoForList, 0, len(orders))
-	for _, order := range orders {
+	pbOrders := make([]*pb.OrderInfoForList, 0, len(paginatedOrders.Orders))
+	for _, order := range paginatedOrders.Orders {
 		pbOrder := &pb.OrderInfoForList{
 			Number: order.Number,
 			CompletionDate: timestamppb.New(order.CompletionDate),
@@ -148,5 +161,8 @@ func (h *OrderServiceHandler) GetOrders(ctx context.Context, req *pb.GetOrdersRe
 
 	return &pb.GetOrdersResponse{
 		Orders: pbOrders,
+		Total:   paginatedOrders.TotalCount,
+		Page:    int32(paginatedOrders.Page),
+		PerPage: int32(paginatedOrders.PerPage),
 	}, nil
 }

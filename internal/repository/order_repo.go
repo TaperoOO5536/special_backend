@@ -11,7 +11,7 @@ import (
 type OrderRepository interface {
 	CreateOrder(ctx context.Context, order *models.Order) error
 	GetOrderInfo(ctx context.Context, id uuid.UUID) (*models.Order, error)
-	GetOrders(ctx context.Context, userID string) ([]*models.Order, error)
+	GetOrders(ctx context.Context, userID string, pagination models.Pagination) (*models.PaginatedOrders, error)
 	// UpdateOrder(ctx context.Context, id uuid.UUID, newStatus string) (*models.Order, error)
 }
 
@@ -40,23 +40,22 @@ func (r *orderRepository) GetOrderInfo(ctx context.Context, id uuid.UUID) (*mode
 	return &order, nil
 }
 
-func (r *orderRepository) GetOrders(ctx context.Context, userID string) ([]*models.Order, error) {
-	var orders []*models.Order
-	if err := r.db.Where("user_id = ?", userID).Find(&orders).Error; err != nil {
+func (r *orderRepository) GetOrders(ctx context.Context, userID string, pagination models.Pagination) (*models.PaginatedOrders, error) {
+	var orders []models.Order
+	var total int64
+	
+	if err := r.db.Model(&models.Order{}).Count(&total).Error; err != nil {
+    return nil, err
+  }
+
+	offset := (pagination.Page - 1) * pagination.PerPage
+	if err := r.db.Where("user_id = ?", userID).Limit(pagination.PerPage).Offset(offset).Find(&orders).Error; err != nil {
 		return nil, err
 	}
-	return orders, nil
+	return &models.PaginatedOrders{
+		Orders:     orders,
+		TotalCount: total,
+		Page:       pagination.Page,
+		PerPage:    pagination.PerPage,
+	}, nil
 }
-
-// func (r *orderRepository) UpdateOrder(ctx context.Context, id uuid.UUID, newStatus string) (*models.Order, error) {
-// 	order, err := r.GetOrderInfo(ctx, id)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-
-// 	order.Status = newStatus
-// 	if err := r.db.Save(order).Error; err != nil {
-// 		return nil, err
-// 	}
-// 	return order, nil
-// }

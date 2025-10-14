@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 
+	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/service"
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
 	"github.com/google/uuid"
@@ -59,17 +60,33 @@ func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInf
 }
 
 func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsRequest) (*pb.GetItemsResponse, error) {
-	items, err := h.itemService.GetItems(ctx)
+	pagination := models.Pagination{}	
+
+	if req.Page == 0 {
+		pagination.Page = 1
+	} else {
+		pagination.Page = int(req.Page)
+	}
+	if req.PerPage == 0 {
+		pagination.PerPage = 1
+	} else {
+		pagination.PerPage = int(req.PerPage)
+	}
+	
+	paginatedItems, err := h.itemService.GetItems(ctx, pagination)
 	if err != nil {
 		err := status.Error(codes.Internal, err.Error())
 		return nil, err
 	}
 
 	response := &pb.GetItemsResponse{
-		Items: make([]*pb.ItemInfoForList, 0, len(items)),
+		Items: make([]*pb.ItemInfoForList, 0, len(paginatedItems.Items)),
+		Total:   paginatedItems.TotalCount,
+		Page:    int32(paginatedItems.Page),
+		PerPage: int32(paginatedItems.PerPage),
 	}
 	
-	for _, item := range items {
+	for _, item := range paginatedItems.Items {
 		pbItem := &pb.ItemInfoForList{
 			Id:      item.ID.String(),
 			Title:   item.Title,

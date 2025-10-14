@@ -36,8 +36,8 @@ func (s *ItemService) GetItemInfo(ctx context.Context, id uuid.UUID) (*models.It
 	return item, nil
 }
 
-func (s *ItemService) GetItems(ctx context.Context) ([]*models.Item, error) {
-	items, err := s.itemRepo.GetItems(ctx)
+func (s *ItemService) GetItems(ctx context.Context, pagination models.Pagination) (*models.PaginatedItems, error) {
+	items, err := s.itemRepo.GetItems(ctx, pagination)
 	if err != nil {
 		return nil, err
 	}

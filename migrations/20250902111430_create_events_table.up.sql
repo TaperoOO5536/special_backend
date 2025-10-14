@@ -4,7 +4,8 @@ create table if not exists Events (
             Event_Description varchar (300) not null,
             Event_DateTime timestamp with time zone not null,
             Event_Price int not null,
-            Total_Seats int null,
-            Occupied_Seats int null,
-            Little_Picture bytea not null
+            Total_Seats int not null,
+            Occupied_Seats int not null,
+            Little_Picture bytea not null,
+            Mime_Type varchar (50) not null
         ); 

@@ -23,6 +23,7 @@ type UserEventService struct {
 func NewUserEventService(userEventRepo repository.UserEventRepository, eventRepo repository.EventRepository, token string) *UserEventService {
 	return &UserEventService{
 		userEventRepo: userEventRepo,
+		eventRepo: eventRepo,
 		token: token,
 	}
 }
@@ -81,7 +82,7 @@ func (s *UserEventService) GetUserEventInfo(ctx context.Context, initData string
 	return userEvent, nil 
 }
 
-func (s *UserEventService) GetUserEvents(ctx context.Context, initData string) ([]*models.UserEvent, error) {
+func (s *UserEventService) GetUserEvents(ctx context.Context, initData string, pagination models.Pagination) (*models.PaginatedUserEvents, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
 		return nil, err
@@ -92,7 +93,7 @@ func (s *UserEventService) GetUserEvents(ctx context.Context, initData string) (
 		return nil, err
 	}
 
-	userEvents, err := s.userEventRepo.GetUserEvents(ctx, user.ID)
+	userEvents, err := s.userEventRepo.GetUserEvents(ctx, user.ID, pagination)
 	if err != nil {
 		return nil, err
 	}

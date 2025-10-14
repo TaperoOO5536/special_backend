@@ -130,7 +130,10 @@ message GetEventInfoRequest {
   string id = 1;
 }
 
-message GetEventsRequest {}
+message GetEventsRequest {
+  int32 page = 1;
+  int32 per_page = 2;
+}
 
 message GetEventInfoResponse {
   string id = 1;
@@ -155,6 +158,9 @@ message EventInfoForList {
 
 message GetEventsResponse {
   repeated EventInfoForList events = 1;
+  int64 total = 2;
+  int32 page = 3;
+  int32 per_page = 4;
 }
 
 // UserEvent
@@ -168,7 +174,10 @@ message GetUserEventInfoRequest {
   string id = 1;
 }
 
-message GetUserEventsRequest {}
+message GetUserEventsRequest {
+  int32 page = 1;
+  int32 per_page = 2;
+}
 
 message UpdateUserEventRequest {
   string id = 1;
@@ -197,7 +206,10 @@ message UserEventInfoForList {
 }
 
 message GetUserEventsResponse {
-  repeated UserEventInfoForList user_events = 2;
+  repeated UserEventInfoForList user_events = 1;
+  int64 total = 2;
+  int32 page = 3;
+  int32 per_page = 4;
 }
 
 // Item
@@ -206,7 +218,10 @@ message GetItemInfoRequest {
   string id = 1;
 }
 
-message GetItemsRequest {}
+message GetItemsRequest {
+  int32 page = 1;
+  int32 per_page = 2;
+}
 
 message GetItemInfoResponse {
   string id = 1;
@@ -225,6 +240,9 @@ message ItemInfoForList {
 
 message GetItemsResponse {
   repeated ItemInfoForList items = 1;
+  int64 total = 2;
+  int32 page = 3;
+  int32 per_page = 4;
 }
 
 // Order
@@ -245,7 +263,10 @@ message GetOrderInfoRequest {
   string id = 1;
 }
 
-message GetOrdersRequest {}
+message GetOrdersRequest {
+  int32 page = 1;
+  int32 per_page = 2;
+}
 
 message UpdateOrderRequest {
   string id = 1;
@@ -281,4 +302,7 @@ message OrderInfoForList {
 
 message GetOrdersResponse {
   repeated OrderInfoForList orders = 1;
+  int64 total = 2;
+  int32 page = 3;
+  int32 per_page = 4;
 }

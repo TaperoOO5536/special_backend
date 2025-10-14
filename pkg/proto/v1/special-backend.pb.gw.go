@@ -143,6 +143,8 @@ func local_request_SpecialAppService_GetEventInfo_0(ctx context.Context, marshal
 	return msg, metadata, err
 }
 
+var filter_SpecialAppService_GetEvents_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+
 func request_SpecialAppService_GetEvents_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetEventsRequest
@@ -150,6 +152,12 @@ func request_SpecialAppService_GetEvents_0(ctx context.Context, marshaler runtim
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SpecialAppService_GetEvents_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetEvents(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -160,6 +168,12 @@ func local_request_SpecialAppService_GetEvents_0(ctx context.Context, marshaler 
 		protoReq GetEventsRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SpecialAppService_GetEvents_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	msg, err := server.GetEvents(ctx, &protoReq)
 	return msg, metadata, err
 }
@@ -230,6 +244,8 @@ func local_request_SpecialAppService_GetUserEventInfo_0(ctx context.Context, mar
 	return msg, metadata, err
 }
 
+var filter_SpecialAppService_GetUserEvents_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+
 func request_SpecialAppService_GetUserEvents_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetUserEventsRequest
@@ -237,6 +253,12 @@ func request_SpecialAppService_GetUserEvents_0(ctx context.Context, marshaler ru
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SpecialAppService_GetUserEvents_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetUserEvents(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -247,6 +269,12 @@ func local_request_SpecialAppService_GetUserEvents_0(ctx context.Context, marsha
 		protoReq GetUserEventsRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SpecialAppService_GetUserEvents_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	msg, err := server.GetUserEvents(ctx, &protoReq)
 	return msg, metadata, err
 }
@@ -374,6 +402,8 @@ func local_request_SpecialAppService_GetItemInfo_0(ctx context.Context, marshale
 	return msg, metadata, err
 }
 
+var filter_SpecialAppService_GetItems_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+
 func request_SpecialAppService_GetItems_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetItemsRequest
@@ -381,6 +411,12 @@ func request_SpecialAppService_GetItems_0(ctx context.Context, marshaler runtime
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SpecialAppService_GetItems_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetItems(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -391,6 +427,12 @@ func local_request_SpecialAppService_GetItems_0(ctx context.Context, marshaler r
 		protoReq GetItemsRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SpecialAppService_GetItems_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	msg, err := server.GetItems(ctx, &protoReq)
 	return msg, metadata, err
 }
@@ -461,6 +503,8 @@ func local_request_SpecialAppService_GetOrderInfo_0(ctx context.Context, marshal
 	return msg, metadata, err
 }
 
+var filter_SpecialAppService_GetOrders_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+
 func request_SpecialAppService_GetOrders_0(ctx context.Context, marshaler runtime.Marshaler, client SpecialAppServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetOrdersRequest
@@ -468,6 +512,12 @@ func request_SpecialAppService_GetOrders_0(ctx context.Context, marshaler runtim
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SpecialAppService_GetOrders_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetOrders(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -478,6 +528,12 @@ func local_request_SpecialAppService_GetOrders_0(ctx context.Context, marshaler 
 		protoReq GetOrdersRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SpecialAppService_GetOrders_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	msg, err := server.GetOrders(ctx, &protoReq)
 	return msg, metadata, err
 }

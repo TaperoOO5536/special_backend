@@ -42,29 +42,24 @@ func main() {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 
-	user := User{
-		ID:        9876543210,
-		FirstName: "Some",
-		LastName:  "Body",
-		Username:  "@Somebody",
-	}
-	botToken := config.GetToken()
-	initData, err := GenInitData(botToken, user)
-	if err != nil {
-		fmt.Printf("Error: %v\n", err)
-		return
-	}
-	log.Println("Test initData:", initData)
+	GenInitData()
 }
 
-func GenInitData(token string, user User) (string, error) {
+func GenInitData() error {
+	user := User{
+		ID:        1234567891,
+		FirstName: "New2",
+		LastName:  "test2",
+		Username:  "@new2test2",
+	}
+	token := config.GetToken()
 	values := url.Values{}
 	values.Set("query_id", "TEST_QUERY_123")
 	values.Set("auth_date", fmt.Sprintf("%d", time.Now().Unix()))
 
 	userJSON, err := json.Marshal(user)
 	if err != nil {
-		return "", fmt.Errorf("failed to marshal user: %v", err)
+		return fmt.Errorf("failed to marshal user: %v", err)
 	}
 	values.Set("user", string(userJSON))
 
@@ -87,6 +82,7 @@ func GenInitData(token string, user User) (string, error) {
 	hash := hex.EncodeToString(h.Sum(nil))
 
 	values.Set("hash", hash)
-
-	return values.Encode(), nil
+	initData := values.Encode()
+	log.Println("Test initData:", initData)
+	return nil
 }

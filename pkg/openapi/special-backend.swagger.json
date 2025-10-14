@@ -750,7 +750,8 @@
       "type": "object",
       "properties": {
         "number": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "formDate": {
           "type": "string",
@@ -891,7 +892,8 @@
       "type": "object",
       "properties": {
         "number": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "completionDate": {
           "type": "string",

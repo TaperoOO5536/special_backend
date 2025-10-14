@@ -48,7 +48,6 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 
 	order := &models.Order{
 		ID: input.OrderID,
-		Number: "number",
 		UserID: user.ID,
 		FormDate: time.Now(),
 		CompletionDate: input.CompletionDate,

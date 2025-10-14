@@ -1750,7 +1750,7 @@ func (x *OrderItemInfoForList) GetPicture() *PictureInfo {
 
 type GetOrderInfoResponse struct {
 	state          protoimpl.MessageState  `protogen:"open.v1"`
-	Number         string                  `protobuf:"bytes,1,opt,name=number,proto3" json:"number,omitempty"`
+	Number         int32                   `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
 	FormDate       *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=form_date,json=formDate,proto3" json:"form_date,omitempty"`
 	CompletionDate *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=completion_date,json=completionDate,proto3" json:"completion_date,omitempty"`
 	Comment        string                  `protobuf:"bytes,4,opt,name=comment,proto3" json:"comment,omitempty"`
@@ -1791,11 +1791,11 @@ func (*GetOrderInfoResponse) Descriptor() ([]byte, []int) {
 	return file_special_backend_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *GetOrderInfoResponse) GetNumber() string {
+func (x *GetOrderInfoResponse) GetNumber() int32 {
 	if x != nil {
 		return x.Number
 	}
-	return ""
+	return 0
 }
 
 func (x *GetOrderInfoResponse) GetFormDate() *timestamppb.Timestamp {
@@ -1842,7 +1842,7 @@ func (x *GetOrderInfoResponse) GetItems() []*OrderItemInfoForList {
 
 type OrderInfoForList struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	Number         string                 `protobuf:"bytes,1,opt,name=number,proto3" json:"number,omitempty"`
+	Number         int32                  `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
 	CompletionDate *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=completion_date,json=completionDate,proto3" json:"completion_date,omitempty"`
 	Status         string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	OrderAmount    int32                  `protobuf:"varint,4,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
@@ -1880,11 +1880,11 @@ func (*OrderInfoForList) Descriptor() ([]byte, []int) {
 	return file_special_backend_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *OrderInfoForList) GetNumber() string {
+func (x *OrderInfoForList) GetNumber() int32 {
 	if x != nil {
 		return x.Number
 	}
-	return ""
+	return 0
 }
 
 func (x *OrderInfoForList) GetCompletionDate() *timestamppb.Timestamp {
@@ -2102,7 +2102,7 @@ const file_special_backend_proto_rawDesc = "" +
 	"\bquantity\x18\x05 \x01(\x05R\bquantity\x125\n" +
 	"\apicture\x18\x06 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\xbd\x02\n" +
 	"\x14GetOrderInfoResponse\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\tR\x06number\x127\n" +
+	"\x06number\x18\x01 \x01(\x05R\x06number\x127\n" +
 	"\tform_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\bformDate\x12C\n" +
 	"\x0fcompletion_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecompletionDate\x12\x18\n" +
 	"\acomment\x18\x04 \x01(\tR\acomment\x12\x16\n" +
@@ -2110,7 +2110,7 @@ const file_special_backend_proto_rawDesc = "" +
 	"\forder_amount\x18\x06 \x01(\x05R\vorderAmount\x12:\n" +
 	"\x05items\x18\a \x03(\v2$.special_app_v1.OrderItemInfoForListR\x05items\"\xaa\x01\n" +
 	"\x10OrderInfoForList\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\tR\x06number\x12C\n" +
+	"\x06number\x18\x01 \x01(\x05R\x06number\x12C\n" +
 	"\x0fcompletion_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecompletionDate\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12!\n" +
 	"\forder_amount\x18\x04 \x01(\x05R\vorderAmount\"\x92\x01\n" +

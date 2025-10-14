@@ -284,7 +284,7 @@ message OrderItemInfoForList {
 }
 
 message GetOrderInfoResponse {
-  string number = 1;
+  int32 number = 1;
   google.protobuf.Timestamp form_date = 2;
   google.protobuf.Timestamp completion_date = 3;
   string comment = 4;
@@ -294,7 +294,7 @@ message GetOrderInfoResponse {
 }
 
 message OrderInfoForList {
-  string number = 1;
+  int32 number = 1;
   google.protobuf.Timestamp completion_date = 2;
   string status = 3;
   int32 order_amount = 4;

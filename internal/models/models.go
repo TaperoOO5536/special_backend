@@ -80,7 +80,7 @@ type EventPicture struct {
 
 type Order struct {
 	ID             uuid.UUID   `gorm:"column:id_order;primaryKey"`
-	Number         string      `gorm:"column:order_number"`
+	Number         int32      `gorm:"column:order_number;default:nextval('order_seq');unique"`
 	UserID         string      `gorm:"column:user_id"`
 	FormDate       time.Time   `gorm:"column:order_form_datetime"`
 	CompletionDate time.Time   `gorm:"column:completion_date"`

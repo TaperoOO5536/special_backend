@@ -48,7 +48,7 @@ func (h *UserEventServiceHandler) CreateUserEvent(ctx context.Context, req *pb.C
 	input := service.UserEventCreateInput{
 		UserEventID: userEventID,
 		EventID: EventID,
-		NumberOfGuests: req.NumberOfGuests,
+		NumberOfGuests: int64(req.NumberOfGuests),
 	}
 
 	err = h.userEventService.CreateUserEvent(ctx, initData, input)
@@ -84,7 +84,7 @@ func (h *UserEventServiceHandler) GetUserEventInfo(ctx context.Context, req *pb.
 	return &pb.GetUserEventInfoResponse{
 		Id: userEvent.ID.String(),
 		EventId: userEvent.EventID.String(),
-		NumberOfGuests: userEvent.NumberOfGuests,
+		NumberOfGuests: int32(userEvent.NumberOfGuests),
 		Title: userEvent.Event.Title,
 		Datetime: timestamppb.New(userEvent.Event.DateTime),
 		Picture: &pb.PictureInfo{
@@ -135,7 +135,7 @@ func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.Get
 
 	return &pb.GetUserEventsResponse{
 		UserEvents: pbUserEvents,
-		Total:   paginatedUserEvents.TotalCount,
+		Total:   int32(paginatedUserEvents.TotalCount),
 		Page:    int32(paginatedUserEvents.Page),
 		PerPage: int32(paginatedUserEvents.PerPage),
 	}, nil
@@ -163,7 +163,7 @@ func (h *UserEventServiceHandler) UpdateUserEvent(ctx context.Context, req *pb.U
 		return nil, err
 	}
 
-	userEvent, err := h.userEventService.UpdateUserEvent(ctx, initData, userEventID, req.NumberOfGuests)
+	userEvent, err := h.userEventService.UpdateUserEvent(ctx, initData, userEventID, int64(req.NumberOfGuests))
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
 	}
@@ -171,7 +171,7 @@ func (h *UserEventServiceHandler) UpdateUserEvent(ctx context.Context, req *pb.U
 	return &pb.GetUserEventInfoResponse{
 		Id: userEvent.ID.String(),
 		EventId: userEvent.EventID.String(),
-		NumberOfGuests: userEvent.NumberOfGuests,
+		NumberOfGuests: int32(userEvent.NumberOfGuests),
 		Title: userEvent.Event.Title,
 		Datetime: timestamppb.New(userEvent.Event.DateTime),
 		Picture: &pb.PictureInfo{

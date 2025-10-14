@@ -140,9 +140,9 @@ message GetEventInfoResponse {
   string title = 2;
   string description = 3;
   google.protobuf.Timestamp datetime = 4;
-  int64 price = 5;
-  int64 total_seats = 6;
-  int64 occupied_seats = 7;
+  int32 price = 5;
+  int32 total_seats = 6;
+  int32 occupied_seats = 7;
   repeated PictureInfo pictures = 8;
 }
 
@@ -150,15 +150,15 @@ message EventInfoForList {
   string id = 1;
   string title = 2;
   google.protobuf.Timestamp datetime = 3;
-  int64 price = 4;
-  int64 total_seats = 5;
-  int64 occupied_seats = 6;
+  int32 price = 4;
+  int32 total_seats = 5;
+  int32 occupied_seats = 6;
   PictureInfo picture = 7;
 }
 
 message GetEventsResponse {
   repeated EventInfoForList events = 1;
-  int64 total = 2;
+  int32 total = 2;
   int32 page = 3;
   int32 per_page = 4;
 }
@@ -167,7 +167,7 @@ message GetEventsResponse {
 
 message CreateUserEventRequest {
   string event_id = 1;
-  int64 number_of_guests = 2;
+  int32 number_of_guests = 2;
 }
 
 message GetUserEventInfoRequest {
@@ -181,7 +181,7 @@ message GetUserEventsRequest {
 
 message UpdateUserEventRequest {
   string id = 1;
-  int64 number_of_guests = 2;
+  int32 number_of_guests = 2;
 }
 
 message DeleteUserEventRequest {
@@ -191,7 +191,7 @@ message DeleteUserEventRequest {
 message GetUserEventInfoResponse {
   string id = 1; 
   string event_id = 2;
-  int64 number_of_guests = 3;
+  int32 number_of_guests = 3;
   string title = 4; 
   google.protobuf.Timestamp datetime = 5;
   PictureInfo picture = 6;
@@ -207,7 +207,7 @@ message UserEventInfoForList {
 
 message GetUserEventsResponse {
   repeated UserEventInfoForList user_events = 1;
-  int64 total = 2;
+  int32 total = 2;
   int32 page = 3;
   int32 per_page = 4;
 }
@@ -227,20 +227,20 @@ message GetItemInfoResponse {
   string id = 1;
   string title = 2;
   string description = 3;
-  int64 price = 4;
+  int32 price = 4;
   repeated PictureInfo pictures = 5;
 }
 
 message ItemInfoForList {
   string id = 1;
   string title = 2;
-  int64 price = 3;
+  int32 price = 3;
   PictureInfo picture = 4;
 }
 
 message GetItemsResponse {
   repeated ItemInfoForList items = 1;
-  int64 total = 2;
+  int32 total = 2;
   int32 page = 3;
   int32 per_page = 4;
 }
@@ -249,13 +249,13 @@ message GetItemsResponse {
 
 message OrderItemInfoForCreatng {
   string item_id = 1;
-  int64 quantity = 2;
+  int32 quantity = 2;
 }
 
 message CreateOrderRequest {
   google.protobuf.Timestamp completion_date = 1;
   optional string comment = 2;
-  int64 order_amount = 3;
+  int32 order_amount = 3;
   repeated OrderItemInfoForCreatng items = 4;
 }
 
@@ -277,8 +277,8 @@ message OrderItemInfoForList {
   string id = 1;
   string item_id = 2;
   string title = 3;
-  int64 price = 4;
-  int64 quantity = 5;
+  int32 price = 4;
+  int32 quantity = 5;
   PictureInfo picture = 6;
 
 }
@@ -289,7 +289,7 @@ message GetOrderInfoResponse {
   google.protobuf.Timestamp completion_date = 3;
   string comment = 4;
   string status = 5;
-  int64 order_amount = 6;
+  int32 order_amount = 6;
   repeated OrderItemInfoForList items = 7;
 }
 
@@ -297,12 +297,12 @@ message OrderInfoForList {
   string number = 1;
   google.protobuf.Timestamp completion_date = 2;
   string status = 3;
-  int64 order_amount = 4;
+  int32 order_amount = 4;
 }
 
 message GetOrdersResponse {
   repeated OrderInfoForList orders = 1;
-  int64 total = 2;
+  int32 total = 2;
   int32 page = 3;
   int32 per_page = 4;
 }

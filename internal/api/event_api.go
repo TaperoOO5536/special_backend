@@ -56,9 +56,9 @@ func (h *EventServiceHandler) GetEventInfo(ctx context.Context, req *pb.GetEvent
 		Title:         event.Title,
 		Description:   event.Description,
 		Datetime:      timestamppb.New(event.DateTime),
-		Price:         event.Price,
-		TotalSeats:    event.TotalSeats,
-		OccupiedSeats: event.OccupiedSeats,
+		Price:         int32(event.Price),
+		TotalSeats:    int32(event.TotalSeats),
+		OccupiedSeats: int32(event.OccupiedSeats),
 		Pictures:      pbPictures,
 	}, nil
 }
@@ -85,7 +85,7 @@ func (h *EventServiceHandler) GetEvents(ctx context.Context, req *pb.GetEventsRe
 
 	response := &pb.GetEventsResponse{
 		Events:  make([]*pb.EventInfoForList, 0, len(paginatedEvents.Events)),
-		Total:   paginatedEvents.TotalCount,
+		Total:   int32(paginatedEvents.TotalCount),
 		Page:    int32(paginatedEvents.Page),
 		PerPage: int32(paginatedEvents.PerPage),
 	}
@@ -95,9 +95,9 @@ func (h *EventServiceHandler) GetEvents(ctx context.Context, req *pb.GetEventsRe
 			Id:            event.ID.String(),
 			Title:         event.Title,
 			Datetime:      timestamppb.New(event.DateTime),
-			Price:         event.Price,
-			TotalSeats:    event.TotalSeats,
-			OccupiedSeats: event.OccupiedSeats,
+			Price:         int32(event.Price),
+			TotalSeats:    int32(event.TotalSeats),
+			OccupiedSeats: int32(event.OccupiedSeats),
 			Picture:       &pb.PictureInfo{
 			Picture:  event.LittlePicture,
 			MimeType: event.MimeType,

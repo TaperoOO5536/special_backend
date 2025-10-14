@@ -538,8 +538,8 @@
       "type": "object",
       "properties": {
         "numberOfGuests": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -582,8 +582,8 @@
           "type": "string"
         },
         "orderAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "items": {
           "type": "array",
@@ -601,8 +601,8 @@
           "type": "string"
         },
         "numberOfGuests": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -620,16 +620,16 @@
           "format": "date-time"
         },
         "price": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "totalSeats": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "occupiedSeats": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "picture": {
           "$ref": "#/definitions/special_app_v1PictureInfo"
@@ -653,16 +653,16 @@
           "format": "date-time"
         },
         "price": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "totalSeats": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "occupiedSeats": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "pictures": {
           "type": "array",
@@ -684,8 +684,8 @@
           }
         },
         "total": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "page": {
           "type": "integer",
@@ -710,8 +710,8 @@
           "type": "string"
         },
         "price": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "pictures": {
           "type": "array",
@@ -733,8 +733,8 @@
           }
         },
         "total": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "page": {
           "type": "integer",
@@ -767,8 +767,8 @@
           "type": "string"
         },
         "orderAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "items": {
           "type": "array",
@@ -790,8 +790,8 @@
           }
         },
         "total": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "page": {
           "type": "integer",
@@ -813,8 +813,8 @@
           "type": "string"
         },
         "numberOfGuests": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "title": {
           "type": "string"
@@ -839,8 +839,8 @@
           }
         },
         "total": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "page": {
           "type": "integer",
@@ -879,8 +879,8 @@
           "type": "string"
         },
         "price": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "picture": {
           "$ref": "#/definitions/special_app_v1PictureInfo"
@@ -901,8 +901,8 @@
           "type": "string"
         },
         "orderAmount": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -913,8 +913,8 @@
           "type": "string"
         },
         "quantity": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -931,12 +931,12 @@
           "type": "string"
         },
         "price": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "quantity": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "picture": {
           "$ref": "#/definitions/special_app_v1PictureInfo"

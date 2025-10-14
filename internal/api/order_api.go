@@ -54,7 +54,7 @@ func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrd
 			ID: uuid.New(),
 			OrderID: orderID,
 			ItemID: itemID,
-			Quantity: pbItem.Quantity,
+			Quantity: int64(pbItem.Quantity),
 		}
 		items = append(items, item)
 	}
@@ -64,7 +64,7 @@ func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrd
 		CompletionDate: req.CompletionDate.AsTime(),
 		Comment: *req.Comment,
 		OrderItems: items,
-		OrderAmount: req.OrderAmount,
+		OrderAmount: int64(req.OrderAmount),
 	}
 
 	err = h.orderService.CreateOrder(ctx, initData, input)
@@ -103,8 +103,8 @@ func (h *OrderServiceHandler) GetOrderInfo(ctx context.Context, req *pb.GetOrder
 			Id: orderItem.ID.String(),
 			ItemId: orderItem.ItemID.String(),
 			Title: orderItem.Item.Title,
-			Price: orderItem.Item.Price,
-			Quantity: orderItem.Quantity,
+			Price: int32(orderItem.Item.Price),
+			Quantity: int32(orderItem.Quantity),
 			Picture: &pb.PictureInfo{
 			Picture: orderItem.Item.LittlePicture,
 			MimeType: orderItem.Item.MimeType,
@@ -119,7 +119,7 @@ func (h *OrderServiceHandler) GetOrderInfo(ctx context.Context, req *pb.GetOrder
 		CompletionDate: timestamppb.New(order.CompletionDate),
 		Comment: order.Comment,
 		Status: order.Status,
-		OrderAmount: order.OrderAmount,
+		OrderAmount: int32(order.OrderAmount),
 		Items: orderItems,
 	}, nil
 }
@@ -154,14 +154,14 @@ func (h *OrderServiceHandler) GetOrders(ctx context.Context, req *pb.GetOrdersRe
 			Number: order.Number,
 			CompletionDate: timestamppb.New(order.CompletionDate),
 			Status: order.Status,
-			OrderAmount: order.OrderAmount,
+			OrderAmount: int32(order.OrderAmount),
 		}
 		pbOrders = append(pbOrders, pbOrder)
 	}
 
 	return &pb.GetOrdersResponse{
 		Orders: pbOrders,
-		Total:   paginatedOrders.TotalCount,
+		Total:   int32(paginatedOrders.TotalCount),
 		Page:    int32(paginatedOrders.Page),
 		PerPage: int32(paginatedOrders.PerPage),
 	}, nil

@@ -54,7 +54,7 @@ func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInf
 		Id:          item.ID.String(),
 		Title:       item.Title,
 		Description: item.Description,
-		Price:       item.Price,
+		Price:       int32(item.Price),
 		Pictures:    pbPictures,
 	}, nil
 }
@@ -81,7 +81,7 @@ func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsReque
 
 	response := &pb.GetItemsResponse{
 		Items: make([]*pb.ItemInfoForList, 0, len(paginatedItems.Items)),
-		Total:   paginatedItems.TotalCount,
+		Total:   int32(paginatedItems.TotalCount),
 		Page:    int32(paginatedItems.Page),
 		PerPage: int32(paginatedItems.PerPage),
 	}
@@ -90,7 +90,7 @@ func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsReque
 		pbItem := &pb.ItemInfoForList{
 			Id:      item.ID.String(),
 			Title:   item.Title,
-			Price:   item.Price,
+			Price:   int32(item.Price),
 			Picture: &pb.PictureInfo{
 			Picture: item.LittlePicture,
 			MimeType: item.MimeType,

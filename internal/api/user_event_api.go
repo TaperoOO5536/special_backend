@@ -46,8 +46,8 @@ func (h *UserEventServiceHandler) CreateUserEvent(ctx context.Context, req *pb.C
 	userEventID := uuid.New()
 
 	input := service.UserEventCreateInput{
-		UserEventID: userEventID,
-		EventID: EventID,
+		UserEventID:    userEventID,
+		EventID:        EventID,
 		NumberOfGuests: int64(req.NumberOfGuests),
 	}
 
@@ -82,13 +82,13 @@ func (h *UserEventServiceHandler) GetUserEventInfo(ctx context.Context, req *pb.
 	}
 
 	return &pb.GetUserEventInfoResponse{
-		Id: userEvent.ID.String(),
-		EventId: userEvent.EventID.String(),
+		Id:             userEvent.ID.String(),
+		EventId:        userEvent.EventID.String(),
 		NumberOfGuests: int32(userEvent.NumberOfGuests),
-		Title: userEvent.Event.Title,
-		Datetime: timestamppb.New(userEvent.Event.DateTime),
-		Picture: &pb.PictureInfo{
-			Picture: userEvent.Event.LittlePicture,
+		Title:          userEvent.Event.Title,
+		Datetime:       timestamppb.New(userEvent.Event.DateTime),
+		Picture:        &pb.PictureInfo{
+			Picture:  userEvent.Event.LittlePicture,
 			MimeType: userEvent.Event.MimeType,
 		},
 	}, nil
@@ -121,12 +121,12 @@ func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.Get
 	pbUserEvents := make([]*pb.UserEventInfoForList, 0, len(paginatedUserEvents.UserEvents))
 	for _, userEvent := range paginatedUserEvents.UserEvents {
 		pbUserEvent := &pb.UserEventInfoForList{
-			Id: userEvent.ID.String(),
-			EventId: userEvent.EventID.String(),
-			Title: userEvent.Event.Title,
+			Id:       userEvent.ID.String(),
+			EventId:  userEvent.EventID.String(),
+			Title:    userEvent.Event.Title,
 			Datetime: timestamppb.New(userEvent.Event.DateTime),
-			Picture: &pb.PictureInfo{
-			Picture: userEvent.Event.LittlePicture,
+			Picture:  &pb.PictureInfo{
+			Picture:  userEvent.Event.LittlePicture,
 			MimeType: userEvent.Event.MimeType,
 		},
 		}
@@ -169,13 +169,13 @@ func (h *UserEventServiceHandler) UpdateUserEvent(ctx context.Context, req *pb.U
 	}
 	
 	return &pb.GetUserEventInfoResponse{
-		Id: userEvent.ID.String(),
-		EventId: userEvent.EventID.String(),
+		Id:             userEvent.ID.String(),
+		EventId:        userEvent.EventID.String(),
 		NumberOfGuests: int32(userEvent.NumberOfGuests),
-		Title: userEvent.Event.Title,
-		Datetime: timestamppb.New(userEvent.Event.DateTime),
-		Picture: &pb.PictureInfo{
-			Picture: userEvent.Event.LittlePicture,
+		Title:          userEvent.Event.Title,
+		Datetime:       timestamppb.New(userEvent.Event.DateTime),
+		Picture:        &pb.PictureInfo{
+			Picture:  userEvent.Event.LittlePicture,
 			MimeType: userEvent.Event.MimeType,
 		},
 	}, nil

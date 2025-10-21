@@ -51,20 +51,20 @@ func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrd
 			return nil, status.Error(codes.InvalidArgument, "invalid itemID")
 		}
 		item := models.OrderItem{
-			ID: uuid.New(),
-			OrderID: orderID,
-			ItemID: itemID,
+			ID:       uuid.New(),
+			OrderID:  orderID,
+			ItemID:   itemID,
 			Quantity: int64(pbItem.Quantity),
 		}
 		items = append(items, item)
 	}
 
 	input := service.OrderCreateInput{
-		OrderID: orderID,
+		OrderID:        orderID,
 		CompletionDate: req.CompletionDate.AsTime(),
-		Comment: *req.Comment,
-		OrderItems: items,
-		OrderAmount: int64(req.OrderAmount),
+		Comment:        *req.Comment,
+		OrderItems:     items,
+		OrderAmount:    int64(req.OrderAmount),
 	}
 
 	err = h.orderService.CreateOrder(ctx, initData, input)
@@ -100,13 +100,13 @@ func (h *OrderServiceHandler) GetOrderInfo(ctx context.Context, req *pb.GetOrder
 	orderItems := make([]*pb.OrderItemInfoForList, 0, len(order.OrderItems))
 	for _, orderItem := range order.OrderItems {
 		pbItem := &pb.OrderItemInfoForList{
-			Id: orderItem.ID.String(),
-			ItemId: orderItem.ItemID.String(),
-			Title: orderItem.Item.Title,
-			Price: int32(orderItem.Item.Price),
+			Id:       orderItem.ID.String(),
+			ItemId:   orderItem.ItemID.String(),
+			Title:    orderItem.Item.Title,
+			Price:    int32(orderItem.Item.Price),
 			Quantity: int32(orderItem.Quantity),
-			Picture: &pb.PictureInfo{
-			Picture: orderItem.Item.LittlePicture,
+			Picture:  &pb.PictureInfo{
+			Picture:  orderItem.Item.LittlePicture,
 			MimeType: orderItem.Item.MimeType,
 		},
 		}
@@ -114,13 +114,13 @@ func (h *OrderServiceHandler) GetOrderInfo(ctx context.Context, req *pb.GetOrder
 	}
 	
 	return &pb.GetOrderInfoResponse{
-		Number: order.Number,
-		FormDate: timestamppb.New(order.FormDate),
+		Number:         order.Number,
+		FormDate:       timestamppb.New(order.FormDate),
 		CompletionDate: timestamppb.New(order.CompletionDate),
-		Comment: order.Comment,
-		Status: order.Status,
-		OrderAmount: int32(order.OrderAmount),
-		Items: orderItems,
+		Comment:        order.Comment,
+		Status:         order.Status,
+		OrderAmount:    int32(order.OrderAmount),
+		Items:          orderItems,
 	}, nil
 }
 
@@ -151,10 +151,11 @@ func (h *OrderServiceHandler) GetOrders(ctx context.Context, req *pb.GetOrdersRe
 	pbOrders := make([]*pb.OrderInfoForList, 0, len(paginatedOrders.Orders))
 	for _, order := range paginatedOrders.Orders {
 		pbOrder := &pb.OrderInfoForList{
-			Number: order.Number,
+			Id:             order.ID.String(),
+			Number:         order.Number,
 			CompletionDate: timestamppb.New(order.CompletionDate),
-			Status: order.Status,
-			OrderAmount: int32(order.OrderAmount),
+			Status:         order.Status,
+			OrderAmount:    int32(order.OrderAmount),
 		}
 		pbOrders = append(pbOrders, pbOrder)
 	}

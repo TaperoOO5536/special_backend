@@ -67,7 +67,9 @@ func (a *App) Start(ctx context.Context) error {
 	orderServiceHandler := api.NewOrderServiceHandler(orderService)
 	userEventServiceHandler := api.NewUserEventServiceHandler(userEventService)
 
-	handler := api.NewHandler(itemServiceHandler, eventServiceHandler, userServiceHandler, orderServiceHandler, userEventServiceHandler)
+	handler := api.NewHandler(itemServiceHandler, eventServiceHandler,
+														userServiceHandler, orderServiceHandler,
+														userEventServiceHandler)
 
 	grpcServer := grpc.NewServer()
 

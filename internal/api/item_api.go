@@ -44,7 +44,7 @@ func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInf
 	pbPictures := make([]*pb.PictureInfo, 0, len(item.Pictures))
 	for _, picture := range item.Pictures {
 		pbPicture := &pb.PictureInfo{
-			Picture: picture.Path,
+			Picture:  picture.Path,
 			MimeType: picture.MimeType,
 		}
 		pbPictures = append(pbPictures, pbPicture)
@@ -80,7 +80,7 @@ func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsReque
 	}
 
 	response := &pb.GetItemsResponse{
-		Items: make([]*pb.ItemInfoForList, 0, len(paginatedItems.Items)),
+		Items:   make([]*pb.ItemInfoForList, 0, len(paginatedItems.Items)),
 		Total:   int32(paginatedItems.TotalCount),
 		Page:    int32(paginatedItems.Page),
 		PerPage: int32(paginatedItems.PerPage),
@@ -88,11 +88,11 @@ func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsReque
 	
 	for _, item := range paginatedItems.Items {
 		pbItem := &pb.ItemInfoForList{
-			Id:      item.ID.String(),
-			Title:   item.Title,
-			Price:   int32(item.Price),
-			Picture: &pb.PictureInfo{
-			Picture: item.LittlePicture,
+			Id:       item.ID.String(),
+			Title:    item.Title,
+			Price:    int32(item.Price),
+			Picture:  &pb.PictureInfo{
+			Picture:  item.LittlePicture,
 			MimeType: item.MimeType,
 		},
 		}

@@ -1,9 +1,9 @@
 package models
 
 import (
-	"github.com/google/uuid"
-	// "google.golang.org/protobuf/types/known/timestamppb"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type Pagination struct {
@@ -80,14 +80,14 @@ type EventPicture struct {
 
 type Order struct {
 	ID             uuid.UUID   `gorm:"column:id_order;primaryKey"`
-	Number         int32      `gorm:"column:order_number;default:nextval('order_seq');unique"`
+	Number         int32       `gorm:"column:order_number;default:nextval('order_seq');unique"`
 	UserID         string      `gorm:"column:user_id"`
 	FormDate       time.Time   `gorm:"column:order_form_datetime"`
 	CompletionDate time.Time   `gorm:"column:completion_date"`
 	Comment        string      `gorm:"column:order_comment"`
 	Status         string      `gorm:"column:order_status"`
 	OrderAmount    int64       `gorm:"column:order_amount"`
-	OrderItems     []OrderItem `gorm:"foreignKey:OrderID"`
+	OrderItems     []OrderItem `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE"`
 }
 
 type Item struct {

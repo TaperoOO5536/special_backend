@@ -1,9 +1,6 @@
 package config
 
 import (
-	// "context"
-	// "time"
-
 	"log"
 	"os"
 
@@ -24,7 +21,7 @@ func GetDsn() string {
 }
 
 func GetToken() string {
-	return os.Getenv("TOKEN")
+	return GetEnvDefault("TOKEN", "")
 }
 
 func GetEnvDefault(key, defaultValue string) string {

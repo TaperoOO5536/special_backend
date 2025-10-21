@@ -115,7 +115,7 @@ func (s *UserEventService) UpdateUserEvent(ctx context.Context, initData string,
 		return nil, err
 	}
 
-	err = s.eventRepo.UpdateEvent(ctx, userEvent.ID, newGuestNumber-userEvent.NumberOfGuests)
+	err = s.eventRepo.UpdateEvent(ctx, userEvent.EventID, newGuestNumber-userEvent.NumberOfGuests)
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +145,7 @@ func (s *UserEventService) DeleteUserEvent(ctx context.Context, initData string,
 		return err
 	}
 
-	err = s.eventRepo.UpdateEvent(ctx, userEvent.ID, -userEvent.NumberOfGuests)
+	err = s.eventRepo.UpdateEvent(ctx, userEvent.EventID, -userEvent.NumberOfGuests)
 	if err != nil {
 		return err
 	}

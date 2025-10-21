@@ -12,7 +12,6 @@ type OrderRepository interface {
 	CreateOrder(ctx context.Context, order *models.Order) error
 	GetOrderInfo(ctx context.Context, id uuid.UUID) (*models.Order, error)
 	GetOrders(ctx context.Context, userID string, pagination models.Pagination) (*models.PaginatedOrders, error)
-	// UpdateOrder(ctx context.Context, id uuid.UUID, newStatus string) (*models.Order, error)
 }
 
 type orderRepository struct {

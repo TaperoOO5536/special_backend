@@ -35,7 +35,6 @@ const (
 	SpecialAppService_CreateOrder_FullMethodName      = "/special_app_v1.SpecialAppService/CreateOrder"
 	SpecialAppService_GetOrderInfo_FullMethodName     = "/special_app_v1.SpecialAppService/GetOrderInfo"
 	SpecialAppService_GetOrders_FullMethodName        = "/special_app_v1.SpecialAppService/GetOrders"
-	SpecialAppService_UpdateOrder_FullMethodName      = "/special_app_v1.SpecialAppService/UpdateOrder"
 )
 
 // SpecialAppServiceClient is the client API for SpecialAppService service.
@@ -57,7 +56,6 @@ type SpecialAppServiceClient interface {
 	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetOrderInfo(ctx context.Context, in *GetOrderInfoRequest, opts ...grpc.CallOption) (*GetOrderInfoResponse, error)
 	GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error)
-	UpdateOrder(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*GetOrderInfoResponse, error)
 }
 
 type specialAppServiceClient struct {
@@ -218,16 +216,6 @@ func (c *specialAppServiceClient) GetOrders(ctx context.Context, in *GetOrdersRe
 	return out, nil
 }
 
-func (c *specialAppServiceClient) UpdateOrder(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*GetOrderInfoResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOrderInfoResponse)
-	err := c.cc.Invoke(ctx, SpecialAppService_UpdateOrder_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // SpecialAppServiceServer is the server API for SpecialAppService service.
 // All implementations must embed UnimplementedSpecialAppServiceServer
 // for forward compatibility.
@@ -247,7 +235,6 @@ type SpecialAppServiceServer interface {
 	CreateOrder(context.Context, *CreateOrderRequest) (*emptypb.Empty, error)
 	GetOrderInfo(context.Context, *GetOrderInfoRequest) (*GetOrderInfoResponse, error)
 	GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error)
-	UpdateOrder(context.Context, *UpdateOrderRequest) (*GetOrderInfoResponse, error)
 	mustEmbedUnimplementedSpecialAppServiceServer()
 }
 
@@ -302,9 +289,6 @@ func (UnimplementedSpecialAppServiceServer) GetOrderInfo(context.Context, *GetOr
 }
 func (UnimplementedSpecialAppServiceServer) GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrders not implemented")
-}
-func (UnimplementedSpecialAppServiceServer) UpdateOrder(context.Context, *UpdateOrderRequest) (*GetOrderInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrder not implemented")
 }
 func (UnimplementedSpecialAppServiceServer) mustEmbedUnimplementedSpecialAppServiceServer() {}
 func (UnimplementedSpecialAppServiceServer) testEmbeddedByValue()                           {}
@@ -597,24 +581,6 @@ func _SpecialAppService_GetOrders_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpecialAppService_UpdateOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SpecialAppServiceServer).UpdateOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SpecialAppService_UpdateOrder_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpecialAppServiceServer).UpdateOrder(ctx, req.(*UpdateOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // SpecialAppService_ServiceDesc is the grpc.ServiceDesc for SpecialAppService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -681,10 +647,6 @@ var SpecialAppService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOrders",
 			Handler:    _SpecialAppService_GetOrders_Handler,
-		},
-		{
-			MethodName: "UpdateOrder",
-			Handler:    _SpecialAppService_UpdateOrder_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

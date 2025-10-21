@@ -47,14 +47,14 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 	}
 
 	order := &models.Order{
-		ID: input.OrderID,
-		UserID: user.ID,
-		FormDate: time.Now(),
+		ID:             input.OrderID,
+		UserID:         user.ID,
+		FormDate:       time.Now(),
 		CompletionDate: input.CompletionDate,
-		Comment: input.Comment,
-		Status: "В обработке",
-		OrderAmount: input.OrderAmount,
-		OrderItems: input.OrderItems,
+		Comment:        input.Comment,
+		Status:         "В обработке",
+		OrderAmount:    input.OrderAmount,
+		OrderItems:     input.OrderItems,
 	}
 
 	err = s.orderRepo.CreateOrder(ctx, order)
@@ -103,20 +103,3 @@ func (s *OrderService) GetOrders(ctx context.Context, initData string, paginatio
 
 	return orders, nil
 }
-
-// func (s *OrderService) UpdateOrder(ctx context.Context, initData string, id uuid.UUID, newStatus string) (*models.Order, error) {
-// 	valid, err := VerifyInitData(initData, s.token)
-// 	if err != nil || !valid {
-// 		return nil, err
-// 	}
-
-// 	order, err := s.orderRepo.UpdateOrder(ctx, id, newStatus)
-// 	if err != nil {
-// 		if err == gorm.ErrRecordNotFound {
-// 			return nil, ErrEventNotFound
-// 		}
-// 		return nil, err
-// 	}
-
-// 	return order, nil
-// }

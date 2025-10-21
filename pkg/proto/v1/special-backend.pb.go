@@ -1612,58 +1612,6 @@ func (x *GetOrdersRequest) GetPerPage() int32 {
 	return 0
 }
 
-type UpdateOrderRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateOrderRequest) Reset() {
-	*x = UpdateOrderRequest{}
-	mi := &file_special_backend_proto_msgTypes[27]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateOrderRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateOrderRequest) ProtoMessage() {}
-
-func (x *UpdateOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[27]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateOrderRequest.ProtoReflect.Descriptor instead.
-func (*UpdateOrderRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{27}
-}
-
-func (x *UpdateOrderRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *UpdateOrderRequest) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
 type OrderItemInfoForList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1678,7 +1626,7 @@ type OrderItemInfoForList struct {
 
 func (x *OrderItemInfoForList) Reset() {
 	*x = OrderItemInfoForList{}
-	mi := &file_special_backend_proto_msgTypes[28]
+	mi := &file_special_backend_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1690,7 +1638,7 @@ func (x *OrderItemInfoForList) String() string {
 func (*OrderItemInfoForList) ProtoMessage() {}
 
 func (x *OrderItemInfoForList) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[28]
+	mi := &file_special_backend_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1703,7 +1651,7 @@ func (x *OrderItemInfoForList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderItemInfoForList.ProtoReflect.Descriptor instead.
 func (*OrderItemInfoForList) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{28}
+	return file_special_backend_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *OrderItemInfoForList) GetId() string {
@@ -1763,7 +1711,7 @@ type GetOrderInfoResponse struct {
 
 func (x *GetOrderInfoResponse) Reset() {
 	*x = GetOrderInfoResponse{}
-	mi := &file_special_backend_proto_msgTypes[29]
+	mi := &file_special_backend_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1775,7 +1723,7 @@ func (x *GetOrderInfoResponse) String() string {
 func (*GetOrderInfoResponse) ProtoMessage() {}
 
 func (x *GetOrderInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[29]
+	mi := &file_special_backend_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1788,7 +1736,7 @@ func (x *GetOrderInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrderInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetOrderInfoResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{29}
+	return file_special_backend_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetOrderInfoResponse) GetNumber() int32 {
@@ -1842,17 +1790,18 @@ func (x *GetOrderInfoResponse) GetItems() []*OrderItemInfoForList {
 
 type OrderInfoForList struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	Number         int32                  `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
-	CompletionDate *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=completion_date,json=completionDate,proto3" json:"completion_date,omitempty"`
-	Status         string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	OrderAmount    int32                  `protobuf:"varint,4,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
+	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Number         int32                  `protobuf:"varint,2,opt,name=number,proto3" json:"number,omitempty"`
+	CompletionDate *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=completion_date,json=completionDate,proto3" json:"completion_date,omitempty"`
+	Status         string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	OrderAmount    int32                  `protobuf:"varint,5,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
 func (x *OrderInfoForList) Reset() {
 	*x = OrderInfoForList{}
-	mi := &file_special_backend_proto_msgTypes[30]
+	mi := &file_special_backend_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1864,7 +1813,7 @@ func (x *OrderInfoForList) String() string {
 func (*OrderInfoForList) ProtoMessage() {}
 
 func (x *OrderInfoForList) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[30]
+	mi := &file_special_backend_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1877,7 +1826,14 @@ func (x *OrderInfoForList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderInfoForList.ProtoReflect.Descriptor instead.
 func (*OrderInfoForList) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{30}
+	return file_special_backend_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *OrderInfoForList) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *OrderInfoForList) GetNumber() int32 {
@@ -1920,7 +1876,7 @@ type GetOrdersResponse struct {
 
 func (x *GetOrdersResponse) Reset() {
 	*x = GetOrdersResponse{}
-	mi := &file_special_backend_proto_msgTypes[31]
+	mi := &file_special_backend_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1932,7 +1888,7 @@ func (x *GetOrdersResponse) String() string {
 func (*GetOrdersResponse) ProtoMessage() {}
 
 func (x *GetOrdersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[31]
+	mi := &file_special_backend_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1945,7 +1901,7 @@ func (x *GetOrdersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrdersResponse.ProtoReflect.Descriptor instead.
 func (*GetOrdersResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{31}
+	return file_special_backend_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GetOrdersResponse) GetOrders() []*OrderInfoForList {
@@ -2090,10 +2046,7 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"A\n" +
 	"\x10GetOrdersRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x19\n" +
-	"\bper_page\x18\x02 \x01(\x05R\aperPage\"<\n" +
-	"\x12UpdateOrderRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\"\xbe\x01\n" +
+	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\xbe\x01\n" +
 	"\x14OrderItemInfoForList\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\aitem_id\x18\x02 \x01(\tR\x06itemId\x12\x14\n" +
@@ -2108,17 +2061,18 @@ const file_special_backend_proto_rawDesc = "" +
 	"\acomment\x18\x04 \x01(\tR\acomment\x12\x16\n" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12!\n" +
 	"\forder_amount\x18\x06 \x01(\x05R\vorderAmount\x12:\n" +
-	"\x05items\x18\a \x03(\v2$.special_app_v1.OrderItemInfoForListR\x05items\"\xaa\x01\n" +
-	"\x10OrderInfoForList\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\x05R\x06number\x12C\n" +
-	"\x0fcompletion_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecompletionDate\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status\x12!\n" +
-	"\forder_amount\x18\x04 \x01(\x05R\vorderAmount\"\x92\x01\n" +
+	"\x05items\x18\a \x03(\v2$.special_app_v1.OrderItemInfoForListR\x05items\"\xba\x01\n" +
+	"\x10OrderInfoForList\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06number\x18\x02 \x01(\x05R\x06number\x12C\n" +
+	"\x0fcompletion_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecompletionDate\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12!\n" +
+	"\forder_amount\x18\x05 \x01(\x05R\vorderAmount\"\x92\x01\n" +
 	"\x11GetOrdersResponse\x128\n" +
 	"\x06orders\x18\x01 \x03(\v2 .special_app_v1.OrderInfoForListR\x06orders\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x19\n" +
-	"\bper_page\x18\x04 \x01(\x05R\aperPage2\xff\r\n" +
+	"\bper_page\x18\x04 \x01(\x05R\aperPage2\x8a\r\n" +
 	"\x11SpecialAppService\x12Z\n" +
 	"\n" +
 	"CreateUser\x12!.special_app_v1.CreateUserRequest\x1a\x16.google.protobuf.Empty\"\x11\x82\xd3\xe4\x93\x02\v\"\t/v1/users\x12j\n" +
@@ -2139,8 +2093,7 @@ const file_special_backend_proto_rawDesc = "" +
 	"/v1/orders\x12r\n" +
 	"\fGetOrderInfo\x12#.special_app_v1.GetOrderInfoRequest\x1a$.special_app_v1.GetOrderInfoResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/orders/{id}\x12d\n" +
 	"\tGetOrders\x12 .special_app_v1.GetOrdersRequest\x1a!.special_app_v1.GetOrdersResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/v1/orders\x12s\n" +
-	"\vUpdateOrder\x12\".special_app_v1.UpdateOrderRequest\x1a$.special_app_v1.GetOrderInfoResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*2\x0f/v1/orders/{id}B)Z'special_app/pkg/proto/v1;special_app_v1b\x06proto3"
+	"/v1/ordersB)Z'special_app/pkg/proto/v1;special_app_v1b\x06proto3"
 
 var (
 	file_special_backend_proto_rawDescOnce sync.Once
@@ -2154,7 +2107,7 @@ func file_special_backend_proto_rawDescGZIP() []byte {
 	return file_special_backend_proto_rawDescData
 }
 
-var file_special_backend_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_special_backend_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_special_backend_proto_goTypes = []any{
 	(*PictureInfo)(nil),              // 0: special_app_v1.PictureInfo
 	(*CreateUserRequest)(nil),        // 1: special_app_v1.CreateUserRequest
@@ -2183,36 +2136,35 @@ var file_special_backend_proto_goTypes = []any{
 	(*CreateOrderRequest)(nil),       // 24: special_app_v1.CreateOrderRequest
 	(*GetOrderInfoRequest)(nil),      // 25: special_app_v1.GetOrderInfoRequest
 	(*GetOrdersRequest)(nil),         // 26: special_app_v1.GetOrdersRequest
-	(*UpdateOrderRequest)(nil),       // 27: special_app_v1.UpdateOrderRequest
-	(*OrderItemInfoForList)(nil),     // 28: special_app_v1.OrderItemInfoForList
-	(*GetOrderInfoResponse)(nil),     // 29: special_app_v1.GetOrderInfoResponse
-	(*OrderInfoForList)(nil),         // 30: special_app_v1.OrderInfoForList
-	(*GetOrdersResponse)(nil),        // 31: special_app_v1.GetOrdersResponse
-	(*timestamppb.Timestamp)(nil),    // 32: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),            // 33: google.protobuf.Empty
+	(*OrderItemInfoForList)(nil),     // 27: special_app_v1.OrderItemInfoForList
+	(*GetOrderInfoResponse)(nil),     // 28: special_app_v1.GetOrderInfoResponse
+	(*OrderInfoForList)(nil),         // 29: special_app_v1.OrderInfoForList
+	(*GetOrdersResponse)(nil),        // 30: special_app_v1.GetOrdersResponse
+	(*timestamppb.Timestamp)(nil),    // 31: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),            // 32: google.protobuf.Empty
 }
 var file_special_backend_proto_depIdxs = []int32{
-	32, // 0: special_app_v1.GetEventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
+	31, // 0: special_app_v1.GetEventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
 	0,  // 1: special_app_v1.GetEventInfoResponse.pictures:type_name -> special_app_v1.PictureInfo
-	32, // 2: special_app_v1.EventInfoForList.datetime:type_name -> google.protobuf.Timestamp
+	31, // 2: special_app_v1.EventInfoForList.datetime:type_name -> google.protobuf.Timestamp
 	0,  // 3: special_app_v1.EventInfoForList.picture:type_name -> special_app_v1.PictureInfo
 	8,  // 4: special_app_v1.GetEventsResponse.events:type_name -> special_app_v1.EventInfoForList
-	32, // 5: special_app_v1.GetUserEventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
+	31, // 5: special_app_v1.GetUserEventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
 	0,  // 6: special_app_v1.GetUserEventInfoResponse.picture:type_name -> special_app_v1.PictureInfo
-	32, // 7: special_app_v1.UserEventInfoForList.datetime:type_name -> google.protobuf.Timestamp
+	31, // 7: special_app_v1.UserEventInfoForList.datetime:type_name -> google.protobuf.Timestamp
 	0,  // 8: special_app_v1.UserEventInfoForList.picture:type_name -> special_app_v1.PictureInfo
 	16, // 9: special_app_v1.GetUserEventsResponse.user_events:type_name -> special_app_v1.UserEventInfoForList
 	0,  // 10: special_app_v1.GetItemInfoResponse.pictures:type_name -> special_app_v1.PictureInfo
 	0,  // 11: special_app_v1.ItemInfoForList.picture:type_name -> special_app_v1.PictureInfo
 	21, // 12: special_app_v1.GetItemsResponse.items:type_name -> special_app_v1.ItemInfoForList
-	32, // 13: special_app_v1.CreateOrderRequest.completion_date:type_name -> google.protobuf.Timestamp
+	31, // 13: special_app_v1.CreateOrderRequest.completion_date:type_name -> google.protobuf.Timestamp
 	23, // 14: special_app_v1.CreateOrderRequest.items:type_name -> special_app_v1.OrderItemInfoForCreatng
 	0,  // 15: special_app_v1.OrderItemInfoForList.picture:type_name -> special_app_v1.PictureInfo
-	32, // 16: special_app_v1.GetOrderInfoResponse.form_date:type_name -> google.protobuf.Timestamp
-	32, // 17: special_app_v1.GetOrderInfoResponse.completion_date:type_name -> google.protobuf.Timestamp
-	28, // 18: special_app_v1.GetOrderInfoResponse.items:type_name -> special_app_v1.OrderItemInfoForList
-	32, // 19: special_app_v1.OrderInfoForList.completion_date:type_name -> google.protobuf.Timestamp
-	30, // 20: special_app_v1.GetOrdersResponse.orders:type_name -> special_app_v1.OrderInfoForList
+	31, // 16: special_app_v1.GetOrderInfoResponse.form_date:type_name -> google.protobuf.Timestamp
+	31, // 17: special_app_v1.GetOrderInfoResponse.completion_date:type_name -> google.protobuf.Timestamp
+	27, // 18: special_app_v1.GetOrderInfoResponse.items:type_name -> special_app_v1.OrderItemInfoForList
+	31, // 19: special_app_v1.OrderInfoForList.completion_date:type_name -> google.protobuf.Timestamp
+	29, // 20: special_app_v1.GetOrdersResponse.orders:type_name -> special_app_v1.OrderInfoForList
 	1,  // 21: special_app_v1.SpecialAppService.CreateUser:input_type -> special_app_v1.CreateUserRequest
 	2,  // 22: special_app_v1.SpecialAppService.UpdateUser:input_type -> special_app_v1.UpdateUserRequest
 	3,  // 23: special_app_v1.SpecialAppService.GetUser:input_type -> special_app_v1.GetUserRequest
@@ -2228,25 +2180,23 @@ var file_special_backend_proto_depIdxs = []int32{
 	24, // 33: special_app_v1.SpecialAppService.CreateOrder:input_type -> special_app_v1.CreateOrderRequest
 	25, // 34: special_app_v1.SpecialAppService.GetOrderInfo:input_type -> special_app_v1.GetOrderInfoRequest
 	26, // 35: special_app_v1.SpecialAppService.GetOrders:input_type -> special_app_v1.GetOrdersRequest
-	27, // 36: special_app_v1.SpecialAppService.UpdateOrder:input_type -> special_app_v1.UpdateOrderRequest
-	33, // 37: special_app_v1.SpecialAppService.CreateUser:output_type -> google.protobuf.Empty
-	4,  // 38: special_app_v1.SpecialAppService.UpdateUser:output_type -> special_app_v1.GetUserInfoResponse
-	4,  // 39: special_app_v1.SpecialAppService.GetUser:output_type -> special_app_v1.GetUserInfoResponse
-	7,  // 40: special_app_v1.SpecialAppService.GetEventInfo:output_type -> special_app_v1.GetEventInfoResponse
-	9,  // 41: special_app_v1.SpecialAppService.GetEvents:output_type -> special_app_v1.GetEventsResponse
-	33, // 42: special_app_v1.SpecialAppService.CreateUserEvent:output_type -> google.protobuf.Empty
-	15, // 43: special_app_v1.SpecialAppService.GetUserEventInfo:output_type -> special_app_v1.GetUserEventInfoResponse
-	17, // 44: special_app_v1.SpecialAppService.GetUserEvents:output_type -> special_app_v1.GetUserEventsResponse
-	15, // 45: special_app_v1.SpecialAppService.UpdateUserEvent:output_type -> special_app_v1.GetUserEventInfoResponse
-	33, // 46: special_app_v1.SpecialAppService.DeleteUserEvent:output_type -> google.protobuf.Empty
-	20, // 47: special_app_v1.SpecialAppService.GetItemInfo:output_type -> special_app_v1.GetItemInfoResponse
-	22, // 48: special_app_v1.SpecialAppService.GetItems:output_type -> special_app_v1.GetItemsResponse
-	33, // 49: special_app_v1.SpecialAppService.CreateOrder:output_type -> google.protobuf.Empty
-	29, // 50: special_app_v1.SpecialAppService.GetOrderInfo:output_type -> special_app_v1.GetOrderInfoResponse
-	31, // 51: special_app_v1.SpecialAppService.GetOrders:output_type -> special_app_v1.GetOrdersResponse
-	29, // 52: special_app_v1.SpecialAppService.UpdateOrder:output_type -> special_app_v1.GetOrderInfoResponse
-	37, // [37:53] is the sub-list for method output_type
-	21, // [21:37] is the sub-list for method input_type
+	32, // 36: special_app_v1.SpecialAppService.CreateUser:output_type -> google.protobuf.Empty
+	4,  // 37: special_app_v1.SpecialAppService.UpdateUser:output_type -> special_app_v1.GetUserInfoResponse
+	4,  // 38: special_app_v1.SpecialAppService.GetUser:output_type -> special_app_v1.GetUserInfoResponse
+	7,  // 39: special_app_v1.SpecialAppService.GetEventInfo:output_type -> special_app_v1.GetEventInfoResponse
+	9,  // 40: special_app_v1.SpecialAppService.GetEvents:output_type -> special_app_v1.GetEventsResponse
+	32, // 41: special_app_v1.SpecialAppService.CreateUserEvent:output_type -> google.protobuf.Empty
+	15, // 42: special_app_v1.SpecialAppService.GetUserEventInfo:output_type -> special_app_v1.GetUserEventInfoResponse
+	17, // 43: special_app_v1.SpecialAppService.GetUserEvents:output_type -> special_app_v1.GetUserEventsResponse
+	15, // 44: special_app_v1.SpecialAppService.UpdateUserEvent:output_type -> special_app_v1.GetUserEventInfoResponse
+	32, // 45: special_app_v1.SpecialAppService.DeleteUserEvent:output_type -> google.protobuf.Empty
+	20, // 46: special_app_v1.SpecialAppService.GetItemInfo:output_type -> special_app_v1.GetItemInfoResponse
+	22, // 47: special_app_v1.SpecialAppService.GetItems:output_type -> special_app_v1.GetItemsResponse
+	32, // 48: special_app_v1.SpecialAppService.CreateOrder:output_type -> google.protobuf.Empty
+	28, // 49: special_app_v1.SpecialAppService.GetOrderInfo:output_type -> special_app_v1.GetOrderInfoResponse
+	30, // 50: special_app_v1.SpecialAppService.GetOrders:output_type -> special_app_v1.GetOrdersResponse
+	36, // [36:51] is the sub-list for method output_type
+	21, // [21:36] is the sub-list for method input_type
 	21, // [21:21] is the sub-list for extension type_name
 	21, // [21:21] is the sub-list for extension extendee
 	0,  // [0:21] is the sub-list for field type_name
@@ -2265,7 +2215,7 @@ func file_special_backend_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_special_backend_proto_rawDesc), len(file_special_backend_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   32,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

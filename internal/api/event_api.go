@@ -45,7 +45,7 @@ func (h *EventServiceHandler) GetEventInfo(ctx context.Context, req *pb.GetEvent
 	pbPictures := make([]*pb.PictureInfo, 0, len(event.Pictures))
 	for _, picture := range event.Pictures {
 		pbPicture := &pb.PictureInfo{
-			Picture: picture.Path,
+			Picture:  picture.Path,
 			MimeType: picture.MimeType,
 		}
 		pbPictures = append(pbPictures, pbPicture)

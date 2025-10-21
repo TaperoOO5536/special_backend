@@ -92,12 +92,6 @@ service SpecialAppService {
       get: "/v1/orders"
     };
   }
-  rpc UpdateOrder(UpdateOrderRequest) returns (GetOrderInfoResponse) {
-    option (google.api.http) = {
-      patch: "/v1/orders/{id}"
-      body: "*"
-    };
-  }
 }
 
 // pictures
@@ -268,11 +262,6 @@ message GetOrdersRequest {
   int32 per_page = 2;
 }
 
-message UpdateOrderRequest {
-  string id = 1;
-  string status = 2;
-}
-
 message OrderItemInfoForList {
   string id = 1;
   string item_id = 2;
@@ -294,10 +283,11 @@ message GetOrderInfoResponse {
 }
 
 message OrderInfoForList {
-  int32 number = 1;
-  google.protobuf.Timestamp completion_date = 2;
-  string status = 3;
-  int32 order_amount = 4;
+  string id = 1;
+  int32 number = 2;
+  google.protobuf.Timestamp completion_date = 3;
+  string status = 4;
+  int32 order_amount = 5;
 }
 
 message GetOrdersResponse {

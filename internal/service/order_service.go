@@ -2,9 +2,12 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
+	"log"
 	"time"
 
+	"github.com/TaperoOO5536/special_backend/internal/kafka"
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/repository"
 	"github.com/google/uuid"
@@ -17,13 +20,15 @@ var (
 
 type OrderService struct {
 	orderRepo repository.OrderRepository
-	token    string
+	token     string
+	producer  *kafka.Producer
 }
 
-func NewOrderService(orderRepo repository.OrderRepository, token string) *OrderService {
+func NewOrderService(orderRepo repository.OrderRepository, token string, producer *kafka.Producer) *OrderService {
 	return &OrderService{
 		orderRepo: orderRepo,
 		token: token,
+		producer: producer,
 	}
 }
 
@@ -61,6 +66,34 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 	if err != nil {
 		return err
 	}
+
+	createdOrder, err := s.orderRepo.GetOrderInfo(ctx, input.OrderID)
+	if err != nil {
+		return err
+	}
+
+	go func() {
+		msg := models.CreatedOrder{
+			Number:         createdOrder.Number,
+			UserID:         user.ID,
+			CompletionDate: createdOrder.CompletionDate,
+			OrderAmount:    createdOrder.OrderAmount,
+		}
+		jsonMsg, err := json.Marshal(msg)
+		if err != nil {
+			log.Printf("failed to marshal message: %v", err)
+				return
+		}
+
+		err = s.producer.Produce(
+			string(jsonMsg),
+			"order",
+		)
+		if err != nil {
+				log.Printf("failed to produce message: %v", err)
+				return
+		}
+	}()
 	
 	return nil
 }

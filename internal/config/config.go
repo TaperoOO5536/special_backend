@@ -1,6 +1,7 @@
 package config
 
 import (
+	"database/sql"
 	"log"
 	"os"
 
@@ -32,16 +33,15 @@ func GetEnvDefault(key, defaultValue string) string {
 	return value
 }
 
-func NewDBClient(dsn string) *gorm.DB {
+func NewDBClient(dsn string) (*gorm.DB, *sql.DB) {
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
 
-	// sqlDB, err := db.DB()
-	// if err != nil {
-	// 	panic("failed to get database instance")
-	// }
-	// defer sqlDB.Close()
-	return db
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic("failed to get database instance")
+	}
+	return db, sqlDB
 }

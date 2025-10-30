@@ -94,13 +94,6 @@ service SpecialAppService {
   }
 }
 
-// pictures
-
-message PictureInfo {
-  bytes picture = 1;
-  string mime_type = 2;
-}
-
 // Users
 
 message CreateUserRequest {}
@@ -137,7 +130,7 @@ message GetEventInfoResponse {
   int32 price = 5;
   int32 total_seats = 6;
   int32 occupied_seats = 7;
-  repeated PictureInfo pictures = 8;
+  repeated string pictures = 8;
 }
 
 message EventInfoForList {
@@ -147,7 +140,7 @@ message EventInfoForList {
   int32 price = 4;
   int32 total_seats = 5;
   int32 occupied_seats = 6;
-  PictureInfo picture = 7;
+  string picture = 7;
 }
 
 message GetEventsResponse {
@@ -188,7 +181,7 @@ message GetUserEventInfoResponse {
   int32 number_of_guests = 3;
   string title = 4; 
   google.protobuf.Timestamp datetime = 5;
-  PictureInfo picture = 6;
+  string picture = 6;
 }
 
 message UserEventInfoForList {
@@ -196,7 +189,7 @@ message UserEventInfoForList {
   string event_id = 2;
   string title = 3;
   google.protobuf.Timestamp datetime = 4;
-  PictureInfo picture = 5;
+  string picture = 5;
 }
 
 message GetUserEventsResponse {
@@ -222,14 +215,14 @@ message GetItemInfoResponse {
   string title = 2;
   string description = 3;
   int32 price = 4;
-  repeated PictureInfo pictures = 5;
+  repeated string pictures = 5;
 }
 
 message ItemInfoForList {
   string id = 1;
   string title = 2;
   int32 price = 3;
-  PictureInfo picture = 4;
+  string picture = 4;
 }
 
 message GetItemsResponse {
@@ -268,7 +261,7 @@ message OrderItemInfoForList {
   string title = 3;
   int32 price = 4;
   int32 quantity = 5;
-  PictureInfo picture = 6;
+  string picture = 6;
 
 }
 

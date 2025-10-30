@@ -6,6 +6,5 @@ create table if not exists Events (
             Event_Price int not null,
             Total_Seats int not null,
             Occupied_Seats int not null,
-            Little_Picture bytea not null,
-            Mime_Type varchar (50) not null
+            Little_Picture text not null
         ); 

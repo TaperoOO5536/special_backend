@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/TaperoOO5536/special_backend/internal/config"
+	"github.com/TaperoOO5536/special_backend/internal/kafka"
 	"github.com/TaperoOO5536/special_backend/internal/repository"
 	"github.com/TaperoOO5536/special_backend/internal/service"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
@@ -47,7 +48,8 @@ func New(cfg *Config) *App {
 }
 
 func (a *App) Start(ctx context.Context) error {
-	db := config.NewDBClient(a.config.Dsn)
+	db, sqlDB := config.NewDBClient(a.config.Dsn)
+	defer sqlDB.Close()
 
 	itemRepo := repository.NewItemRepository(db)
 	eventRepo := repository.NewEventRepository(db)
@@ -58,7 +60,14 @@ func (a *App) Start(ctx context.Context) error {
 	itemService := service.NewItemService(itemRepo)
 	eventService := service.NewEventService(eventRepo)
 	userServive := service.NewUserService(userRepo, config.GetToken())
-	orderService := service.NewOrderService(orderRepo, config.GetToken())
+
+	p, err := kafka.NewProducer([]string{"localhost:9091"})
+	if err != nil {
+		return fmt.Errorf("failed to create kafka producer: %v", err)
+	}
+	defer p.Close()
+
+	orderService := service.NewOrderService(orderRepo, config.GetToken(), p)
 	userEventService := service.NewUserEventService(userEventRepo, eventRepo, config.GetToken())
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)

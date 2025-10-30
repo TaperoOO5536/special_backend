@@ -87,10 +87,7 @@ func (h *UserEventServiceHandler) GetUserEventInfo(ctx context.Context, req *pb.
 		NumberOfGuests: int32(userEvent.NumberOfGuests),
 		Title:          userEvent.Event.Title,
 		Datetime:       timestamppb.New(userEvent.Event.DateTime),
-		Picture:        &pb.PictureInfo{
-			Picture:  userEvent.Event.LittlePicture,
-			MimeType: userEvent.Event.MimeType,
-		},
+		Picture:  userEvent.Event.LittlePicture,
 	}, nil
 }
 
@@ -125,10 +122,7 @@ func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.Get
 			EventId:  userEvent.EventID.String(),
 			Title:    userEvent.Event.Title,
 			Datetime: timestamppb.New(userEvent.Event.DateTime),
-			Picture:  &pb.PictureInfo{
 			Picture:  userEvent.Event.LittlePicture,
-			MimeType: userEvent.Event.MimeType,
-		},
 		}
 		pbUserEvents = append(pbUserEvents, pbUserEvent)
 	}
@@ -174,10 +168,7 @@ func (h *UserEventServiceHandler) UpdateUserEvent(ctx context.Context, req *pb.U
 		NumberOfGuests: int32(userEvent.NumberOfGuests),
 		Title:          userEvent.Event.Title,
 		Datetime:       timestamppb.New(userEvent.Event.DateTime),
-		Picture:        &pb.PictureInfo{
 			Picture:  userEvent.Event.LittlePicture,
-			MimeType: userEvent.Event.MimeType,
-		},
 	}, nil
 }
 

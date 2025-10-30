@@ -24,58 +24,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type PictureInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Picture       []byte                 `protobuf:"bytes,1,opt,name=picture,proto3" json:"picture,omitempty"`
-	MimeType      string                 `protobuf:"bytes,2,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PictureInfo) Reset() {
-	*x = PictureInfo{}
-	mi := &file_special_backend_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PictureInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PictureInfo) ProtoMessage() {}
-
-func (x *PictureInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PictureInfo.ProtoReflect.Descriptor instead.
-func (*PictureInfo) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *PictureInfo) GetPicture() []byte {
-	if x != nil {
-		return x.Picture
-	}
-	return nil
-}
-
-func (x *PictureInfo) GetMimeType() string {
-	if x != nil {
-		return x.MimeType
-	}
-	return ""
-}
-
 type CreateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -84,7 +32,7 @@ type CreateUserRequest struct {
 
 func (x *CreateUserRequest) Reset() {
 	*x = CreateUserRequest{}
-	mi := &file_special_backend_proto_msgTypes[1]
+	mi := &file_special_backend_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -96,7 +44,7 @@ func (x *CreateUserRequest) String() string {
 func (*CreateUserRequest) ProtoMessage() {}
 
 func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[1]
+	mi := &file_special_backend_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -109,7 +57,7 @@ func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{1}
+	return file_special_backend_proto_rawDescGZIP(), []int{0}
 }
 
 type UpdateUserRequest struct {
@@ -121,7 +69,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_special_backend_proto_msgTypes[2]
+	mi := &file_special_backend_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -133,7 +81,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[2]
+	mi := &file_special_backend_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -146,7 +94,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{2}
+	return file_special_backend_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *UpdateUserRequest) GetPhoneNumber() string {
@@ -164,7 +112,7 @@ type GetUserRequest struct {
 
 func (x *GetUserRequest) Reset() {
 	*x = GetUserRequest{}
-	mi := &file_special_backend_proto_msgTypes[3]
+	mi := &file_special_backend_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +124,7 @@ func (x *GetUserRequest) String() string {
 func (*GetUserRequest) ProtoMessage() {}
 
 func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[3]
+	mi := &file_special_backend_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +137,7 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{3}
+	return file_special_backend_proto_rawDescGZIP(), []int{2}
 }
 
 type GetUserInfoResponse struct {
@@ -204,7 +152,7 @@ type GetUserInfoResponse struct {
 
 func (x *GetUserInfoResponse) Reset() {
 	*x = GetUserInfoResponse{}
-	mi := &file_special_backend_proto_msgTypes[4]
+	mi := &file_special_backend_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -216,7 +164,7 @@ func (x *GetUserInfoResponse) String() string {
 func (*GetUserInfoResponse) ProtoMessage() {}
 
 func (x *GetUserInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[4]
+	mi := &file_special_backend_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -229,7 +177,7 @@ func (x *GetUserInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetUserInfoResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{4}
+	return file_special_backend_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetUserInfoResponse) GetName() string {
@@ -269,7 +217,7 @@ type GetEventInfoRequest struct {
 
 func (x *GetEventInfoRequest) Reset() {
 	*x = GetEventInfoRequest{}
-	mi := &file_special_backend_proto_msgTypes[5]
+	mi := &file_special_backend_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -281,7 +229,7 @@ func (x *GetEventInfoRequest) String() string {
 func (*GetEventInfoRequest) ProtoMessage() {}
 
 func (x *GetEventInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[5]
+	mi := &file_special_backend_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -294,7 +242,7 @@ func (x *GetEventInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEventInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetEventInfoRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{5}
+	return file_special_backend_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetEventInfoRequest) GetId() string {
@@ -314,7 +262,7 @@ type GetEventsRequest struct {
 
 func (x *GetEventsRequest) Reset() {
 	*x = GetEventsRequest{}
-	mi := &file_special_backend_proto_msgTypes[6]
+	mi := &file_special_backend_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -326,7 +274,7 @@ func (x *GetEventsRequest) String() string {
 func (*GetEventsRequest) ProtoMessage() {}
 
 func (x *GetEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[6]
+	mi := &file_special_backend_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -339,7 +287,7 @@ func (x *GetEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEventsRequest.ProtoReflect.Descriptor instead.
 func (*GetEventsRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{6}
+	return file_special_backend_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetEventsRequest) GetPage() int32 {
@@ -365,14 +313,14 @@ type GetEventInfoResponse struct {
 	Price         int32                  `protobuf:"varint,5,opt,name=price,proto3" json:"price,omitempty"`
 	TotalSeats    int32                  `protobuf:"varint,6,opt,name=total_seats,json=totalSeats,proto3" json:"total_seats,omitempty"`
 	OccupiedSeats int32                  `protobuf:"varint,7,opt,name=occupied_seats,json=occupiedSeats,proto3" json:"occupied_seats,omitempty"`
-	Pictures      []*PictureInfo         `protobuf:"bytes,8,rep,name=pictures,proto3" json:"pictures,omitempty"`
+	Pictures      []string               `protobuf:"bytes,8,rep,name=pictures,proto3" json:"pictures,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetEventInfoResponse) Reset() {
 	*x = GetEventInfoResponse{}
-	mi := &file_special_backend_proto_msgTypes[7]
+	mi := &file_special_backend_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -384,7 +332,7 @@ func (x *GetEventInfoResponse) String() string {
 func (*GetEventInfoResponse) ProtoMessage() {}
 
 func (x *GetEventInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[7]
+	mi := &file_special_backend_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -397,7 +345,7 @@ func (x *GetEventInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEventInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetEventInfoResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{7}
+	return file_special_backend_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetEventInfoResponse) GetId() string {
@@ -449,7 +397,7 @@ func (x *GetEventInfoResponse) GetOccupiedSeats() int32 {
 	return 0
 }
 
-func (x *GetEventInfoResponse) GetPictures() []*PictureInfo {
+func (x *GetEventInfoResponse) GetPictures() []string {
 	if x != nil {
 		return x.Pictures
 	}
@@ -464,14 +412,14 @@ type EventInfoForList struct {
 	Price         int32                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
 	TotalSeats    int32                  `protobuf:"varint,5,opt,name=total_seats,json=totalSeats,proto3" json:"total_seats,omitempty"`
 	OccupiedSeats int32                  `protobuf:"varint,6,opt,name=occupied_seats,json=occupiedSeats,proto3" json:"occupied_seats,omitempty"`
-	Picture       *PictureInfo           `protobuf:"bytes,7,opt,name=picture,proto3" json:"picture,omitempty"`
+	Picture       string                 `protobuf:"bytes,7,opt,name=picture,proto3" json:"picture,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *EventInfoForList) Reset() {
 	*x = EventInfoForList{}
-	mi := &file_special_backend_proto_msgTypes[8]
+	mi := &file_special_backend_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -483,7 +431,7 @@ func (x *EventInfoForList) String() string {
 func (*EventInfoForList) ProtoMessage() {}
 
 func (x *EventInfoForList) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[8]
+	mi := &file_special_backend_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -496,7 +444,7 @@ func (x *EventInfoForList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventInfoForList.ProtoReflect.Descriptor instead.
 func (*EventInfoForList) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{8}
+	return file_special_backend_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *EventInfoForList) GetId() string {
@@ -541,11 +489,11 @@ func (x *EventInfoForList) GetOccupiedSeats() int32 {
 	return 0
 }
 
-func (x *EventInfoForList) GetPicture() *PictureInfo {
+func (x *EventInfoForList) GetPicture() string {
 	if x != nil {
 		return x.Picture
 	}
-	return nil
+	return ""
 }
 
 type GetEventsResponse struct {
@@ -560,7 +508,7 @@ type GetEventsResponse struct {
 
 func (x *GetEventsResponse) Reset() {
 	*x = GetEventsResponse{}
-	mi := &file_special_backend_proto_msgTypes[9]
+	mi := &file_special_backend_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -572,7 +520,7 @@ func (x *GetEventsResponse) String() string {
 func (*GetEventsResponse) ProtoMessage() {}
 
 func (x *GetEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[9]
+	mi := &file_special_backend_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -585,7 +533,7 @@ func (x *GetEventsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEventsResponse.ProtoReflect.Descriptor instead.
 func (*GetEventsResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{9}
+	return file_special_backend_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetEventsResponse) GetEvents() []*EventInfoForList {
@@ -626,7 +574,7 @@ type CreateUserEventRequest struct {
 
 func (x *CreateUserEventRequest) Reset() {
 	*x = CreateUserEventRequest{}
-	mi := &file_special_backend_proto_msgTypes[10]
+	mi := &file_special_backend_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -638,7 +586,7 @@ func (x *CreateUserEventRequest) String() string {
 func (*CreateUserEventRequest) ProtoMessage() {}
 
 func (x *CreateUserEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[10]
+	mi := &file_special_backend_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -651,7 +599,7 @@ func (x *CreateUserEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserEventRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserEventRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{10}
+	return file_special_backend_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateUserEventRequest) GetEventId() string {
@@ -677,7 +625,7 @@ type GetUserEventInfoRequest struct {
 
 func (x *GetUserEventInfoRequest) Reset() {
 	*x = GetUserEventInfoRequest{}
-	mi := &file_special_backend_proto_msgTypes[11]
+	mi := &file_special_backend_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -689,7 +637,7 @@ func (x *GetUserEventInfoRequest) String() string {
 func (*GetUserEventInfoRequest) ProtoMessage() {}
 
 func (x *GetUserEventInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[11]
+	mi := &file_special_backend_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -702,7 +650,7 @@ func (x *GetUserEventInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserEventInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetUserEventInfoRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{11}
+	return file_special_backend_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetUserEventInfoRequest) GetId() string {
@@ -722,7 +670,7 @@ type GetUserEventsRequest struct {
 
 func (x *GetUserEventsRequest) Reset() {
 	*x = GetUserEventsRequest{}
-	mi := &file_special_backend_proto_msgTypes[12]
+	mi := &file_special_backend_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -734,7 +682,7 @@ func (x *GetUserEventsRequest) String() string {
 func (*GetUserEventsRequest) ProtoMessage() {}
 
 func (x *GetUserEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[12]
+	mi := &file_special_backend_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -747,7 +695,7 @@ func (x *GetUserEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserEventsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserEventsRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{12}
+	return file_special_backend_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetUserEventsRequest) GetPage() int32 {
@@ -774,7 +722,7 @@ type UpdateUserEventRequest struct {
 
 func (x *UpdateUserEventRequest) Reset() {
 	*x = UpdateUserEventRequest{}
-	mi := &file_special_backend_proto_msgTypes[13]
+	mi := &file_special_backend_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -786,7 +734,7 @@ func (x *UpdateUserEventRequest) String() string {
 func (*UpdateUserEventRequest) ProtoMessage() {}
 
 func (x *UpdateUserEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[13]
+	mi := &file_special_backend_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -799,7 +747,7 @@ func (x *UpdateUserEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserEventRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserEventRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{13}
+	return file_special_backend_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateUserEventRequest) GetId() string {
@@ -825,7 +773,7 @@ type DeleteUserEventRequest struct {
 
 func (x *DeleteUserEventRequest) Reset() {
 	*x = DeleteUserEventRequest{}
-	mi := &file_special_backend_proto_msgTypes[14]
+	mi := &file_special_backend_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -837,7 +785,7 @@ func (x *DeleteUserEventRequest) String() string {
 func (*DeleteUserEventRequest) ProtoMessage() {}
 
 func (x *DeleteUserEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[14]
+	mi := &file_special_backend_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -850,7 +798,7 @@ func (x *DeleteUserEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserEventRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserEventRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{14}
+	return file_special_backend_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *DeleteUserEventRequest) GetId() string {
@@ -867,14 +815,14 @@ type GetUserEventInfoResponse struct {
 	NumberOfGuests int32                  `protobuf:"varint,3,opt,name=number_of_guests,json=numberOfGuests,proto3" json:"number_of_guests,omitempty"`
 	Title          string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
 	Datetime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=datetime,proto3" json:"datetime,omitempty"`
-	Picture        *PictureInfo           `protobuf:"bytes,6,opt,name=picture,proto3" json:"picture,omitempty"`
+	Picture        string                 `protobuf:"bytes,6,opt,name=picture,proto3" json:"picture,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GetUserEventInfoResponse) Reset() {
 	*x = GetUserEventInfoResponse{}
-	mi := &file_special_backend_proto_msgTypes[15]
+	mi := &file_special_backend_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -886,7 +834,7 @@ func (x *GetUserEventInfoResponse) String() string {
 func (*GetUserEventInfoResponse) ProtoMessage() {}
 
 func (x *GetUserEventInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[15]
+	mi := &file_special_backend_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -899,7 +847,7 @@ func (x *GetUserEventInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserEventInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetUserEventInfoResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{15}
+	return file_special_backend_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetUserEventInfoResponse) GetId() string {
@@ -937,11 +885,11 @@ func (x *GetUserEventInfoResponse) GetDatetime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetUserEventInfoResponse) GetPicture() *PictureInfo {
+func (x *GetUserEventInfoResponse) GetPicture() string {
 	if x != nil {
 		return x.Picture
 	}
-	return nil
+	return ""
 }
 
 type UserEventInfoForList struct {
@@ -950,14 +898,14 @@ type UserEventInfoForList struct {
 	EventId       string                 `protobuf:"bytes,2,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
 	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	Datetime      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=datetime,proto3" json:"datetime,omitempty"`
-	Picture       *PictureInfo           `protobuf:"bytes,5,opt,name=picture,proto3" json:"picture,omitempty"`
+	Picture       string                 `protobuf:"bytes,5,opt,name=picture,proto3" json:"picture,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserEventInfoForList) Reset() {
 	*x = UserEventInfoForList{}
-	mi := &file_special_backend_proto_msgTypes[16]
+	mi := &file_special_backend_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -969,7 +917,7 @@ func (x *UserEventInfoForList) String() string {
 func (*UserEventInfoForList) ProtoMessage() {}
 
 func (x *UserEventInfoForList) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[16]
+	mi := &file_special_backend_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -982,7 +930,7 @@ func (x *UserEventInfoForList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEventInfoForList.ProtoReflect.Descriptor instead.
 func (*UserEventInfoForList) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{16}
+	return file_special_backend_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UserEventInfoForList) GetId() string {
@@ -1013,11 +961,11 @@ func (x *UserEventInfoForList) GetDatetime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *UserEventInfoForList) GetPicture() *PictureInfo {
+func (x *UserEventInfoForList) GetPicture() string {
 	if x != nil {
 		return x.Picture
 	}
-	return nil
+	return ""
 }
 
 type GetUserEventsResponse struct {
@@ -1032,7 +980,7 @@ type GetUserEventsResponse struct {
 
 func (x *GetUserEventsResponse) Reset() {
 	*x = GetUserEventsResponse{}
-	mi := &file_special_backend_proto_msgTypes[17]
+	mi := &file_special_backend_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1044,7 +992,7 @@ func (x *GetUserEventsResponse) String() string {
 func (*GetUserEventsResponse) ProtoMessage() {}
 
 func (x *GetUserEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[17]
+	mi := &file_special_backend_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1057,7 +1005,7 @@ func (x *GetUserEventsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserEventsResponse.ProtoReflect.Descriptor instead.
 func (*GetUserEventsResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{17}
+	return file_special_backend_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetUserEventsResponse) GetUserEvents() []*UserEventInfoForList {
@@ -1097,7 +1045,7 @@ type GetItemInfoRequest struct {
 
 func (x *GetItemInfoRequest) Reset() {
 	*x = GetItemInfoRequest{}
-	mi := &file_special_backend_proto_msgTypes[18]
+	mi := &file_special_backend_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1109,7 +1057,7 @@ func (x *GetItemInfoRequest) String() string {
 func (*GetItemInfoRequest) ProtoMessage() {}
 
 func (x *GetItemInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[18]
+	mi := &file_special_backend_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1122,7 +1070,7 @@ func (x *GetItemInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetItemInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetItemInfoRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{18}
+	return file_special_backend_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetItemInfoRequest) GetId() string {
@@ -1142,7 +1090,7 @@ type GetItemsRequest struct {
 
 func (x *GetItemsRequest) Reset() {
 	*x = GetItemsRequest{}
-	mi := &file_special_backend_proto_msgTypes[19]
+	mi := &file_special_backend_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1154,7 +1102,7 @@ func (x *GetItemsRequest) String() string {
 func (*GetItemsRequest) ProtoMessage() {}
 
 func (x *GetItemsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[19]
+	mi := &file_special_backend_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1167,7 +1115,7 @@ func (x *GetItemsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetItemsRequest.ProtoReflect.Descriptor instead.
 func (*GetItemsRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{19}
+	return file_special_backend_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetItemsRequest) GetPage() int32 {
@@ -1190,14 +1138,14 @@ type GetItemInfoResponse struct {
 	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Price         int32                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
-	Pictures      []*PictureInfo         `protobuf:"bytes,5,rep,name=pictures,proto3" json:"pictures,omitempty"`
+	Pictures      []string               `protobuf:"bytes,5,rep,name=pictures,proto3" json:"pictures,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetItemInfoResponse) Reset() {
 	*x = GetItemInfoResponse{}
-	mi := &file_special_backend_proto_msgTypes[20]
+	mi := &file_special_backend_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1209,7 +1157,7 @@ func (x *GetItemInfoResponse) String() string {
 func (*GetItemInfoResponse) ProtoMessage() {}
 
 func (x *GetItemInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[20]
+	mi := &file_special_backend_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1222,7 +1170,7 @@ func (x *GetItemInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetItemInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetItemInfoResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{20}
+	return file_special_backend_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetItemInfoResponse) GetId() string {
@@ -1253,7 +1201,7 @@ func (x *GetItemInfoResponse) GetPrice() int32 {
 	return 0
 }
 
-func (x *GetItemInfoResponse) GetPictures() []*PictureInfo {
+func (x *GetItemInfoResponse) GetPictures() []string {
 	if x != nil {
 		return x.Pictures
 	}
@@ -1265,14 +1213,14 @@ type ItemInfoForList struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Price         int32                  `protobuf:"varint,3,opt,name=price,proto3" json:"price,omitempty"`
-	Picture       *PictureInfo           `protobuf:"bytes,4,opt,name=picture,proto3" json:"picture,omitempty"`
+	Picture       string                 `protobuf:"bytes,4,opt,name=picture,proto3" json:"picture,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ItemInfoForList) Reset() {
 	*x = ItemInfoForList{}
-	mi := &file_special_backend_proto_msgTypes[21]
+	mi := &file_special_backend_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1284,7 +1232,7 @@ func (x *ItemInfoForList) String() string {
 func (*ItemInfoForList) ProtoMessage() {}
 
 func (x *ItemInfoForList) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[21]
+	mi := &file_special_backend_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1297,7 +1245,7 @@ func (x *ItemInfoForList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemInfoForList.ProtoReflect.Descriptor instead.
 func (*ItemInfoForList) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{21}
+	return file_special_backend_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ItemInfoForList) GetId() string {
@@ -1321,11 +1269,11 @@ func (x *ItemInfoForList) GetPrice() int32 {
 	return 0
 }
 
-func (x *ItemInfoForList) GetPicture() *PictureInfo {
+func (x *ItemInfoForList) GetPicture() string {
 	if x != nil {
 		return x.Picture
 	}
-	return nil
+	return ""
 }
 
 type GetItemsResponse struct {
@@ -1340,7 +1288,7 @@ type GetItemsResponse struct {
 
 func (x *GetItemsResponse) Reset() {
 	*x = GetItemsResponse{}
-	mi := &file_special_backend_proto_msgTypes[22]
+	mi := &file_special_backend_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1352,7 +1300,7 @@ func (x *GetItemsResponse) String() string {
 func (*GetItemsResponse) ProtoMessage() {}
 
 func (x *GetItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[22]
+	mi := &file_special_backend_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1365,7 +1313,7 @@ func (x *GetItemsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetItemsResponse.ProtoReflect.Descriptor instead.
 func (*GetItemsResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{22}
+	return file_special_backend_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetItemsResponse) GetItems() []*ItemInfoForList {
@@ -1406,7 +1354,7 @@ type OrderItemInfoForCreatng struct {
 
 func (x *OrderItemInfoForCreatng) Reset() {
 	*x = OrderItemInfoForCreatng{}
-	mi := &file_special_backend_proto_msgTypes[23]
+	mi := &file_special_backend_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1418,7 +1366,7 @@ func (x *OrderItemInfoForCreatng) String() string {
 func (*OrderItemInfoForCreatng) ProtoMessage() {}
 
 func (x *OrderItemInfoForCreatng) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[23]
+	mi := &file_special_backend_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1431,7 +1379,7 @@ func (x *OrderItemInfoForCreatng) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderItemInfoForCreatng.ProtoReflect.Descriptor instead.
 func (*OrderItemInfoForCreatng) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{23}
+	return file_special_backend_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *OrderItemInfoForCreatng) GetItemId() string {
@@ -1460,7 +1408,7 @@ type CreateOrderRequest struct {
 
 func (x *CreateOrderRequest) Reset() {
 	*x = CreateOrderRequest{}
-	mi := &file_special_backend_proto_msgTypes[24]
+	mi := &file_special_backend_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1472,7 +1420,7 @@ func (x *CreateOrderRequest) String() string {
 func (*CreateOrderRequest) ProtoMessage() {}
 
 func (x *CreateOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[24]
+	mi := &file_special_backend_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1485,7 +1433,7 @@ func (x *CreateOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOrderRequest.ProtoReflect.Descriptor instead.
 func (*CreateOrderRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{24}
+	return file_special_backend_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CreateOrderRequest) GetCompletionDate() *timestamppb.Timestamp {
@@ -1525,7 +1473,7 @@ type GetOrderInfoRequest struct {
 
 func (x *GetOrderInfoRequest) Reset() {
 	*x = GetOrderInfoRequest{}
-	mi := &file_special_backend_proto_msgTypes[25]
+	mi := &file_special_backend_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1537,7 +1485,7 @@ func (x *GetOrderInfoRequest) String() string {
 func (*GetOrderInfoRequest) ProtoMessage() {}
 
 func (x *GetOrderInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[25]
+	mi := &file_special_backend_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1550,7 +1498,7 @@ func (x *GetOrderInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrderInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetOrderInfoRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{25}
+	return file_special_backend_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GetOrderInfoRequest) GetId() string {
@@ -1570,7 +1518,7 @@ type GetOrdersRequest struct {
 
 func (x *GetOrdersRequest) Reset() {
 	*x = GetOrdersRequest{}
-	mi := &file_special_backend_proto_msgTypes[26]
+	mi := &file_special_backend_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1582,7 +1530,7 @@ func (x *GetOrdersRequest) String() string {
 func (*GetOrdersRequest) ProtoMessage() {}
 
 func (x *GetOrdersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[26]
+	mi := &file_special_backend_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1595,7 +1543,7 @@ func (x *GetOrdersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrdersRequest.ProtoReflect.Descriptor instead.
 func (*GetOrdersRequest) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{26}
+	return file_special_backend_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *GetOrdersRequest) GetPage() int32 {
@@ -1619,14 +1567,14 @@ type OrderItemInfoForList struct {
 	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	Price         int32                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
 	Quantity      int32                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	Picture       *PictureInfo           `protobuf:"bytes,6,opt,name=picture,proto3" json:"picture,omitempty"`
+	Picture       string                 `protobuf:"bytes,6,opt,name=picture,proto3" json:"picture,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OrderItemInfoForList) Reset() {
 	*x = OrderItemInfoForList{}
-	mi := &file_special_backend_proto_msgTypes[27]
+	mi := &file_special_backend_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1638,7 +1586,7 @@ func (x *OrderItemInfoForList) String() string {
 func (*OrderItemInfoForList) ProtoMessage() {}
 
 func (x *OrderItemInfoForList) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[27]
+	mi := &file_special_backend_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1651,7 +1599,7 @@ func (x *OrderItemInfoForList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderItemInfoForList.ProtoReflect.Descriptor instead.
 func (*OrderItemInfoForList) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{27}
+	return file_special_backend_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *OrderItemInfoForList) GetId() string {
@@ -1689,11 +1637,11 @@ func (x *OrderItemInfoForList) GetQuantity() int32 {
 	return 0
 }
 
-func (x *OrderItemInfoForList) GetPicture() *PictureInfo {
+func (x *OrderItemInfoForList) GetPicture() string {
 	if x != nil {
 		return x.Picture
 	}
-	return nil
+	return ""
 }
 
 type GetOrderInfoResponse struct {
@@ -1711,7 +1659,7 @@ type GetOrderInfoResponse struct {
 
 func (x *GetOrderInfoResponse) Reset() {
 	*x = GetOrderInfoResponse{}
-	mi := &file_special_backend_proto_msgTypes[28]
+	mi := &file_special_backend_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1723,7 +1671,7 @@ func (x *GetOrderInfoResponse) String() string {
 func (*GetOrderInfoResponse) ProtoMessage() {}
 
 func (x *GetOrderInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[28]
+	mi := &file_special_backend_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1736,7 +1684,7 @@ func (x *GetOrderInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrderInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetOrderInfoResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{28}
+	return file_special_backend_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetOrderInfoResponse) GetNumber() int32 {
@@ -1801,7 +1749,7 @@ type OrderInfoForList struct {
 
 func (x *OrderInfoForList) Reset() {
 	*x = OrderInfoForList{}
-	mi := &file_special_backend_proto_msgTypes[29]
+	mi := &file_special_backend_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1813,7 +1761,7 @@ func (x *OrderInfoForList) String() string {
 func (*OrderInfoForList) ProtoMessage() {}
 
 func (x *OrderInfoForList) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[29]
+	mi := &file_special_backend_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1826,7 +1774,7 @@ func (x *OrderInfoForList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderInfoForList.ProtoReflect.Descriptor instead.
 func (*OrderInfoForList) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{29}
+	return file_special_backend_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *OrderInfoForList) GetId() string {
@@ -1876,7 +1824,7 @@ type GetOrdersResponse struct {
 
 func (x *GetOrdersResponse) Reset() {
 	*x = GetOrdersResponse{}
-	mi := &file_special_backend_proto_msgTypes[30]
+	mi := &file_special_backend_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1888,7 +1836,7 @@ func (x *GetOrdersResponse) String() string {
 func (*GetOrdersResponse) ProtoMessage() {}
 
 func (x *GetOrdersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_special_backend_proto_msgTypes[30]
+	mi := &file_special_backend_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1901,7 +1849,7 @@ func (x *GetOrdersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrdersResponse.ProtoReflect.Descriptor instead.
 func (*GetOrdersResponse) Descriptor() ([]byte, []int) {
-	return file_special_backend_proto_rawDescGZIP(), []int{30}
+	return file_special_backend_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetOrdersResponse) GetOrders() []*OrderInfoForList {
@@ -1936,10 +1884,7 @@ var File_special_backend_proto protoreflect.FileDescriptor
 
 const file_special_backend_proto_rawDesc = "" +
 	"\n" +
-	"\x15special-backend.proto\x12\x0especial_app_v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"D\n" +
-	"\vPictureInfo\x12\x18\n" +
-	"\apicture\x18\x01 \x01(\fR\apicture\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType\"\x13\n" +
+	"\x15special-backend.proto\x12\x0especial_app_v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\x13\n" +
 	"\x11CreateUserRequest\"L\n" +
 	"\x11UpdateUserRequest\x12&\n" +
 	"\fphone_number\x18\x01 \x01(\tH\x00R\vphoneNumber\x88\x01\x01B\x0f\n" +
@@ -1954,7 +1899,7 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"A\n" +
 	"\x10GetEventsRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x19\n" +
-	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\xad\x02\n" +
+	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\x90\x02\n" +
 	"\x14GetEventInfoResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
@@ -1963,8 +1908,8 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x05price\x18\x05 \x01(\x05R\x05price\x12\x1f\n" +
 	"\vtotal_seats\x18\x06 \x01(\x05R\n" +
 	"totalSeats\x12%\n" +
-	"\x0eoccupied_seats\x18\a \x01(\x05R\roccupiedSeats\x127\n" +
-	"\bpictures\x18\b \x03(\v2\x1b.special_app_v1.PictureInfoR\bpictures\"\x85\x02\n" +
+	"\x0eoccupied_seats\x18\a \x01(\x05R\roccupiedSeats\x12\x1a\n" +
+	"\bpictures\x18\b \x03(\tR\bpictures\"\xe8\x01\n" +
 	"\x10EventInfoForList\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x126\n" +
@@ -1972,8 +1917,8 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x05price\x18\x04 \x01(\x05R\x05price\x12\x1f\n" +
 	"\vtotal_seats\x18\x05 \x01(\x05R\n" +
 	"totalSeats\x12%\n" +
-	"\x0eoccupied_seats\x18\x06 \x01(\x05R\roccupiedSeats\x125\n" +
-	"\apicture\x18\a \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\x92\x01\n" +
+	"\x0eoccupied_seats\x18\x06 \x01(\x05R\roccupiedSeats\x12\x18\n" +
+	"\apicture\x18\a \x01(\tR\apicture\"\x92\x01\n" +
 	"\x11GetEventsResponse\x128\n" +
 	"\x06events\x18\x01 \x03(\v2 .special_app_v1.EventInfoForListR\x06events\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
@@ -1991,20 +1936,20 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12(\n" +
 	"\x10number_of_guests\x18\x02 \x01(\x05R\x0enumberOfGuests\"(\n" +
 	"\x16DeleteUserEventRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\xf4\x01\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\xd7\x01\n" +
 	"\x18GetUserEventInfoResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bevent_id\x18\x02 \x01(\tR\aeventId\x12(\n" +
 	"\x10number_of_guests\x18\x03 \x01(\x05R\x0enumberOfGuests\x12\x14\n" +
 	"\x05title\x18\x04 \x01(\tR\x05title\x126\n" +
-	"\bdatetime\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x125\n" +
-	"\apicture\x18\x06 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\xc6\x01\n" +
+	"\bdatetime\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x12\x18\n" +
+	"\apicture\x18\x06 \x01(\tR\apicture\"\xa9\x01\n" +
 	"\x14UserEventInfoForList\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bevent_id\x18\x02 \x01(\tR\aeventId\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x126\n" +
-	"\bdatetime\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x125\n" +
-	"\apicture\x18\x05 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\xa3\x01\n" +
+	"\bdatetime\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bdatetime\x12\x18\n" +
+	"\apicture\x18\x05 \x01(\tR\apicture\"\xa3\x01\n" +
 	"\x15GetUserEventsResponse\x12E\n" +
 	"\vuser_events\x18\x01 \x03(\v2$.special_app_v1.UserEventInfoForListR\n" +
 	"userEvents\x12\x14\n" +
@@ -2015,18 +1960,18 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"@\n" +
 	"\x0fGetItemsRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x19\n" +
-	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\xac\x01\n" +
+	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\x8f\x01\n" +
 	"\x13GetItemInfoResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x14\n" +
-	"\x05price\x18\x04 \x01(\x05R\x05price\x127\n" +
-	"\bpictures\x18\x05 \x03(\v2\x1b.special_app_v1.PictureInfoR\bpictures\"\x84\x01\n" +
+	"\x05price\x18\x04 \x01(\x05R\x05price\x12\x1a\n" +
+	"\bpictures\x18\x05 \x03(\tR\bpictures\"g\n" +
 	"\x0fItemInfoForList\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x14\n" +
-	"\x05price\x18\x03 \x01(\x05R\x05price\x125\n" +
-	"\apicture\x18\x04 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\x8e\x01\n" +
+	"\x05price\x18\x03 \x01(\x05R\x05price\x12\x18\n" +
+	"\apicture\x18\x04 \x01(\tR\apicture\"\x8e\x01\n" +
 	"\x10GetItemsResponse\x125\n" +
 	"\x05items\x18\x01 \x03(\v2\x1f.special_app_v1.ItemInfoForListR\x05items\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
@@ -2046,14 +1991,14 @@ const file_special_backend_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"A\n" +
 	"\x10GetOrdersRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x19\n" +
-	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\xbe\x01\n" +
+	"\bper_page\x18\x02 \x01(\x05R\aperPage\"\xa1\x01\n" +
 	"\x14OrderItemInfoForList\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\aitem_id\x18\x02 \x01(\tR\x06itemId\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x14\n" +
 	"\x05price\x18\x04 \x01(\x05R\x05price\x12\x1a\n" +
-	"\bquantity\x18\x05 \x01(\x05R\bquantity\x125\n" +
-	"\apicture\x18\x06 \x01(\v2\x1b.special_app_v1.PictureInfoR\apicture\"\xbd\x02\n" +
+	"\bquantity\x18\x05 \x01(\x05R\bquantity\x12\x18\n" +
+	"\apicture\x18\x06 \x01(\tR\apicture\"\xbd\x02\n" +
 	"\x14GetOrderInfoResponse\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\x05R\x06number\x127\n" +
 	"\tform_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\bformDate\x12C\n" +
@@ -2107,99 +2052,91 @@ func file_special_backend_proto_rawDescGZIP() []byte {
 	return file_special_backend_proto_rawDescData
 }
 
-var file_special_backend_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_special_backend_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_special_backend_proto_goTypes = []any{
-	(*PictureInfo)(nil),              // 0: special_app_v1.PictureInfo
-	(*CreateUserRequest)(nil),        // 1: special_app_v1.CreateUserRequest
-	(*UpdateUserRequest)(nil),        // 2: special_app_v1.UpdateUserRequest
-	(*GetUserRequest)(nil),           // 3: special_app_v1.GetUserRequest
-	(*GetUserInfoResponse)(nil),      // 4: special_app_v1.GetUserInfoResponse
-	(*GetEventInfoRequest)(nil),      // 5: special_app_v1.GetEventInfoRequest
-	(*GetEventsRequest)(nil),         // 6: special_app_v1.GetEventsRequest
-	(*GetEventInfoResponse)(nil),     // 7: special_app_v1.GetEventInfoResponse
-	(*EventInfoForList)(nil),         // 8: special_app_v1.EventInfoForList
-	(*GetEventsResponse)(nil),        // 9: special_app_v1.GetEventsResponse
-	(*CreateUserEventRequest)(nil),   // 10: special_app_v1.CreateUserEventRequest
-	(*GetUserEventInfoRequest)(nil),  // 11: special_app_v1.GetUserEventInfoRequest
-	(*GetUserEventsRequest)(nil),     // 12: special_app_v1.GetUserEventsRequest
-	(*UpdateUserEventRequest)(nil),   // 13: special_app_v1.UpdateUserEventRequest
-	(*DeleteUserEventRequest)(nil),   // 14: special_app_v1.DeleteUserEventRequest
-	(*GetUserEventInfoResponse)(nil), // 15: special_app_v1.GetUserEventInfoResponse
-	(*UserEventInfoForList)(nil),     // 16: special_app_v1.UserEventInfoForList
-	(*GetUserEventsResponse)(nil),    // 17: special_app_v1.GetUserEventsResponse
-	(*GetItemInfoRequest)(nil),       // 18: special_app_v1.GetItemInfoRequest
-	(*GetItemsRequest)(nil),          // 19: special_app_v1.GetItemsRequest
-	(*GetItemInfoResponse)(nil),      // 20: special_app_v1.GetItemInfoResponse
-	(*ItemInfoForList)(nil),          // 21: special_app_v1.ItemInfoForList
-	(*GetItemsResponse)(nil),         // 22: special_app_v1.GetItemsResponse
-	(*OrderItemInfoForCreatng)(nil),  // 23: special_app_v1.OrderItemInfoForCreatng
-	(*CreateOrderRequest)(nil),       // 24: special_app_v1.CreateOrderRequest
-	(*GetOrderInfoRequest)(nil),      // 25: special_app_v1.GetOrderInfoRequest
-	(*GetOrdersRequest)(nil),         // 26: special_app_v1.GetOrdersRequest
-	(*OrderItemInfoForList)(nil),     // 27: special_app_v1.OrderItemInfoForList
-	(*GetOrderInfoResponse)(nil),     // 28: special_app_v1.GetOrderInfoResponse
-	(*OrderInfoForList)(nil),         // 29: special_app_v1.OrderInfoForList
-	(*GetOrdersResponse)(nil),        // 30: special_app_v1.GetOrdersResponse
-	(*timestamppb.Timestamp)(nil),    // 31: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),            // 32: google.protobuf.Empty
+	(*CreateUserRequest)(nil),        // 0: special_app_v1.CreateUserRequest
+	(*UpdateUserRequest)(nil),        // 1: special_app_v1.UpdateUserRequest
+	(*GetUserRequest)(nil),           // 2: special_app_v1.GetUserRequest
+	(*GetUserInfoResponse)(nil),      // 3: special_app_v1.GetUserInfoResponse
+	(*GetEventInfoRequest)(nil),      // 4: special_app_v1.GetEventInfoRequest
+	(*GetEventsRequest)(nil),         // 5: special_app_v1.GetEventsRequest
+	(*GetEventInfoResponse)(nil),     // 6: special_app_v1.GetEventInfoResponse
+	(*EventInfoForList)(nil),         // 7: special_app_v1.EventInfoForList
+	(*GetEventsResponse)(nil),        // 8: special_app_v1.GetEventsResponse
+	(*CreateUserEventRequest)(nil),   // 9: special_app_v1.CreateUserEventRequest
+	(*GetUserEventInfoRequest)(nil),  // 10: special_app_v1.GetUserEventInfoRequest
+	(*GetUserEventsRequest)(nil),     // 11: special_app_v1.GetUserEventsRequest
+	(*UpdateUserEventRequest)(nil),   // 12: special_app_v1.UpdateUserEventRequest
+	(*DeleteUserEventRequest)(nil),   // 13: special_app_v1.DeleteUserEventRequest
+	(*GetUserEventInfoResponse)(nil), // 14: special_app_v1.GetUserEventInfoResponse
+	(*UserEventInfoForList)(nil),     // 15: special_app_v1.UserEventInfoForList
+	(*GetUserEventsResponse)(nil),    // 16: special_app_v1.GetUserEventsResponse
+	(*GetItemInfoRequest)(nil),       // 17: special_app_v1.GetItemInfoRequest
+	(*GetItemsRequest)(nil),          // 18: special_app_v1.GetItemsRequest
+	(*GetItemInfoResponse)(nil),      // 19: special_app_v1.GetItemInfoResponse
+	(*ItemInfoForList)(nil),          // 20: special_app_v1.ItemInfoForList
+	(*GetItemsResponse)(nil),         // 21: special_app_v1.GetItemsResponse
+	(*OrderItemInfoForCreatng)(nil),  // 22: special_app_v1.OrderItemInfoForCreatng
+	(*CreateOrderRequest)(nil),       // 23: special_app_v1.CreateOrderRequest
+	(*GetOrderInfoRequest)(nil),      // 24: special_app_v1.GetOrderInfoRequest
+	(*GetOrdersRequest)(nil),         // 25: special_app_v1.GetOrdersRequest
+	(*OrderItemInfoForList)(nil),     // 26: special_app_v1.OrderItemInfoForList
+	(*GetOrderInfoResponse)(nil),     // 27: special_app_v1.GetOrderInfoResponse
+	(*OrderInfoForList)(nil),         // 28: special_app_v1.OrderInfoForList
+	(*GetOrdersResponse)(nil),        // 29: special_app_v1.GetOrdersResponse
+	(*timestamppb.Timestamp)(nil),    // 30: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),            // 31: google.protobuf.Empty
 }
 var file_special_backend_proto_depIdxs = []int32{
-	31, // 0: special_app_v1.GetEventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
-	0,  // 1: special_app_v1.GetEventInfoResponse.pictures:type_name -> special_app_v1.PictureInfo
-	31, // 2: special_app_v1.EventInfoForList.datetime:type_name -> google.protobuf.Timestamp
-	0,  // 3: special_app_v1.EventInfoForList.picture:type_name -> special_app_v1.PictureInfo
-	8,  // 4: special_app_v1.GetEventsResponse.events:type_name -> special_app_v1.EventInfoForList
-	31, // 5: special_app_v1.GetUserEventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
-	0,  // 6: special_app_v1.GetUserEventInfoResponse.picture:type_name -> special_app_v1.PictureInfo
-	31, // 7: special_app_v1.UserEventInfoForList.datetime:type_name -> google.protobuf.Timestamp
-	0,  // 8: special_app_v1.UserEventInfoForList.picture:type_name -> special_app_v1.PictureInfo
-	16, // 9: special_app_v1.GetUserEventsResponse.user_events:type_name -> special_app_v1.UserEventInfoForList
-	0,  // 10: special_app_v1.GetItemInfoResponse.pictures:type_name -> special_app_v1.PictureInfo
-	0,  // 11: special_app_v1.ItemInfoForList.picture:type_name -> special_app_v1.PictureInfo
-	21, // 12: special_app_v1.GetItemsResponse.items:type_name -> special_app_v1.ItemInfoForList
-	31, // 13: special_app_v1.CreateOrderRequest.completion_date:type_name -> google.protobuf.Timestamp
-	23, // 14: special_app_v1.CreateOrderRequest.items:type_name -> special_app_v1.OrderItemInfoForCreatng
-	0,  // 15: special_app_v1.OrderItemInfoForList.picture:type_name -> special_app_v1.PictureInfo
-	31, // 16: special_app_v1.GetOrderInfoResponse.form_date:type_name -> google.protobuf.Timestamp
-	31, // 17: special_app_v1.GetOrderInfoResponse.completion_date:type_name -> google.protobuf.Timestamp
-	27, // 18: special_app_v1.GetOrderInfoResponse.items:type_name -> special_app_v1.OrderItemInfoForList
-	31, // 19: special_app_v1.OrderInfoForList.completion_date:type_name -> google.protobuf.Timestamp
-	29, // 20: special_app_v1.GetOrdersResponse.orders:type_name -> special_app_v1.OrderInfoForList
-	1,  // 21: special_app_v1.SpecialAppService.CreateUser:input_type -> special_app_v1.CreateUserRequest
-	2,  // 22: special_app_v1.SpecialAppService.UpdateUser:input_type -> special_app_v1.UpdateUserRequest
-	3,  // 23: special_app_v1.SpecialAppService.GetUser:input_type -> special_app_v1.GetUserRequest
-	5,  // 24: special_app_v1.SpecialAppService.GetEventInfo:input_type -> special_app_v1.GetEventInfoRequest
-	6,  // 25: special_app_v1.SpecialAppService.GetEvents:input_type -> special_app_v1.GetEventsRequest
-	10, // 26: special_app_v1.SpecialAppService.CreateUserEvent:input_type -> special_app_v1.CreateUserEventRequest
-	11, // 27: special_app_v1.SpecialAppService.GetUserEventInfo:input_type -> special_app_v1.GetUserEventInfoRequest
-	12, // 28: special_app_v1.SpecialAppService.GetUserEvents:input_type -> special_app_v1.GetUserEventsRequest
-	13, // 29: special_app_v1.SpecialAppService.UpdateUserEvent:input_type -> special_app_v1.UpdateUserEventRequest
-	14, // 30: special_app_v1.SpecialAppService.DeleteUserEvent:input_type -> special_app_v1.DeleteUserEventRequest
-	18, // 31: special_app_v1.SpecialAppService.GetItemInfo:input_type -> special_app_v1.GetItemInfoRequest
-	19, // 32: special_app_v1.SpecialAppService.GetItems:input_type -> special_app_v1.GetItemsRequest
-	24, // 33: special_app_v1.SpecialAppService.CreateOrder:input_type -> special_app_v1.CreateOrderRequest
-	25, // 34: special_app_v1.SpecialAppService.GetOrderInfo:input_type -> special_app_v1.GetOrderInfoRequest
-	26, // 35: special_app_v1.SpecialAppService.GetOrders:input_type -> special_app_v1.GetOrdersRequest
-	32, // 36: special_app_v1.SpecialAppService.CreateUser:output_type -> google.protobuf.Empty
-	4,  // 37: special_app_v1.SpecialAppService.UpdateUser:output_type -> special_app_v1.GetUserInfoResponse
-	4,  // 38: special_app_v1.SpecialAppService.GetUser:output_type -> special_app_v1.GetUserInfoResponse
-	7,  // 39: special_app_v1.SpecialAppService.GetEventInfo:output_type -> special_app_v1.GetEventInfoResponse
-	9,  // 40: special_app_v1.SpecialAppService.GetEvents:output_type -> special_app_v1.GetEventsResponse
-	32, // 41: special_app_v1.SpecialAppService.CreateUserEvent:output_type -> google.protobuf.Empty
-	15, // 42: special_app_v1.SpecialAppService.GetUserEventInfo:output_type -> special_app_v1.GetUserEventInfoResponse
-	17, // 43: special_app_v1.SpecialAppService.GetUserEvents:output_type -> special_app_v1.GetUserEventsResponse
-	15, // 44: special_app_v1.SpecialAppService.UpdateUserEvent:output_type -> special_app_v1.GetUserEventInfoResponse
-	32, // 45: special_app_v1.SpecialAppService.DeleteUserEvent:output_type -> google.protobuf.Empty
-	20, // 46: special_app_v1.SpecialAppService.GetItemInfo:output_type -> special_app_v1.GetItemInfoResponse
-	22, // 47: special_app_v1.SpecialAppService.GetItems:output_type -> special_app_v1.GetItemsResponse
-	32, // 48: special_app_v1.SpecialAppService.CreateOrder:output_type -> google.protobuf.Empty
-	28, // 49: special_app_v1.SpecialAppService.GetOrderInfo:output_type -> special_app_v1.GetOrderInfoResponse
-	30, // 50: special_app_v1.SpecialAppService.GetOrders:output_type -> special_app_v1.GetOrdersResponse
-	36, // [36:51] is the sub-list for method output_type
-	21, // [21:36] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	30, // 0: special_app_v1.GetEventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
+	30, // 1: special_app_v1.EventInfoForList.datetime:type_name -> google.protobuf.Timestamp
+	7,  // 2: special_app_v1.GetEventsResponse.events:type_name -> special_app_v1.EventInfoForList
+	30, // 3: special_app_v1.GetUserEventInfoResponse.datetime:type_name -> google.protobuf.Timestamp
+	30, // 4: special_app_v1.UserEventInfoForList.datetime:type_name -> google.protobuf.Timestamp
+	15, // 5: special_app_v1.GetUserEventsResponse.user_events:type_name -> special_app_v1.UserEventInfoForList
+	20, // 6: special_app_v1.GetItemsResponse.items:type_name -> special_app_v1.ItemInfoForList
+	30, // 7: special_app_v1.CreateOrderRequest.completion_date:type_name -> google.protobuf.Timestamp
+	22, // 8: special_app_v1.CreateOrderRequest.items:type_name -> special_app_v1.OrderItemInfoForCreatng
+	30, // 9: special_app_v1.GetOrderInfoResponse.form_date:type_name -> google.protobuf.Timestamp
+	30, // 10: special_app_v1.GetOrderInfoResponse.completion_date:type_name -> google.protobuf.Timestamp
+	26, // 11: special_app_v1.GetOrderInfoResponse.items:type_name -> special_app_v1.OrderItemInfoForList
+	30, // 12: special_app_v1.OrderInfoForList.completion_date:type_name -> google.protobuf.Timestamp
+	28, // 13: special_app_v1.GetOrdersResponse.orders:type_name -> special_app_v1.OrderInfoForList
+	0,  // 14: special_app_v1.SpecialAppService.CreateUser:input_type -> special_app_v1.CreateUserRequest
+	1,  // 15: special_app_v1.SpecialAppService.UpdateUser:input_type -> special_app_v1.UpdateUserRequest
+	2,  // 16: special_app_v1.SpecialAppService.GetUser:input_type -> special_app_v1.GetUserRequest
+	4,  // 17: special_app_v1.SpecialAppService.GetEventInfo:input_type -> special_app_v1.GetEventInfoRequest
+	5,  // 18: special_app_v1.SpecialAppService.GetEvents:input_type -> special_app_v1.GetEventsRequest
+	9,  // 19: special_app_v1.SpecialAppService.CreateUserEvent:input_type -> special_app_v1.CreateUserEventRequest
+	10, // 20: special_app_v1.SpecialAppService.GetUserEventInfo:input_type -> special_app_v1.GetUserEventInfoRequest
+	11, // 21: special_app_v1.SpecialAppService.GetUserEvents:input_type -> special_app_v1.GetUserEventsRequest
+	12, // 22: special_app_v1.SpecialAppService.UpdateUserEvent:input_type -> special_app_v1.UpdateUserEventRequest
+	13, // 23: special_app_v1.SpecialAppService.DeleteUserEvent:input_type -> special_app_v1.DeleteUserEventRequest
+	17, // 24: special_app_v1.SpecialAppService.GetItemInfo:input_type -> special_app_v1.GetItemInfoRequest
+	18, // 25: special_app_v1.SpecialAppService.GetItems:input_type -> special_app_v1.GetItemsRequest
+	23, // 26: special_app_v1.SpecialAppService.CreateOrder:input_type -> special_app_v1.CreateOrderRequest
+	24, // 27: special_app_v1.SpecialAppService.GetOrderInfo:input_type -> special_app_v1.GetOrderInfoRequest
+	25, // 28: special_app_v1.SpecialAppService.GetOrders:input_type -> special_app_v1.GetOrdersRequest
+	31, // 29: special_app_v1.SpecialAppService.CreateUser:output_type -> google.protobuf.Empty
+	3,  // 30: special_app_v1.SpecialAppService.UpdateUser:output_type -> special_app_v1.GetUserInfoResponse
+	3,  // 31: special_app_v1.SpecialAppService.GetUser:output_type -> special_app_v1.GetUserInfoResponse
+	6,  // 32: special_app_v1.SpecialAppService.GetEventInfo:output_type -> special_app_v1.GetEventInfoResponse
+	8,  // 33: special_app_v1.SpecialAppService.GetEvents:output_type -> special_app_v1.GetEventsResponse
+	31, // 34: special_app_v1.SpecialAppService.CreateUserEvent:output_type -> google.protobuf.Empty
+	14, // 35: special_app_v1.SpecialAppService.GetUserEventInfo:output_type -> special_app_v1.GetUserEventInfoResponse
+	16, // 36: special_app_v1.SpecialAppService.GetUserEvents:output_type -> special_app_v1.GetUserEventsResponse
+	14, // 37: special_app_v1.SpecialAppService.UpdateUserEvent:output_type -> special_app_v1.GetUserEventInfoResponse
+	31, // 38: special_app_v1.SpecialAppService.DeleteUserEvent:output_type -> google.protobuf.Empty
+	19, // 39: special_app_v1.SpecialAppService.GetItemInfo:output_type -> special_app_v1.GetItemInfoResponse
+	21, // 40: special_app_v1.SpecialAppService.GetItems:output_type -> special_app_v1.GetItemsResponse
+	31, // 41: special_app_v1.SpecialAppService.CreateOrder:output_type -> google.protobuf.Empty
+	27, // 42: special_app_v1.SpecialAppService.GetOrderInfo:output_type -> special_app_v1.GetOrderInfoResponse
+	29, // 43: special_app_v1.SpecialAppService.GetOrders:output_type -> special_app_v1.GetOrdersResponse
+	29, // [29:44] is the sub-list for method output_type
+	14, // [14:29] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_special_backend_proto_init() }
@@ -2207,15 +2144,15 @@ func file_special_backend_proto_init() {
 	if File_special_backend_proto != nil {
 		return
 	}
-	file_special_backend_proto_msgTypes[2].OneofWrappers = []any{}
-	file_special_backend_proto_msgTypes[24].OneofWrappers = []any{}
+	file_special_backend_proto_msgTypes[1].OneofWrappers = []any{}
+	file_special_backend_proto_msgTypes[23].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_special_backend_proto_rawDesc), len(file_special_backend_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   31,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

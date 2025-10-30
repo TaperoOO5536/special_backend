@@ -42,13 +42,9 @@ func (h *EventServiceHandler) GetEventInfo(ctx context.Context, req *pb.GetEvent
 		return nil, err
 	}
 
-	pbPictures := make([]*pb.PictureInfo, 0, len(event.Pictures))
+	pbPictures := make([]string, 0, len(event.Pictures))
 	for _, picture := range event.Pictures {
-		pbPicture := &pb.PictureInfo{
-			Picture:  picture.Path,
-			MimeType: picture.MimeType,
-		}
-		pbPictures = append(pbPictures, pbPicture)
+		pbPictures = append(pbPictures, picture.Path)
 	}
 
 	return &pb.GetEventInfoResponse{
@@ -98,10 +94,7 @@ func (h *EventServiceHandler) GetEvents(ctx context.Context, req *pb.GetEventsRe
 			Price:         int32(event.Price),
 			TotalSeats:    int32(event.TotalSeats),
 			OccupiedSeats: int32(event.OccupiedSeats),
-			Picture:       &pb.PictureInfo{
-			Picture:  event.LittlePicture,
-			MimeType: event.MimeType,
-		},
+			Picture:       event.LittlePicture,
 		}
 		response.Events = append(response.Events, pbEvent)
 	}

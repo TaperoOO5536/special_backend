@@ -52,7 +52,7 @@ func (r *userEventRepository) GetUserEvents(ctx context.Context, userID string, 
 	offset := (pagination.Page - 1) * pagination.PerPage
 	
 	if err := r.db.Preload("Event", func(db *gorm.DB) *gorm.DB {
-		return db.Select("id_event", "event_title", "event_datetime", "little_picture", "mime_type")
+		return db.Select("id_event", "event_title", "event_datetime", "little_picture")
 	}).Where("user_id = ?", userID).Limit(pagination.PerPage).Offset(offset).Find(&userEvents).Error; err != nil {
 		return nil, err
 	}

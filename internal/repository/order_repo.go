@@ -32,7 +32,7 @@ func (r *orderRepository) CreateOrder(ctx context.Context, order *models.Order) 
 func (r *orderRepository) GetOrderInfo(ctx context.Context, id uuid.UUID) (*models.Order, error) {
 	var order models.Order
 	if err := r.db.Preload("OrderItems.Item", func(db *gorm.DB) *gorm.DB {
-		return db.Select("id_item", "item_title", "item_price", "little_picture", "mime_type")
+		return db.Select("id_item", "item_title", "item_price", "little_picture")
 	}).Where("id_order = ?", id).First(&order).Error; err != nil {
 		return nil, err
 	}

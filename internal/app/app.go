@@ -61,7 +61,7 @@ func (a *App) Start(ctx context.Context) error {
 	eventService := service.NewEventService(eventRepo)
 	userServive := service.NewUserService(userRepo, config.GetToken())
 
-	p, err := kafka.NewProducer([]string{"localhost:9091"})
+	p, err := kafka.NewProducer([]string{"localhost:5215"})
 	if err != nil {
 		return fmt.Errorf("failed to create kafka producer: %v", err)
 	}

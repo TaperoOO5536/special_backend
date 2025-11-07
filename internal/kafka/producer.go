@@ -27,13 +27,17 @@ func NewProducer(address []string) (*Producer, error) {
 	return &Producer{producer: p}, nil
 }
 
-func (p *Producer) Produce(message, topic string) error {
+func (p *Producer) Produce(message, topic, headerStr string) error {
+	headers := []kafka.Header{
+		{Key: "event-type", Value: []byte(headerStr)},
+	}
 	kafkaMsg := &kafka.Message{
 		TopicPartition: kafka.TopicPartition{
 			Topic: &topic,
 			Partition: kafka.PartitionAny,
 		},
 		Value: []byte(message),
+		Headers: headers,
 		Key: nil,
 	}
 	kafkaChan := make(chan kafka.Event)

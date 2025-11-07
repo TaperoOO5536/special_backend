@@ -87,7 +87,8 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 
 		err = s.producer.Produce(
 			string(jsonMsg),
-			"order",
+			"orders",
+			"order.create",
 		)
 		if err != nil {
 				log.Printf("failed to produce message: %v", err)

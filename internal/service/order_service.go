@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/TaperoOO5536/special_backend/internal/kafka"
@@ -73,8 +74,8 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 	}
 
 	go func() {
-		msg := models.CreatedOrder{
-			Number:         createdOrder.Number,
+		msg := models.KafkaOrder{
+			Number:         strconv.FormatInt(int64(createdOrder.Number), 10),
 			UserID:         user.ID,
 			CompletionDate: createdOrder.CompletionDate,
 			OrderAmount:    createdOrder.OrderAmount,

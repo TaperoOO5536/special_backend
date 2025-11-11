@@ -34,7 +34,7 @@ func (r *userEventRepository) CreateUserEvent(ctx context.Context, userEvent *mo
 func (r *userEventRepository) GetUserEventInfo(ctx context.Context, id uuid.UUID) (*models.UserEvent, error) {
 	var userEvent *models.UserEvent
 	if err := r.db.Preload("Event", func(db *gorm.DB) *gorm.DB {
-		return db.Select("id_event", "event_title", "event_datetime", "little_picture", "mime_type")
+		return db.Select("id_event", "event_title", "event_datetime", "little_picture")
 	}).Where("id_user_event = ?", id).First(&userEvent).Error; err != nil {
 		return nil, err
 	}

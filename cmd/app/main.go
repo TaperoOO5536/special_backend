@@ -47,10 +47,10 @@ func main() {
 
 func GenInitData() error {
 	user := User{
-		ID:        1165017205,
-		FirstName: "Олеся",
+		ID:        274116209,
+		FirstName: "Петя",
 		LastName:  "",
-		Username:  "@kakayatobeliberda",
+		Username:  "@DetedSteel",
 	}
 	token := config.GetToken()
 	values := url.Values{}

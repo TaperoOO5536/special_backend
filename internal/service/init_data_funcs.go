@@ -11,6 +11,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 )
@@ -22,6 +23,7 @@ var (
 	ErrHashNotFound =              errors.New("hash not found in initData")
 	ErrInitDataIsEmpty =           errors.New("init data is empty")
 	ErrFailedToUnmarshalId =       errors.New("failed to unmarshar id")
+	ErrTooOldAuthDate =             errors.New("auth date is too old")
 )
 
 type RawUser struct {
@@ -106,6 +108,19 @@ func VerifyInitData(initData string, token string) (bool, error) {
 	h := hmac.New(sha256.New, secretKey)
 	h.Write([]byte(dataCheckString))
 	computedHash := hex.EncodeToString(h.Sum(nil))
+
+	authDateStr := values.Get("auth_date")
+  if authDateStr == "" {
+      return false, fmt.Errorf("auth_date missing")
+  }
+  authDate, err := strconv.ParseInt(authDateStr, 10, 64)
+  if err != nil {
+      return false, fmt.Errorf("invalid auth_date: %v", err)
+  }
+  now := time.Now().Unix()
+  if now-authDate > int64(3600) {
+      return false, ErrTooOldAuthDate
+  }
 
 	return computedHash == receivedHash, nil
 }

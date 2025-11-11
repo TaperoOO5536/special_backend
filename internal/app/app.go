@@ -56,19 +56,18 @@ func (a *App) Start(ctx context.Context) error {
 	userRepo := repository.NewUserRepository(db)
 	orderRepo := repository.NewOrderRepository(db)
 	userEventRepo := repository.NewUserEventRepository(db)
-	
-	itemService := service.NewItemService(itemRepo)
-	eventService := service.NewEventService(eventRepo)
-	userServive := service.NewUserService(userRepo, config.GetToken())
 
-	p, err := kafka.NewProducer([]string{"localhost:5215"})
+	p, err := kafka.NewProducer([]string{"localhost:38905"})
 	if err != nil {
 		return fmt.Errorf("failed to create kafka producer: %v", err)
 	}
 	defer p.Close()
-
+	
+	itemService := service.NewItemService(itemRepo)
+	eventService := service.NewEventService(eventRepo)
+	userServive := service.NewUserService(userRepo, config.GetToken())
 	orderService := service.NewOrderService(orderRepo, config.GetToken(), p)
-	userEventService := service.NewUserEventService(userEventRepo, eventRepo, config.GetToken())
+	userEventService := service.NewUserEventService(userEventRepo, eventRepo, config.GetToken(), p)
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
 	eventServiceHandler := api.NewEventServiceHandler(eventService)

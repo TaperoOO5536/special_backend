@@ -53,11 +53,6 @@ func (s *UserEventService) CreateUserEvent(ctx context.Context, initData string,
 		return err
 	}
 
-	err = s.eventRepo.UpdateEvent(ctx, input.EventID, input.NumberOfGuests)
-	if err != nil {
-		return err
-	}
-
 	userEvent := &models.UserEvent{
 		ID: input.UserEventID,
 		UserID: user.ID,
@@ -157,12 +152,7 @@ func (s *UserEventService) UpdateUserEvent(ctx context.Context, initData string,
 		return nil, err
 	}
 
-	err = s.eventRepo.UpdateEvent(ctx, userEvent.EventID, newGuestNumber-userEvent.NumberOfGuests)
-	if err != nil {
-		return nil, err
-	}
-
-	userEvent, err = s.userEventRepo.UpdateUserEvent(ctx, id, newGuestNumber)
+	userEvent, err = s.userEventRepo.UpdateUserEvent(ctx, id, newGuestNumber, userEvent.EventID)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, ErrEventNotFound
@@ -221,12 +211,7 @@ func (s *UserEventService) DeleteUserEvent(ctx context.Context, initData string,
 		return err
 	}
 
-	err = s.eventRepo.UpdateEvent(ctx, userEvent.EventID, -userEvent.NumberOfGuests)
-	if err != nil {
-		return err
-	}
-
-	err = s.userEventRepo.DeleteUserEvent(ctx, id)
+	err = s.userEventRepo.DeleteUserEvent(ctx, id, userEvent.EventID)
 	if err != nil {
 		return err
 	}

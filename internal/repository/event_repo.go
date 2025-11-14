@@ -2,16 +2,12 @@ package repository
 
 import (
 	"context"
-	"errors"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"gorm.io/gorm"
 
 	"github.com/google/uuid"
 )
-
-var (	ErrNotEnoughSeats = errors.New("event does not have enough seats"))
-
 type EventRepository interface {
 	GetEventInfo(ctx context.Context, id uuid.UUID) (*models.Event, error)
 	GetEvents(ctx context.Context, pagination models.Pagination) (*models.PaginatedEvents, error)

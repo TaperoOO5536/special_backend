@@ -21,6 +21,7 @@ import (
 	"syscall"
 
 	"github.com/TaperoOO5536/special_backend/internal/api"
+	"github.com/TaperoOO5536/special_backend/pkg/env"
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -57,7 +58,7 @@ func (a *App) Start(ctx context.Context) error {
 	orderRepo := repository.NewOrderRepository(db)
 	userEventRepo := repository.NewUserEventRepository(db)
 
-	p, err := kafka.NewProducer([]string{"localhost:38905"})
+	p, err := kafka.NewProducer(env.GetKafkaBrokers())
 	if err != nil {
 		return fmt.Errorf("failed to create kafka producer: %v", err)
 	}
@@ -65,9 +66,9 @@ func (a *App) Start(ctx context.Context) error {
 	
 	itemService := service.NewItemService(itemRepo)
 	eventService := service.NewEventService(eventRepo)
-	userServive := service.NewUserService(userRepo, config.GetToken())
-	orderService := service.NewOrderService(orderRepo, config.GetToken(), p)
-	userEventService := service.NewUserEventService(userEventRepo, eventRepo, config.GetToken(), p)
+	userServive := service.NewUserService(userRepo, env.GetToken())
+	orderService := service.NewOrderService(orderRepo, env.GetToken(), p)
+	userEventService := service.NewUserEventService(userEventRepo, eventRepo, env.GetToken(), p)
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
 	eventServiceHandler := api.NewEventServiceHandler(eventService)
@@ -85,7 +86,7 @@ func (a *App) Start(ctx context.Context) error {
 
 	reflection.Register(grpcServer)
 
-	l, err := net.Listen("tcp", ":"+a.config.GrpcPort)
+	l, err := net.Listen("tcp", ":" + a.config.GrpcPort)
 	if err != nil {
 		return fmt.Errorf("failed to listen: %v", err)
 	}
@@ -112,9 +113,9 @@ func (a *App) Start(ctx context.Context) error {
 	}
 
 	c := cors.New(cors.Options{
-        AllowedOrigins:   []string{"http://192.168.1.212", "http://localhost:5173"},
-        AllowedMethods:   []string{"GET", "POST", "PATCH", "DELETE", "OPTIONS"},
-        AllowedHeaders:   []string{"Authorization", "Content-Type", "Accept", "X-Requested-With"},
+        AllowedOrigins:   env.GetAllowedOrigins(),
+        AllowedMethods:   env.GetAllowedMethods(),
+        AllowedHeaders:   env.GetAllowedHeaders(),
         AllowCredentials: true,
         MaxAge:           300,
 				Debug:            true,

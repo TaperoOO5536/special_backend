@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/TaperoOO5536/special_backend/internal/app"
-	"github.com/TaperoOO5536/special_backend/internal/config"
+	"github.com/TaperoOO5536/special_backend/pkg/env"
 )
 
 type User struct {
@@ -25,15 +25,18 @@ type User struct {
 }
 
 func main() {
-	config.LoadEnv()
+	err := env.LoadEnv()
+	if err != nil {
+		log.Fatalf("failed to load env: %v", err)
+	}
 
 	cfg := &app.Config{
-		GrpcPort:     "8080",
-		HttpPort:     "8081",
+		GrpcPort:     env.GetGRPCPort(),
+		HttpPort:     env.GetHTTPPort(),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  120 * time.Second,
-		Dsn:          config.GetDsn(),
+		Dsn:          env.GetDsn(),
 	}
 
 	app := app.New(cfg)
@@ -47,12 +50,12 @@ func main() {
 
 func GenInitData() error {
 	user := User{
-		ID:        274116209,
-		FirstName: "Петя",
+		ID:        1165017205,
+		FirstName: "Олеся",
 		LastName:  "",
-		Username:  "@DetedSteel",
+		Username:  "@kakayatobeliberda",
 	}
-	token := config.GetToken()
+	token := env.GetToken()
 	values := url.Values{}
 	values.Set("query_id", "TEST_QUERY_123")
 	values.Set("auth_date", fmt.Sprintf("%d", time.Now().Unix()))

@@ -81,6 +81,10 @@ func (h *Handler) GetOrders(ctx context.Context, req *pb.GetOrdersRequest) (*pb.
 	return h.orderHandler.GetOrders(ctx, req)
 }
 
+func (h *Handler) Payment(ctx context.Context, req *pb.GetPaymentUrlRequest) (*pb.GetPaymentUrlResponse, error) {
+	return h.orderHandler.Payment(ctx, req)
+}
+
 //userevents
 
 func (h *Handler) CreateUserEvent(ctx context.Context, req *pb.CreateUserEventRequest) (*emptypb.Empty, error) {

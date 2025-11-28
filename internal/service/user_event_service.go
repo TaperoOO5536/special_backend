@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 
 	"github.com/TaperoOO5536/special_backend/internal/kafka"
@@ -45,12 +46,12 @@ type UserEventCreateInput struct {
 func (s *UserEventService) CreateUserEvent(ctx context.Context, initData string, input UserEventCreateInput) error {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return err
+		return fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	userEvent := &models.UserEvent{
@@ -73,7 +74,7 @@ func (s *UserEventService) CreateUserEvent(ctx context.Context, initData string,
 	go func() {
 		msg := models.KafkaUserEvent{
 			UserNickName:       user.Nickname,
-			EventTitle:          event.Title,
+			EventTitle:         event.Title,
 			EventOccupiedSeats: event.OccupiedSeats,
 			EventTotalSeats:    event.TotalSeats,
 			NumberOfGuests:     input.NumberOfGuests,
@@ -100,7 +101,7 @@ func (s *UserEventService) CreateUserEvent(ctx context.Context, initData string,
 func (s *UserEventService) GetUserEventInfo(ctx context.Context, initData string, id uuid.UUID) (*models.UserEvent, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return nil, err
+		return nil, fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	userEvent, err := s.userEventRepo.GetUserEventInfo(ctx, id)
@@ -117,12 +118,12 @@ func (s *UserEventService) GetUserEventInfo(ctx context.Context, initData string
 func (s *UserEventService) GetUserEvents(ctx context.Context, initData string, pagination models.Pagination) (*models.PaginatedUserEvents, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return nil, err
+		return nil, fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	userEvents, err := s.userEventRepo.GetUserEvents(ctx, user.ID, pagination)
@@ -136,12 +137,12 @@ func (s *UserEventService) GetUserEvents(ctx context.Context, initData string, p
 func (s *UserEventService) UpdateUserEvent(ctx context.Context, initData string, id uuid.UUID, newGuestNumber int64) (*models.UserEvent, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return nil, err
+		return nil, fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	userEvent, err := s.userEventRepo.GetUserEventInfo(ctx, id)
@@ -155,7 +156,7 @@ func (s *UserEventService) UpdateUserEvent(ctx context.Context, initData string,
 	userEvent, err = s.userEventRepo.UpdateUserEvent(ctx, id, newGuestNumber, userEvent.EventID)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrEventNotFound
+			return nil, ErrUserEventNotFound
 		}
 		return nil, err
 	}
@@ -195,12 +196,12 @@ func (s *UserEventService) UpdateUserEvent(ctx context.Context, initData string,
 func (s *UserEventService) DeleteUserEvent(ctx context.Context, initData string, id uuid.UUID) error {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return err
+		return fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	userEvent, err := s.userEventRepo.GetUserEventInfo(ctx, id)

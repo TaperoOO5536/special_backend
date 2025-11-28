@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"log"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/service"
@@ -24,21 +25,25 @@ func NewOrderServiceHandler(orderService *service.OrderService) *OrderServiceHan
 func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*emptypb.Empty, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.CompletionDate == nil {
 		err := status.Error(codes.InvalidArgument, "completion date is required")
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.Items == nil || len(req.Items) == 0 {
 		err := status.Error(codes.InvalidArgument, "order items are required")
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.OrderAmount == 0 {
 		err := status.Error(codes.InvalidArgument, "order amount is required")
+		log.Println(err)
 		return nil, err
 	}
 
@@ -48,6 +53,7 @@ func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrd
 	for _, pbItem := range req.Items {
 		itemID, err := uuid.Parse(pbItem.ItemId)
 		if err != nil {
+			log.Println(err)
 			return nil, status.Error(codes.InvalidArgument, "invalid itemID")
 		}
 		item := models.OrderItem{
@@ -69,7 +75,8 @@ func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrd
 
 	err = h.orderService.CreateOrder(ctx, initData, input)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to create order: %v", err)
 	}
 	
 	return &emptypb.Empty{}, nil
@@ -78,23 +85,27 @@ func (h *OrderServiceHandler) CreateOrder(ctx context.Context, req *pb.CreateOrd
 func (h *OrderServiceHandler) GetOrderInfo(ctx context.Context, req *pb.GetOrderInfoRequest) (*pb.GetOrderInfoResponse, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.Id == "" {
 		err := status.Error(codes.InvalidArgument, "order id is required")
+		log.Println(err)
 		return nil, err
 	}	
 
 	orderID, err := uuid.Parse(req.Id)
 	if err != nil {
 		err := status.Error(codes.InvalidArgument, "invalid order id")
+		log.Println(err)
 		return nil, err
 	}
 
 	order, err := h.orderService.GetOrderInfo(ctx, initData, orderID)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to get order: %v", err)
 	}
 
 	orderItems := make([]*pb.OrderItemInfoForList, 0, len(order.OrderItems))
@@ -124,6 +135,7 @@ func (h *OrderServiceHandler) GetOrderInfo(ctx context.Context, req *pb.GetOrder
 func (h *OrderServiceHandler) GetOrders(ctx context.Context, req *pb.GetOrdersRequest) (*pb.GetOrdersResponse, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
@@ -142,8 +154,17 @@ func (h *OrderServiceHandler) GetOrders(ctx context.Context, req *pb.GetOrdersRe
 
 	paginatedOrders, err := h.orderService.GetOrders(ctx, initData, pagination)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to get orders: %v", err)
 	}
+	if paginatedOrders == nil {
+		err := status.Error(codes.Internal, "internal error: no orders returned")
+		log.Println(err)
+    return nil, err
+  }
+  if paginatedOrders.Orders == nil {
+    paginatedOrders.Orders = []models.Order{}
+  }
 
 	pbOrders := make([]*pb.OrderInfoForList, 0, len(paginatedOrders.Orders))
 	for _, order := range paginatedOrders.Orders {
@@ -162,5 +183,32 @@ func (h *OrderServiceHandler) GetOrders(ctx context.Context, req *pb.GetOrdersRe
 		Total:   int32(paginatedOrders.TotalCount),
 		Page:    int32(paginatedOrders.Page),
 		PerPage: int32(paginatedOrders.PerPage),
+	}, nil
+}
+
+func (h *OrderServiceHandler) Payment(ctx context.Context, req *pb.GetPaymentUrlRequest) (*pb.GetPaymentUrlResponse, error) {
+	// initData, err := GetInitDataFromContext(ctx)
+	// if err != nil {
+	// 	return nil
+	// }
+
+	if req.OrderId == "" {
+		err := status.Error(codes.InvalidArgument, "order id is required")
+		return nil, err
+	}	
+
+	if req.Amount == 0 {
+		err := status.Error(codes.InvalidArgument, "order amount is required")
+		return nil, err
+	}	
+
+	resp, err := h.orderService.CreatePayment1(ctx, req.Amount, req.OrderId)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.GetPaymentUrlResponse{
+		PaymentId: resp.Id,
+		PaymentUrl: resp.Url,
 	}, nil
 }

@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"log"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/service"
@@ -22,17 +23,20 @@ func NewItemServiceHandler(itemService *service.ItemService) *ItemServiceHandler
 func (h *ItemServiceHandler) GetItemInfo(ctx context.Context, req *pb.GetItemInfoRequest) (*pb.GetItemInfoResponse, error) {
 	if req.Id == "" {
 		err := status.Error(codes.InvalidArgument, "item ID is required")
+		log.Println(err)
 		return nil, err
 	}
 	
 	itemID, err := uuid.Parse(req.Id)
 	if err != nil {
+		log.Println(err)
 		err := status.Error(codes.InvalidArgument, "invalid item ID")
 		return nil, err
 	}
 
 	item, err := h.itemService.GetItemInfo(ctx, itemID)
 	if err != nil {
+		log.Println(err)
 		if err == service.ErrItemNotFound {
 			err := status.Error(codes.NotFound, "item not found")
 			return nil, err
@@ -71,6 +75,7 @@ func (h *ItemServiceHandler) GetItems(ctx context.Context, req *pb.GetItemsReque
 	
 	paginatedItems, err := h.itemService.GetItems(ctx, pagination)
 	if err != nil {
+		log.Println(err)
 		err := status.Error(codes.Internal, err.Error())
 		return nil, err
 	}

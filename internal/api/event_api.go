@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"log"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/service"
@@ -23,17 +24,20 @@ func NewEventServiceHandler(eventService *service.EventService) *EventServiceHan
 func (h *EventServiceHandler) GetEventInfo(ctx context.Context, req *pb.GetEventInfoRequest) (*pb.GetEventInfoResponse, error) {
 	if req.Id == "" {
 		err := status.Error(codes.InvalidArgument, "event ID is required")
+		log.Println(err)
 		return nil, err
 	}
 	
 	eventID, err := uuid.Parse(req.Id)
 	if err != nil {
 		err := status.Error(codes.InvalidArgument, "invalid event ID")
+		log.Println(err)
 		return nil, err
 	}
 
 	event, err := h.eventService.GetEventInfo(ctx, eventID)
 	if err != nil {
+		log.Println(err)
 		if err == service.ErrEventNotFound {
 			err := status.Error(codes.NotFound, "event not found")
 			return nil, err
@@ -75,6 +79,7 @@ func (h *EventServiceHandler) GetEvents(ctx context.Context, req *pb.GetEventsRe
 
 	paginatedEvents, err := h.eventService.GetEvents(ctx, pagination)
 	if err != nil {
+		log.Println(err)
 		err := status.Error(codes.Internal, err.Error())
 		return nil, err
 	}

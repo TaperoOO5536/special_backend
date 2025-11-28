@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/repository"
@@ -30,12 +31,12 @@ func NewUserService(userRepo repository.UserRepository, token string) *UserServi
 func (s *UserService) CreateUser(ctx context.Context, initData string) (error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return err
+		return fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	existingUser, _ := s.userRepo.GetUserInfo(ctx, user.ID)
@@ -54,12 +55,12 @@ func (s *UserService) CreateUser(ctx context.Context, initData string) (error) {
 func (s *UserService) GetUserInfo(ctx context.Context, initData string) (*models.User, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return nil, err
+		return nil, fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	userInfo, err := s.userRepo.GetUserInfo(ctx, user.ID)
@@ -76,12 +77,12 @@ func (s *UserService) GetUserInfo(ctx context.Context, initData string) (*models
 func (s *UserService) UpdateUser(ctx context.Context, initData string, phoneNumber string) (*models.User, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return nil, err
+		return nil, fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	_, err = s.userRepo.GetUserInfo(ctx, user.ID)

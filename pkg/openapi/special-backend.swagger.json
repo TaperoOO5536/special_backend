@@ -251,6 +251,38 @@
         ]
       }
     },
+    "/v1/payment": {
+      "post": {
+        "operationId": "SpecialAppService_Payment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetPaymentUrlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/special_app_v1GetPaymentUrlRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SpecialAppService"
+        ]
+      }
+    },
     "/v1/user_events": {
       "get": {
         "operationId": "SpecialAppService_GetUserEvents",
@@ -755,6 +787,30 @@
         "perPage": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "special_app_v1GetPaymentUrlRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string",
+          "format": "int64",
+          "title": "string description = 3;\r\n string user_id = 4;"
+        }
+      }
+    },
+    "special_app_v1GetPaymentUrlResponse": {
+      "type": "object",
+      "properties": {
+        "paymentId": {
+          "type": "string"
+        },
+        "paymentUrl": {
+          "type": "string"
         }
       }
     },

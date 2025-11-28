@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"log"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/service"
@@ -24,22 +25,26 @@ func NewUserEventServiceHandler(userEventService *service.UserEventService) *Use
 func (h *UserEventServiceHandler) CreateUserEvent(ctx context.Context, req *pb.CreateUserEventRequest) (*emptypb.Empty, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.EventId == "" {
 		err := status.Error(codes.InvalidArgument, "event id is required")
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.NumberOfGuests == 0 {
 		err := status.Error(codes.InvalidArgument, "number of guests is required")
+		log.Println(err)
 		return nil, err
 	}
 
 	EventID, err := uuid.Parse(req.EventId)
 	if err != nil {
 		err := status.Error(codes.InvalidArgument, "invalid event id")
+		log.Println(err)
 		return nil, err
 	}
 
@@ -53,7 +58,8 @@ func (h *UserEventServiceHandler) CreateUserEvent(ctx context.Context, req *pb.C
 
 	err = h.userEventService.CreateUserEvent(ctx, initData, input)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to create user event: %v", err)
 	}
 	
 	return &emptypb.Empty{}, nil
@@ -62,23 +68,27 @@ func (h *UserEventServiceHandler) CreateUserEvent(ctx context.Context, req *pb.C
 func (h *UserEventServiceHandler) GetUserEventInfo(ctx context.Context, req *pb.GetUserEventInfoRequest) (*pb.GetUserEventInfoResponse, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.Id == "" {
 		err := status.Error(codes.InvalidArgument, "user event id is required")
+		log.Println(err)
 		return nil, err
 	}	
 
 	userEventID, err := uuid.Parse(req.Id)
 	if err != nil {
+		log.Println(err)
 		err := status.Error(codes.InvalidArgument, "invalid user event id")
 		return nil, err
 	}
 
 	userEvent, err := h.userEventService.GetUserEventInfo(ctx, initData, userEventID)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to get user event: %v", err)
 	}
 
 	return &pb.GetUserEventInfoResponse{
@@ -94,6 +104,7 @@ func (h *UserEventServiceHandler) GetUserEventInfo(ctx context.Context, req *pb.
 func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.GetUserEventsRequest) (*pb.GetUserEventsResponse, error) {
  initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
@@ -112,7 +123,8 @@ func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.Get
 
 	paginatedUserEvents, err := h.userEventService.GetUserEvents(ctx, initData, pagination)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to get user events: %v", err)
 	}
 
 	pbUserEvents := make([]*pb.UserEventInfoForList, 0, len(paginatedUserEvents.UserEvents))
@@ -138,28 +150,33 @@ func (h *UserEventServiceHandler) GetUserEvents(ctx context.Context, req *pb.Get
 func (h *UserEventServiceHandler) UpdateUserEvent(ctx context.Context, req *pb.UpdateUserEventRequest) (*pb.GetUserEventInfoResponse, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.Id == "" {
 		err := status.Error(codes.InvalidArgument, "user event id is required")
+		log.Println(err)
 		return nil, err
 	}	
 
 	if req.NumberOfGuests == 0 {
 		err := status.Error(codes.InvalidArgument, "number of guests are required")
+		log.Println(err)
 		return nil, err
 	}
 
 	userEventID, err := uuid.Parse(req.Id)
 	if err != nil {
 		err := status.Error(codes.InvalidArgument, "invalid user event id")
+		log.Println(err)
 		return nil, err
 	}
 
 	userEvent, err := h.userEventService.UpdateUserEvent(ctx, initData, userEventID, int64(req.NumberOfGuests))
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to update user event: %v", err)
 	}
 	
 	return &pb.GetUserEventInfoResponse{
@@ -175,23 +192,27 @@ func (h *UserEventServiceHandler) UpdateUserEvent(ctx context.Context, req *pb.U
 func (h *UserEventServiceHandler) DeleteUserEvent(ctx context.Context, req *pb.DeleteUserEventRequest) (*emptypb.Empty, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	if req.Id == "" {
 		err := status.Error(codes.InvalidArgument, "user event id is required")
+		log.Println(err)
 		return nil, err
 	}
 
 	userEventID, err := uuid.Parse(req.Id)
 	if err != nil {
 		err := status.Error(codes.InvalidArgument, "invalid user event id")
+		log.Println(err)
 		return nil, err
 	}
 
 	err = h.userEventService.DeleteUserEvent(ctx, initData, userEventID)
 	if err != nil {
-		return nil, err
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to delete user event", err)
 	}
 
 	return &emptypb.Empty{}, nil

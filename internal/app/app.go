@@ -63,11 +63,13 @@ func (a *App) Start(ctx context.Context) error {
 		return fmt.Errorf("failed to create kafka producer: %v", err)
 	}
 	defer p.Close()
+
+	yooclient := config.NewYookassaClient(env.GetShopId(), env.GetYookassaSecret())
 	
 	itemService := service.NewItemService(itemRepo)
 	eventService := service.NewEventService(eventRepo)
 	userServive := service.NewUserService(userRepo, env.GetToken())
-	orderService := service.NewOrderService(orderRepo, env.GetToken(), p)
+	orderService := service.NewOrderService(orderRepo, env.GetToken(), p, yooclient)
 	userEventService := service.NewUserEventService(userEventRepo, eventRepo, env.GetToken(), p)
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
@@ -118,7 +120,7 @@ func (a *App) Start(ctx context.Context) error {
         AllowedHeaders:   env.GetAllowedHeaders(),
         AllowCredentials: true,
         MaxAge:           300,
-				Debug:            true,
+				// Debug:            true,
     })
 
 	corshandler := c.Handler(gwmux)

@@ -11,7 +11,6 @@ import (
 type EventRepository interface {
 	GetEventInfo(ctx context.Context, id uuid.UUID) (*models.Event, error)
 	GetEvents(ctx context.Context, pagination models.Pagination) (*models.PaginatedEvents, error)
-	UpdateEvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error
 }
 
 type eventRepository struct {
@@ -48,22 +47,4 @@ func (r *eventRepository) GetEvents(ctx context.Context, pagination models.Pagin
 		Page:       pagination.Page,
 		PerPage:    pagination.PerPage,
 	}, nil
-}
-
-func (r *eventRepository) UpdateEvent(ctx context.Context, id uuid.UUID, newOccupiedSeats int64) error {
-	event, err := r.GetEventInfo(ctx, id)
-	if err != nil {
-		return err
-	}
-
-	if (event.TotalSeats - (event.OccupiedSeats + newOccupiedSeats) < 0) {
-		return ErrNotEnoughSeats
-	}
-
-	event.OccupiedSeats = event.OccupiedSeats + newOccupiedSeats
-	if err := r.db.Save(event).Error; err != nil {
-		return err
-	}
-
-	return nil
 }

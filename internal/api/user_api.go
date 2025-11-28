@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"log"
 
 	"github.com/TaperoOO5536/special_backend/internal/service"
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
@@ -21,12 +22,14 @@ func NewUserServiceHandler(userService *service.UserService) *UserServiceHandler
 func (h *UserServiceHandler) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*emptypb.Empty, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	err = h.userService.CreateUser(ctx, initData)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		log.Println(err)
+		return nil, status.Errorf(codes.Internal, "failed to create user: %v", err)
 	}
 	
 	return &emptypb.Empty{}, nil
@@ -35,12 +38,15 @@ func (h *UserServiceHandler) CreateUser(ctx context.Context, req *pb.CreateUserR
 func (h *UserServiceHandler) GetUserInfo(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserInfoResponse, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	user, err := h.userService.GetUserInfo(ctx, initData)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		err := status.Errorf(codes.Internal, "failed to get user: %v", err)
+		log.Println(err)
+		return nil, err
 	}
 
 	return &pb.GetUserInfoResponse{
@@ -54,6 +60,7 @@ func (h *UserServiceHandler) GetUserInfo(ctx context.Context, req *pb.GetUserReq
 func (h *UserServiceHandler) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.GetUserInfoResponse, error) {
 	initData, err := GetInitDataFromContext(ctx)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
@@ -66,7 +73,9 @@ func (h *UserServiceHandler) UpdateUser(ctx context.Context, req *pb.UpdateUserR
 
 	user, err := h.userService.UpdateUser(ctx, initData, phoneNumber)
 	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "failed to process initData: %v", err)
+		err := status.Errorf(codes.Internal, "failed to update user: %v", err)
+		log.Println(err)
+		return nil, err
 	}
 	
 	return &pb.GetUserInfoResponse{

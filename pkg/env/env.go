@@ -47,6 +47,14 @@ func LoadEnv() error {
 	if allowedHeaders == "" {
 		return fmt.Errorf("ALLOWED_HEADERS is not set")
 	}
+	yookassaSecret := os.Getenv("YOOKASSA_SECRET")
+	if yookassaSecret == "" {
+		return fmt.Errorf("YOOKASSA_SECRET is not set")
+	}
+	shopID := os.Getenv("SHOP_ID")
+	if shopID == "" {
+		return fmt.Errorf("SHOP_ID is not set")
+	}
 
 	return nil
 }
@@ -81,6 +89,14 @@ func GetAllowedMethods() []string {
 
 func GetAllowedHeaders() []string {
 	return strings.Split(os.Getenv("ALLOWED_HEADERS"), ",")
+}
+
+func GetYookassaSecret() string {
+	return os.Getenv("YOOKASSA_SECRET")
+}
+
+func GetShopId() string {
+	return os.Getenv("SHOP_ID")
 }
 
 func GetEnvDefault(key, defaultValue string) string {

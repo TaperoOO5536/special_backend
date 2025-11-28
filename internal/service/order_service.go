@@ -4,15 +4,22 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"strconv"
 	"time"
 
+	"github.com/TaperoOO5536/special_backend/internal/config"
 	"github.com/TaperoOO5536/special_backend/internal/kafka"
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/repository"
+	"github.com/TaperoOO5536/special_backend/pkg/env"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+
+	"github.com/rvinnie/yookassa-sdk-go/yookassa"
+	yoocommon "github.com/rvinnie/yookassa-sdk-go/yookassa/common"
+	yoopayment "github.com/rvinnie/yookassa-sdk-go/yookassa/payment"
 )
 
 var (
@@ -23,13 +30,15 @@ type OrderService struct {
 	orderRepo repository.OrderRepository
 	token     string
 	producer  *kafka.Producer
+	yooclient *config.Client
 }
 
-func NewOrderService(orderRepo repository.OrderRepository, token string, producer *kafka.Producer) *OrderService {
+func NewOrderService(orderRepo repository.OrderRepository, token string, producer *kafka.Producer, yooclient *config.Client) *OrderService {
 	return &OrderService{
 		orderRepo: orderRepo,
 		token: token,
 		producer: producer,
+		yooclient: yooclient,
 	}
 }
 
@@ -41,15 +50,60 @@ type OrderCreateInput struct {
 	OrderAmount    int64
 }
 
+type PaymentResponse struct {
+	Id  string
+	Url string
+}
+
+func (s *OrderService) CreatePayment1(ctx context.Context, amount int64, orderID string) (*PaymentResponse, error) {
+    client := yookassa.NewClient(env.GetShopId(), env.GetYookassaSecret())
+		paymentHandler := yookassa.NewPaymentHandler(client)
+		payment, err := paymentHandler.CreatePayment(&yoopayment.Payment{
+			Amount: &yoocommon.Amount{
+				Value: strconv.FormatInt(amount*100, 10),
+				Currency: "RUB",
+			},
+			PaymentMethod: yoopayment.PaymentMethodType("bank_card"),
+			Confirmation: yoopayment.Redirect{
+				Type:      "redirect",
+				ReturnURL: "https://example.com",
+			},
+			Description: "Заказ выпечки #" + orderID,
+			Metadata: map[string]string{"order_id": orderID},
+		})
+    if err != nil {
+			return nil, err
+		}
+
+		if payment.Confirmation != nil {
+    	confBytes, err := json.Marshal(payment.Confirmation)
+    	if err != nil {
+    	    return nil, fmt.Errorf("failed to marshal confirmation: %w", err)
+    	}
+
+    	var confMap map[string]interface{}
+    	if err := json.Unmarshal(confBytes, &confMap); err != nil {
+    	    return nil, fmt.Errorf("failed to unmarshal confirmation: %w", err)
+    	}
+			return &PaymentResponse{
+				Id:  payment.ID,
+				Url: confMap["confirmation_url"].(string),
+			}, nil
+
+		}
+
+    return nil, fmt.Errorf("something went wrong")
+}
+
 func (s *OrderService) CreateOrder(ctx context.Context, initData string, input OrderCreateInput) error {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return err
+		return fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	order := &models.Order{
@@ -73,6 +127,7 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 		return err
 	}
 
+
 	go func() {
 		msg := models.KafkaOrder{
 			Number:         strconv.FormatInt(int64(createdOrder.Number), 10),
@@ -83,7 +138,7 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 		jsonMsg, err := json.Marshal(msg)
 		if err != nil {
 			log.Printf("failed to marshal message: %v", err)
-				return
+			return
 		}
 
 		err = s.producer.Produce(
@@ -103,13 +158,13 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 func (s *OrderService) GetOrderInfo(ctx context.Context, initData string, id uuid.UUID) (*models.Order, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return nil, err
+		return nil, fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	order, err := s.orderRepo.GetOrderInfo(ctx, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return nil, ErrEventNotFound
+			return nil, ErrOrderNotFound
 		}
 		return nil, err
 	}
@@ -120,12 +175,12 @@ func (s *OrderService) GetOrderInfo(ctx context.Context, initData string, id uui
 func (s *OrderService) GetOrders(ctx context.Context, initData string, pagination models.Pagination) (*models.PaginatedOrders, error) {
 	valid, err := VerifyInitData(initData, s.token)
 	if err != nil || !valid {
-		return nil, err
+		return nil, fmt.Errorf("failed to verify init data %v", err)
 	}
 
 	user, err := ParseInitData(initData)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to parse init data %v", err)
 	}
 
 	orders, err := s.orderRepo.GetOrders(ctx, user.ID, pagination)

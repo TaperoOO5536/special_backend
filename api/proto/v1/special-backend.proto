@@ -92,6 +92,19 @@ service SpecialAppService {
       get: "/v1/orders"
     };
   }
+  rpc Payment(GetPaymentUrlRequest) returns (GetPaymentUrlResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment"
+      body: "*"
+    };
+  }
+
+//  rpc YookassaWebhook(YookassaWebhookRequest) returns (google.protobuf.Empty) {
+//    option (google.api.http) = {
+//      post: "/v1/webhooks/yookassa"
+//      body: "*"
+//    };
+//  }
 }
 
 // Users
@@ -253,6 +266,18 @@ message GetOrderInfoRequest {
 message GetOrdersRequest {
   int32 page = 1;
   int32 per_page = 2;
+}
+
+message GetPaymentUrlRequest {
+  string order_id = 1;
+  int64 amount = 2;
+  // string description = 3;
+  // string user_id = 4;
+}
+
+message GetPaymentUrlResponse {
+  string payment_id = 1;
+  string payment_url = 2;
 }
 
 message OrderItemInfoForList {

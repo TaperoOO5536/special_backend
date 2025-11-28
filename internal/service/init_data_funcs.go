@@ -7,18 +7,18 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/url"
 	"sort"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/TaperoOO5536/special_backend/internal/models"
 )
 
 var (
 	ErrFailedToParseInitData =     errors.New("failed to parse inti data")
-	ErrUserNotFoundInInitData =    errors.New("user not fount in inti data")
+	ErrUserNotFoundInInitData =    errors.New("user not found in inti data")
 	ErrFailedToUnmarshalUserData = errors.New("failed to unmarshal user data")
 	ErrHashNotFound =              errors.New("hash not found in initData")
 	ErrInitDataIsEmpty =           errors.New("init data is empty")
@@ -75,15 +75,15 @@ func ParseInitData(initData string) (*models.User, error) {
 	return user, nil
 }
 
-func GetSecretKey(token string) []byte {
-	h := sha256.New()
-	h.Write([]byte("WebAppData"))
-	secretKey := h.Sum(nil)
-	h = hmac.New(sha256.New, secretKey)
-	h.Write([]byte(token))
-	key := h.Sum(nil)
-	return key
-}
+// func GetSecretKey(token string) []byte {
+// 	h := sha256.New()
+// 	h.Write([]byte("WebAppData"))
+// 	secretKey := h.Sum(nil)
+// 	h = hmac.New(sha256.New, secretKey)
+// 	h.Write([]byte(token))
+// 	key := h.Sum(nil)
+// 	return key
+// }
 
 func VerifyInitData(initData string, token string) (bool, error) {
 	values, err := url.ParseQuery(initData)
@@ -104,23 +104,36 @@ func VerifyInitData(initData string, token string) (bool, error) {
 	sort.Strings(dataCheckStrings)
 	dataCheckString := strings.Join(dataCheckStrings, "\n")
 
-	secretKey := GetSecretKey(token)
-	h := hmac.New(sha256.New, secretKey)
-	h.Write([]byte(dataCheckString))
-	computedHash := hex.EncodeToString(h.Sum(nil))
+	log.Printf("data_check_string:\n%s", dataCheckString)
 
-	authDateStr := values.Get("auth_date")
-  if authDateStr == "" {
-      return false, fmt.Errorf("auth_date missing")
-  }
-  authDate, err := strconv.ParseInt(authDateStr, 10, 64)
-  if err != nil {
-      return false, fmt.Errorf("invalid auth_date: %v", err)
-  }
-  now := time.Now().Unix()
-  if now-authDate > int64(3600) {
-      return false, ErrTooOldAuthDate
-  }
+	// secretKey := sha256.Sum256([]byte(token))
+	
+	h := hmac.New(sha256.New, []byte("WebAppData"))
+	h.Write([]byte(token))
+
+	h2 := hmac.New(sha256.New, h.Sum(nil))
+	h2.Write([]byte(dataCheckString))
+	computedHash := hex.EncodeToString(h2.Sum(nil))
+	log.Printf("computed_hash: %s", computedHash)
+	log.Printf("received_hash: %s", receivedHash)
+
+	// secretKey := GetSecretKey(token)
+	// h := hmac.New(sha256.New, secretKey)
+	// h.Write([]byte(dataCheckString))
+	// computedHash := hex.EncodeToString(h.Sum(nil))
+
+	// authDateStr := values.Get("auth_date")
+  // if authDateStr == "" {
+  //     return false, fmt.Errorf("auth_date missing")
+  // }
+  // authDate, err := strconv.ParseInt(authDateStr, 10, 64)
+  // if err != nil {
+  //     return false, fmt.Errorf("invalid auth_date: %v", err)
+  // }
+  // now := time.Now().Unix()
+  // if now-authDate > int64(3600) {
+  //     return false, ErrTooOldAuthDate
+  // }
 
 	return computedHash == receivedHash, nil
 }

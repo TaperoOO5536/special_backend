@@ -2,11 +2,13 @@ package service
 
 import (
 	"context"
-	"encoding/json"
+	// "encoding/json"
 	"errors"
 	"fmt"
-	"log"
 
+	// "log"
+
+	"github.com/TaperoOO5536/special_backend/internal/bot_handler"
 	"github.com/TaperoOO5536/special_backend/internal/kafka"
 	"github.com/TaperoOO5536/special_backend/internal/models"
 	"github.com/TaperoOO5536/special_backend/internal/repository"
@@ -23,17 +25,20 @@ type UserEventService struct {
 	userEventRepo repository.UserEventRepository
 	token         string
 	producer      *kafka.Producer
+	botHandler    *bot_handler.BotHandler
 }
 
 func NewUserEventService(userEventRepo repository.UserEventRepository,
 												 eventRepo repository.EventRepository,
 												 token string,
-												 producer *kafka.Producer) *UserEventService {
+												 producer *kafka.Producer,
+												 botHandler *bot_handler.BotHandler) *UserEventService {
 	return &UserEventService{
 		userEventRepo: userEventRepo,
 		eventRepo: eventRepo,
 		token: token,
 		producer: producer,
+		botHandler: botHandler,
 	}
 }
 
@@ -66,34 +71,36 @@ func (s *UserEventService) CreateUserEvent(ctx context.Context, initData string,
 		return err
 	}
 
-	event, err := s.eventRepo.GetEventInfo(ctx, input.EventID)
-	if err != nil {
-		return err
-	}
+	s.botHandler.HandleUserEventMessage("userevent.create", *userEvent, *user)
 
-	go func() {
-		msg := models.KafkaUserEvent{
-			UserNickName:       user.Nickname,
-			EventTitle:         event.Title,
-			EventOccupiedSeats: event.OccupiedSeats,
-			EventTotalSeats:    event.TotalSeats,
-			NumberOfGuests:     input.NumberOfGuests,
-		}
-		jsonMsg, err := json.Marshal(msg)
-		if err != nil {
-			log.Printf("failed to marshal message: %v", err)
-			return
-		}
-		err = s.producer.Produce(
-			string(jsonMsg),
-			"userevents",
-			"userevent.create",
-		)
-		if err != nil {
-			log.Printf("failed to produce message: %v", err)
-			return
-		}
-	}()
+	// event, err := s.eventRepo.GetEventInfo(ctx, input.EventID)
+	// if err != nil {
+	// 	return err
+	// }
+
+	// go func() {
+	// 	msg := models.KafkaUserEvent{
+	// 		UserNickName:       user.Nickname,
+	// 		EventTitle:         event.Title,
+	// 		EventOccupiedSeats: event.OccupiedSeats,
+	// 		EventTotalSeats:    event.TotalSeats,
+	// 		NumberOfGuests:     input.NumberOfGuests,
+	// 	}
+	// 	jsonMsg, err := json.Marshal(msg)
+	// 	if err != nil {
+	// 		log.Printf("failed to marshal message: %v", err)
+	// 		return
+	// 	}
+	// 	err = s.producer.Produce(
+	// 		string(jsonMsg),
+	// 		"userevents",
+	// 		"userevent.create",
+	// 	)
+	// 	if err != nil {
+	// 		log.Printf("failed to produce message: %v", err)
+	// 		return
+	// 	}
+	// }()
 
 	return nil
 }
@@ -161,34 +168,36 @@ func (s *UserEventService) UpdateUserEvent(ctx context.Context, initData string,
 		return nil, err
 	}
 
-	event, err := s.eventRepo.GetEventInfo(ctx, userEvent.EventID)
-	if err != nil {
-		return nil, err
-	}
+	s.botHandler.HandleUserEventMessage("userevent.update", *userEvent, *user)
+	
+	// event, err := s.eventRepo.GetEventInfo(ctx, userEvent.EventID)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	go func() {
-		msg := models.KafkaUserEvent{
-			UserNickName:       user.Nickname,
-			EventTitle:         event.Title,
-			EventOccupiedSeats: event.OccupiedSeats,
-			EventTotalSeats:    event.TotalSeats,
-			NumberOfGuests:     userEvent.NumberOfGuests,
-		}
-		jsonMsg, err := json.Marshal(msg)
-		if err != nil {
-			log.Printf("failed to marshal message: %v", err)
-			return
-		}
-		err = s.producer.Produce(
-			string(jsonMsg),
-			"userevents",
-			"userevent.update",
-		)
-		if err != nil {
-			log.Printf("failed to produce message: %v", err)
-			return
-		}
-	}()
+	// go func() {
+	// 	msg := models.KafkaUserEvent{
+	// 		UserNickName:       user.Nickname,
+	// 		EventTitle:         event.Title,
+	// 		EventOccupiedSeats: event.OccupiedSeats,
+	// 		EventTotalSeats:    event.TotalSeats,
+	// 		NumberOfGuests:     userEvent.NumberOfGuests,
+	// 	}
+	// 	jsonMsg, err := json.Marshal(msg)
+	// 	if err != nil {
+	// 		log.Printf("failed to marshal message: %v", err)
+	// 		return
+	// 	}
+	// 	err = s.producer.Produce(
+	// 		string(jsonMsg),
+	// 		"userevents",
+	// 		"userevent.update",
+	// 	)
+	// 	if err != nil {
+	// 		log.Printf("failed to produce message: %v", err)
+	// 		return
+	// 	}
+	// }()
 
 	return userEvent, nil
 }
@@ -222,28 +231,34 @@ func (s *UserEventService) DeleteUserEvent(ctx context.Context, initData string,
 		return err
 	}
 
-	go func() {
-		msg := models.KafkaUserEvent{
-			UserNickName:       user.Nickname,
-			EventTitle:         event.Title,
-			EventOccupiedSeats: event.OccupiedSeats,
-			EventTotalSeats:    event.TotalSeats,
-		}
-		jsonMsg, err := json.Marshal(msg)
-		if err != nil {
-			log.Printf("failed to marshal message: %v", err)
-			return
-		}
-		err = s.producer.Produce(
-			string(jsonMsg),
-			"userevents",
-			"userevent.delete",
-		)
-		if err != nil {
-			log.Printf("failed to produce message: %v", err)
-			return
-		}
-	}()
+	userEvent.Event = *event
+	
+	s.botHandler.HandleUserEventMessage("userevent.delete", *userEvent, *user)
+
+
+
+	// go func() {
+	// 	msg := models.KafkaUserEvent{
+	// 		UserNickName:       user.Nickname,
+	// 		EventTitle:         event.Title,
+	// 		EventOccupiedSeats: event.OccupiedSeats,
+	// 		EventTotalSeats:    event.TotalSeats,
+	// 	}
+	// 	jsonMsg, err := json.Marshal(msg)
+	// 	if err != nil {
+	// 		log.Printf("failed to marshal message: %v", err)
+	// 		return
+	// 	}
+	// 	err = s.producer.Produce(
+	// 		string(jsonMsg),
+	// 		"userevents",
+	// 		"userevent.delete",
+	// 	)
+	// 	if err != nil {
+	// 		log.Printf("failed to produce message: %v", err)
+	// 		return
+	// 	}
+	// }()
 
 	return nil
 }

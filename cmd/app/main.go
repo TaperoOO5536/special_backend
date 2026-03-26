@@ -29,6 +29,7 @@ func main() {
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  120 * time.Second,
 		Dsn:          env.GetDsn(),
+		BotToken:     env.GetToken(),
 	}
 
 	app := app.New(cfg)

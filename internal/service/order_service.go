@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"strconv"
 	"time"
 
+	"github.com/TaperoOO5536/special_backend/internal/bot_handler"
 	"github.com/TaperoOO5536/special_backend/internal/config"
 	"github.com/TaperoOO5536/special_backend/internal/kafka"
 	"github.com/TaperoOO5536/special_backend/internal/models"
@@ -27,18 +27,20 @@ var (
 )
 
 type OrderService struct {
-	orderRepo repository.OrderRepository
-	token     string
-	producer  *kafka.Producer
-	yooclient *config.Client
+	orderRepo  repository.OrderRepository
+	token      string
+	producer   *kafka.Producer
+	yooclient  *config.Client
+	botHandler *bot_handler.BotHandler
 }
 
-func NewOrderService(orderRepo repository.OrderRepository, token string, producer *kafka.Producer, yooclient *config.Client) *OrderService {
+func NewOrderService(orderRepo repository.OrderRepository, token string, producer *kafka.Producer, yooclient *config.Client, botHandler *bot_handler.BotHandler) *OrderService {
 	return &OrderService{
 		orderRepo: orderRepo,
 		token: token,
 		producer: producer,
 		yooclient: yooclient,
+		botHandler: botHandler,
 	}
 }
 
@@ -127,30 +129,33 @@ func (s *OrderService) CreateOrder(ctx context.Context, initData string, input O
 		return err
 	}
 
+	userID, _ := strconv.Atoi(user.ID)
+	s.botHandler.HandleOrderMessage("order.create", userID, *createdOrder)
 
-	go func() {
-		msg := models.KafkaOrder{
-			Number:         strconv.FormatInt(int64(createdOrder.Number), 10),
-			UserID:         user.ID,
-			CompletionDate: createdOrder.CompletionDate,
-			OrderAmount:    createdOrder.OrderAmount,
-		}
-		jsonMsg, err := json.Marshal(msg)
-		if err != nil {
-			log.Printf("failed to marshal message: %v", err)
-			return
-		}
 
-		err = s.producer.Produce(
-			string(jsonMsg),
-			"orders",
-			"order.create",
-		)
-		if err != nil {
-				log.Printf("failed to produce message: %v", err)
-				return
-		}
-	}()
+	// go func() {
+	// 	msg := models.KafkaOrder{
+	// 		Number:         strconv.FormatInt(int64(createdOrder.Number), 10),
+	// 		UserID:         user.ID,
+	// 		CompletionDate: createdOrder.CompletionDate,
+	// 		OrderAmount:    createdOrder.OrderAmount,
+	// 	}
+	// 	jsonMsg, err := json.Marshal(msg)
+	// 	if err != nil {
+	// 		log.Printf("failed to marshal message: %v", err)
+	// 		return
+	// 	}
+
+	// 	err = s.producer.Produce(
+	// 		string(jsonMsg),
+	// 		"orders",
+	// 		"order.create",
+	// 	)
+	// 	if err != nil {
+	// 			log.Printf("failed to produce message: %v", err)
+	// 			return
+	// 	}
+	// }()
 	
 	return nil
 }

@@ -4,11 +4,13 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strconv"
 
 	"net"
 	"net/http"
 	"time"
 
+	"github.com/TaperoOO5536/special_backend/internal/bot_handler"
 	"github.com/TaperoOO5536/special_backend/internal/config"
 	"github.com/TaperoOO5536/special_backend/internal/kafka"
 	"github.com/TaperoOO5536/special_backend/internal/repository"
@@ -23,6 +25,7 @@ import (
 	"github.com/TaperoOO5536/special_backend/internal/api"
 	"github.com/TaperoOO5536/special_backend/pkg/env"
 	pb "github.com/TaperoOO5536/special_backend/pkg/proto/v1"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
@@ -36,6 +39,7 @@ type Config struct {
 	WriteTimeout time.Duration
 	IdleTimeout  time.Duration
 	Dsn          string
+	BotToken     string
 }
 
 type App struct {
@@ -49,6 +53,38 @@ func New(cfg *Config) *App {
 }
 
 func (a *App) Start(ctx context.Context) error {
+	bot, err := tgbotapi.NewBotAPI(a.config.BotToken)
+	if err != nil {
+		return fmt.Errorf("failed to create bot: %v", err)
+	}
+
+	u := tgbotapi.NewUpdate(0)
+	u.Timeout = 60
+
+	updates := bot.GetUpdatesChan(u)
+
+	// adminID, err := strconv.Atoi(env.GetAdminID())
+	// if err != nil {
+	// 	return fmt.Errorf("failed to get admin id: %v", err)
+	// }
+
+	go func () {
+		  for update := range updates {
+		  if update.Message != nil {
+				log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
+				var text string
+				switch update.Message.Text {
+				case "/start":
+					text = "Welcome"
+				default:
+					text = "Hello, " + update.Message.From.UserName + "! Your id: " + strconv.FormatInt(update.Message.From.ID, 10)
+				}
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, text)
+				bot.Send(msg)
+			}
+		}
+	}()
+
 	db, sqlDB := config.NewDBClient(a.config.Dsn)
 	defer sqlDB.Close()
 
@@ -65,12 +101,16 @@ func (a *App) Start(ctx context.Context) error {
 	defer p.Close()
 
 	yooclient := config.NewYookassaClient(env.GetShopId(), env.GetYookassaSecret())
+
+	adminID, _ := strconv.ParseInt(env.GetAdminID(), 10, 64)
+
+	botHandler := bot_handler.NewBotHandler(bot, adminID)
 	
 	itemService := service.NewItemService(itemRepo)
 	eventService := service.NewEventService(eventRepo)
 	userServive := service.NewUserService(userRepo, env.GetToken())
-	orderService := service.NewOrderService(orderRepo, env.GetToken(), p, yooclient)
-	userEventService := service.NewUserEventService(userEventRepo, eventRepo, env.GetToken(), p)
+	orderService := service.NewOrderService(orderRepo, env.GetToken(), p, yooclient, &botHandler)
+	userEventService := service.NewUserEventService(userEventRepo, eventRepo, env.GetToken(), p, &botHandler)
 
 	itemServiceHandler := api.NewItemServiceHandler(itemService)
 	eventServiceHandler := api.NewEventServiceHandler(eventService)

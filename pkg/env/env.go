@@ -10,7 +10,7 @@ import (
 )
 
 func LoadEnv() error {
-	err := godotenv.Load("pkg/env/.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
@@ -97,6 +97,14 @@ func GetYookassaSecret() string {
 
 func GetShopId() string {
 	return os.Getenv("SHOP_ID")
+}
+
+func GetAdminID() string {
+	return GetEnvDefault("ADMIN_ID", "")
+}
+
+func GetKafkaTopics() []string {
+	return strings.Split(os.Getenv("KAFKA_TOPICS"), ",")
 }
 
 func GetEnvDefault(key, defaultValue string) string {

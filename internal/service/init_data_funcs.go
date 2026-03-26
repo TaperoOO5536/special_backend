@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net/url"
 	"sort"
 	"strconv"
@@ -104,7 +103,7 @@ func VerifyInitData(initData string, token string) (bool, error) {
 	sort.Strings(dataCheckStrings)
 	dataCheckString := strings.Join(dataCheckStrings, "\n")
 
-	log.Printf("data_check_string:\n%s", dataCheckString)
+	// log.Printf("data_check_string:\n%s", dataCheckString)
 
 	// secretKey := sha256.Sum256([]byte(token))
 	
@@ -114,8 +113,8 @@ func VerifyInitData(initData string, token string) (bool, error) {
 	h2 := hmac.New(sha256.New, h.Sum(nil))
 	h2.Write([]byte(dataCheckString))
 	computedHash := hex.EncodeToString(h2.Sum(nil))
-	log.Printf("computed_hash: %s", computedHash)
-	log.Printf("received_hash: %s", receivedHash)
+	// log.Printf("computed_hash: %s", computedHash)
+	// log.Printf("received_hash: %s", receivedHash)
 
 	// secretKey := GetSecretKey(token)
 	// h := hmac.New(sha256.New, secretKey)
